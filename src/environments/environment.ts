@@ -37,8 +37,8 @@ export const environment = {
           pdfScaleFactor: 2.0
         },
         // general state of the app, if unavailable, display Unavailable message and don't continue
-        mspIsInMaintenanceFlag: process.env.mspIsInMaintenanceFlag,
-        mspIsInMaintenanceText: process.env.mspIsInMaintenanceText,
-        mspIsInMaintenanceTimes: process.env.mspIsInMaintenanceTimes,
+        mspIsInMaintenanceFlag: true,
+        mspIsInMaintenanceText: 'This Application is not available due to scheduled maintenance.',
+        mspIsInMaintenanceTimes: 'between 9:00pm and 4:00am'
       }
 }
