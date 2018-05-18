@@ -1,7 +1,6 @@
 require('core-js/es6');
 require('core-js/es7/reflect');
 require('zone.js/dist/zone');
-require('blueimp-canvas-to-blob');
 
 if (process.env.ENV === 'production') {
   // Production
