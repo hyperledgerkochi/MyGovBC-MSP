@@ -1,13 +1,17 @@
 {
-    "/msp/api": {
-        "target": "https://gcpe-mygovbc-msp-1-3-prototype-dev.pathfinder.gov.bc.ca",
-        "changeOrigin": true,
-        "secure": false
-    },
     "/msp/api/captcha": {
-        "target": "https://mygovbc-msp-dev.pathfinder.gov.bc.ca/msp/captcha",
+        "target": "https://mygovbc-msp-dev.pathfinder.gov.bc.ca/xxx",
         "changeOrigin": true,
-        "secure": true
+        "secure": false,
+        "debug": true,
+        "logLevel": "debug"
+    },
+    "/msp/api": {
+        "target": "https://mygovbc-msp-dev.pathfinder.gov.bc.ca",
+        "changeOrigin": true,
+        "secure": false,
+        "debug": true,
+        "logLevel": "debug"
     },
     "/msp/app/images":{
         "target" : "http://localhost:4300",
