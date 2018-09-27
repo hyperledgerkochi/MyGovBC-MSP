@@ -35,6 +35,15 @@
             "scripts": []
           },
           "configurations": {
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "extractCss": true,
+            "namedChunks": false,
+            "aot": true,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true,
             "production": {
               "fileReplacements": [
                 {
@@ -44,6 +53,15 @@
               ]
             },
             "test": {
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -57,8 +75,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "msp:build",
-            "port": 4300,
-            "proxyConfig": "proxy.conf.json"
+            "port": 4300
           },
           "configurations": {
             "production": {
