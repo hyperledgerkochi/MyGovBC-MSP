@@ -6,17 +6,19 @@ import { LocalStorageService, LocalStorageModule } from 'angular-2-local-storage
 import {MspProgressBarComponent} from "../common/progressBar/progressBar.component";
 import {RouterTestingModule} from "@angular/router/testing";
 import { ProcessService } from "../service/process.service";
+import {MspLogService} from "../service/log.service";
+import {HttpClientModule} from "@angular/common/http";
 
 describe('ApplicationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ApplicationComponent, MspProgressBarComponent],
-      imports: [FormsModule, RouterTestingModule, LocalStorageModule.withConfig({
+      imports: [FormsModule, RouterTestingModule,HttpClientModule, LocalStorageModule.withConfig({
         prefix: 'ca.bc.gov.msp',
         storageType: 'sessionStorage'
       })],
-      providers: [MspDataService, ProcessService
+      providers: [MspDataService, ProcessService ,MspLogService
       ]
     })
   });

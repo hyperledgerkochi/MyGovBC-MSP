@@ -1,11 +1,11 @@
-import { Directive, ElementRef, AfterContentInit, EventEmitter,
-  Renderer, HostListener, HostBinding, Input, Output } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
+import { AfterContentInit, Directive, ElementRef, EventEmitter, Input, Output, Renderer2 } from '@angular/core';
+import { Observable } from 'rxjs';
+import {filter} from "rxjs/operators";
+import {fromEvent} from "rxjs/internal/observable/fromEvent";
+
+
+
+
 
 /**
  * A keyboard event that matches the mspKeyboard input value will 
@@ -23,7 +23,7 @@ export class KeyboardEventListner implements AfterContentInit{
   @Output() keyboardAction:EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private el: ElementRef, 
-    private renderer:Renderer){
+    private renderer:Renderer2){
 
   }
   // @HostListener('keyup', ['$event']) 
@@ -35,8 +35,8 @@ export class KeyboardEventListner implements AfterContentInit{
 
   ngAfterContentInit(){
     var self = this;
-    Observable.fromEvent(this.el.nativeElement, 'keyup')
-      .filter( (evt:KeyboardEvent) => {
+    fromEvent(this.el.nativeElement, 'keyup').pipe(
+      filter( (evt:KeyboardEvent) => {
         // console.log('event key: ' + evt.key)
         // console.log('type of this.mspKeyboard is array: ' + Array.isArray(this.mspKeyboard));
         if(typeof this.mspKeyboard === 'string'){
@@ -48,7 +48,7 @@ export class KeyboardEventListner implements AfterContentInit{
             }
           )
         }
-      }).subscribe( 
+      })).subscribe(
         (evt:KeyboardEvent) => {
           if(this.convertToEvent){
             this.fireEvent();

@@ -35,9 +35,17 @@ export class AssistancePersonalDetailComponent extends BaseComponent {
   ngAfterViewInit() {
     this.personalDetailsForm.valueChanges
       .subscribe( values => {
-        // console.log('Personal details form value changes saved: ', values);
         this.onChange.emit(values);
       });
   }
 
-} 
+
+    isSinUnique(): boolean {
+    return this.dataService.finAssistApp.isUniqueSin;
+}
+
+  getSinList(): string[]{
+    return this.finApp.allPersons.map(x => x.sin);
+  }
+
+}

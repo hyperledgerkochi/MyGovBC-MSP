@@ -145,6 +145,15 @@ class Person implements IPerson {
     get dob() {
         return this.parseDate(this.dob_year, this.dob_month, this.dob_day);
     }
+
+    get dobSimple(): SimpleDate {
+        return {
+            "day": this.dob_day,
+            "month": this.dob_month,
+            "year": this.dob_year,
+        }
+    }
+
     //TODO fix this..not DRY
     getCancellationDateInMoment (){
         return this.parseDate(this.cancellationDate.year, this.cancellationDate.month, this.cancellationDate.day);
@@ -198,9 +207,7 @@ class Person implements IPerson {
     }
 
     get hasArrivalToCanada(): boolean {
-        return (this.arrivalToCanadaDay != null &&
-            this.arrivalToCanadaMonth != null &&
-            this.arrivalToCanadaYear != null);
+        return !!(this.arrivalToCanadaDay && this.arrivalToCanadaMonth &&this.arrivalToCanadaYear) ;
     }
 
     /**
@@ -258,6 +265,16 @@ class Person implements IPerson {
         return this.parseDate(this.dischargeYear, this.dischargeMonth, this.dischargeDay);
     }
 
+    get isArrivalToBcBeforeDob(): boolean {
+        return this.dob.isSameOrAfter(this.arrivalToBC);
+    }
+    get isArrivalToCanadaBeforeDob(): boolean {
+        return this.dob.isSameOrAfter(this.arrivalToCanada);
+    }
+
+    get isStudyDatesInValid() : boolean {
+        return this.studiesBeginDate.isSameOrAfter(this.studiesFinishedDate);
+    }
     /**
      * Which province the person has moved from
      */
@@ -314,6 +331,19 @@ class Person implements IPerson {
         else {
             this.planOnBeingOutOfBCRecord = null;
         }
+    }
+
+    get ineligibleForMSP(): boolean {
+        return (this.madePermanentMoveToBC === false && (
+            this.status === StatusInCanada.CitizenAdult ||
+            this.status === StatusInCanada.PermanentResident
+        ));
+    }
+
+    get bcServiceCardShowStatus(): boolean {
+
+        return this.status === StatusInCanada.CitizenAdult
+            || this.status === StatusInCanada.PermanentResident ;
     }
 
     /** Used for dependents and spouses to check if they are  an existing MSP Beneficiary. */

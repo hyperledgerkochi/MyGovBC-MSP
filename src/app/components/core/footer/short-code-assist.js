@@ -1,5 +1,5 @@
 
-import { environment } from '../../../../environments/environment';
+
 
 /**
  * Support starting a co-browse session by sharing generated short code.

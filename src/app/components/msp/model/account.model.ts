@@ -50,6 +50,24 @@ class MspAccountApp implements ApplicationBase {
     private _addedChildren: Array<Person> = [];
     private _updatedChildren: Array<Person>  = [];
 
+    /**
+     * Returns an array of ALL persons uses in account.
+     *
+     * Useful, for example, to make sure all PHNs are unique.
+     */
+    get allPersons(): Array<Person> {
+        return [
+            this.applicant,
+            ...this.addedChildren,
+            ...this.updatedChildren,
+            ...this.removedChildren,
+            this.updatedSpouse,
+            this.addedSpouse,
+            this.removedSpouse,
+        ]
+        .filter(x => x); //no 'undefined's
+    }
+
     get addedChildren(): Array<Person> {
         return this._addedChildren;
     }
@@ -119,7 +137,19 @@ class MspAccountApp implements ApplicationBase {
         return this._applicant;
     }
 
+    get isUniquePhns () {
+        let allPhs:string[] = this.allPersons .map(x => x.previous_phn).filter(x => x)  .filter(x => x.length >= 10) ;
+        return new Set(allPhs).size === allPhs.length ;
+    }
 
+    /*
+        to address , unique bug when PI and Dependents change is selected.
+        When PI and Dependents page is coming in two pages and if there are duplications ,PI page continue should be enabled.
+     */
+    get isUniquePhnsInPI () {
+        let allPhs:string[] = [this.applicant, ...this.updatedChildren,this.updatedSpouse].filter(x => x) .map(x => x.previous_phn).filter(x => x)  .filter(x => x.length >= 10) ;
+        return new Set(allPhs).size === allPhs.length ;
+    }
 
     get removedSpouse(): Person {
         return this._removedSpouse;

@@ -3,32 +3,33 @@
  * documentation, e.g. passport.
  */
 enum Documents {
-    CanadianBirthCertificate,
-    CanadianPassport,
-    CanadianCitizenCard,
-    RecordOfLanding,
-    ConfirmationOfPR,
-    PermanentResidentCard,
-    WorkPermit,
-    StudyPermit,
-    VisitorVisa,
-    PassportWithDiplomaticFoil,
-    MarriageCertificate,
-    ChangeOfNameCertificate,
+    CanadianBirthCertificate,   //0
+    CanadianPassport,           //1
+    CanadianCitizenCard,//2
+    RecordOfLanding,//3
+    PermanentResidentCard,//4
+    WorkPermit,//5
+    StudyPermit,//6
+    VisitorVisa,//7
+    PassportWithDiplomaticFoil,//8
+    MarriageCertificate,//9
+    ChangeOfNameCertificate,//10
     //new docs for account management
-    DivorceDecree,
-    SeparationAgreement,
-    GenderDesignationAdult,
-    GenderDesignationMinor,
-    LandedImmigrationDocs,
-    ReligiousWorkerPermit,
-    ReligiousConfirmationOrder,
-    FoilDiplomaticPassport,
-    AdoptionVerification,
-    CurrentImigrationDocs,
-    BCDriverLicense,
-    WaiverParentalConsent,
-    PhysicianConfirmationForGenderChange
+    DivorceDecree,//11
+    SeparationAgreement,//12
+    LandedImmigrationDocs,//13
+    ReligiousWorkerPermit,//14
+    ReligiousConfirmationOrder,//15
+    FoilDiplomaticPassport,//16
+    AdoptionVerification,//17
+    CurrentImigrationDocs,//18
+    BCDriverLicense,//19
+    GenderDesignationAdult,//20
+    GenderDesignationMinor,//21
+    WaiverParentalConsent,//22
+    PhysicianConfirmationForGenderChange,//23
+    MaritalStatusSignedWrittenStatement,//24
+    NotarizedStatmentAffidavit//25
 }
 
 
@@ -59,6 +60,8 @@ class AccountDocumentRules {
         const removeSpouseOrChildren: DocumentGroup = new DocumentGroup("Remove Spouse or Child(ren)",[
             Documents.DivorceDecree,
             Documents.SeparationAgreement,
+            Documents.NotarizedStatmentAffidavit,
+            Documents.MaritalStatusSignedWrittenStatement
         ]);
         
         let updateBirthdate: DocumentGroup = new DocumentGroup("Update or Correct Birthdate",[
@@ -91,6 +94,7 @@ class AccountDocumentRules {
             Documents.StudyPermit,
             Documents.WorkPermit,
             Documents.ReligiousConfirmationOrder,
+            Documents.CurrentImigrationDocs,
             Documents.FoilDiplomaticPassport,
             Documents.ReligiousWorkerPermit,
 

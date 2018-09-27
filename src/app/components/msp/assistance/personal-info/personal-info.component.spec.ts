@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import {RouterTestingModule} from "@angular/router/testing";
 import { FormsModule } from '@angular/forms';
-import { HttpModule }    from '@angular/http';
 import { AssistancePersonalInfoComponent } from './personal-info.component';
 import { MspDataService } from '../../service/msp-data.service';
 import { CompletenessCheckService } from '../../service/completeness-check.service';
@@ -12,7 +11,7 @@ import {MspBirthDateComponent} from "../../common/birthdate/birthdate.component"
 import {MspAddressComponent} from "../../common/address/address.component";
 import {Mod11CheckValidator} from "../../common/phn/phn.validator";
 import {MspProvinceComponent} from "../../common/province/province.component";
-import {Ng2CompleterModule} from "ng2-completer";
+import { TypeaheadModule } from 'ngx-bootstrap';
 import {AssistancePersonalDetailComponent} from "./personal-details/personal-details.component";
 import {MspPhoneComponent} from "../../common/phone/phone.component";
 import {MspGenderComponent} from "../../common/gender/gender.component";
@@ -27,6 +26,8 @@ import {CalendarYearFormatter} from '../../common/calendar/calendar-year-formatt
 import {CalendarYearValidator} from '../../common/calendar/calendar-year.validator';
 import {CalendarDayValidator} from '../../common/calendar/calendar-day.validator';
 import { ProcessService } from "../../service/process.service";
+import { SinCheckValidator } from '../../common/sin/sin.validator';
+import {HttpClientModule} from "@angular/common/http";
 
 
 describe('AssistancePersonalInfoComponent Test', () => {
@@ -37,8 +38,8 @@ describe('AssistancePersonalInfoComponent Test', () => {
         MspPhnComponent, MspNameComponent, MspPhoneComponent,
         MspBirthDateComponent, MspAddressComponent, MspProvinceComponent, MspCountryComponent,
         Mod11CheckValidator, MspGenderComponent, MspCancelComponent, MspLoggerDirective,
-        CalendarYearFormatter,CalendarYearValidator,CalendarDayValidator],
-      imports: [FormsModule, Ng2CompleterModule, ModalModule.forRoot(), HttpModule,RouterTestingModule, LocalStorageModule.withConfig({
+        CalendarYearFormatter,CalendarYearValidator,CalendarDayValidator, SinCheckValidator],
+      imports: [FormsModule, TypeaheadModule, ModalModule.forRoot(), HttpClientModule,RouterTestingModule, LocalStorageModule.withConfig({
         prefix: 'ca.bc.gov.msp',
         storageType: 'sessionStorage'
       })],

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms';
-import { HttpModule }    from '@angular/http';
+import { HttpClientModule} from "@angular/common/http";
 import { ReviewComponent } from './review.component';
 import { MspDataService } from '../../service/msp-data.service';
 import { LocalStorageService, LocalStorageModule } from 'angular-2-local-storage';
@@ -15,9 +15,10 @@ import {MspLoggerDirective} from "../../common/logging/msp-logger.directive";
 import { MspLogService } from '../../service/log.service';
 
 import { ProcessService } from "../../service/process.service";
-
 import { CaptchaComponent } from "mygovbc-captcha-widget/src/app/captcha/captcha.component";
 import { CaptchaDataService } from "mygovbc-captcha-widget/src/app/captcha-data.service";
+
+
 
 describe('ReviewComponent', () => {
 
@@ -25,7 +26,7 @@ describe('ReviewComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ReviewComponent, MspPersonCardComponent, MspAddressCardPartComponent,
         MspContactCardComponent, ThumbnailComponent, MspCancelComponent, MspLoggerDirective, CaptchaComponent],
-      imports: [FormsModule, ModalModule.forRoot(), RouterTestingModule, HttpModule, LocalStorageModule.withConfig({
+      imports: [FormsModule, ModalModule.forRoot(), RouterTestingModule, HttpClientModule, LocalStorageModule.withConfig({
         prefix: 'ca.bc.gov.msp',
         storageType: 'sessionStorage'
       })],

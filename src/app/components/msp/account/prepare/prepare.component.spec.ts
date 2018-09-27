@@ -1,11 +1,10 @@
 import { TestBed } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms';
-import { HttpModule }    from '@angular/http';
+import { HttpClientModule} from "@angular/common/http";
 import { AccountPrepareComponent } from './prepare.component';
 import { MspDataService } from '../../service/msp-data.service';
 import { LocalStorageService, LocalStorageModule } from 'angular-2-local-storage';
 import {MspConsentModalComponent} from "../../common/consent-modal/consent-modal.component";
-import {Ng2BootstrapModule} from "ngx-bootstrap";
 import {MspCancelComponent} from "../../common/cancel/cancel.component";
 import {MspLoggerDirective} from "../../common/logging/msp-logger.directive";
 import { MspLogService } from '../../service/log.service';
@@ -17,16 +16,18 @@ import { MspApiService } from '../../service/msp-api.service';
 import { CaptchaComponent } from "mygovbc-captcha-widget/src/app/captcha/captcha.component";
 import { CaptchaDataService } from "mygovbc-captcha-widget/src/app/captcha-data.service";
 
+import { ModalModule } from "ngx-bootstrap";
+
 describe('AccountPrepareComponent', () => {
 
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [AccountPrepareComponent, MspConsentModalComponent, MspCancelComponent, MspLoggerDirective, CaptchaComponent],
-      imports: [FormsModule, Ng2BootstrapModule.forRoot(), HttpModule, RouterTestingModule, LocalStorageModule.withConfig({
+      imports: [FormsModule, HttpClientModule, RouterTestingModule, LocalStorageModule.withConfig({
           prefix: 'ca.bc.gov.msp',
           storageType: 'sessionStorage'
-      })],
+      }), ModalModule.forRoot()],
       providers: [MspDataService, MspLogService, ProcessService,
         LocalStorageService, CaptchaDataService, MspApiService
         

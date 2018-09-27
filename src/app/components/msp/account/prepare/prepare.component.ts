@@ -5,12 +5,8 @@ import {MspLogService} from '../../service/log.service'
 
 import {MspAccountApp, AccountChangeOptions} from '../../model/account.model';
 import * as _ from 'lodash';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
+
+
 import {Gender, Person} from "../../model/person.model";
 import {MspDataService} from '../../service/msp-data.service';
 import {MspConsentModalComponent} from "../../common/consent-modal/consent-modal.component";
@@ -78,29 +74,33 @@ export class AccountPrepareComponent extends BaseComponent {
             this.transmissionInProcess = true;
             this.mspAccountApp = this.dataService.getFakeAccountChangeApplication();
 
+            // this.logService.log({
+            //    name: 'Account - Address Change Only Request ',
+            //    confirmationNumber: this.mspAccountApp.referenceNumber
+            //},"Account - Address Change Only Request ");
+
             this.apiService
                 .sendApplication(this.mspAccountApp)
                 .then((mspAccountApp: MspAccountApp) => {
-
                     this.logService.log({
-                        name: 'MSP Account Maintenance Address Change Only Request received success confirmation from API server',
+                        name: 'Account - Address Change Success ',
                         confirmationNumber: this.mspAccountApp.referenceNumber
-                    });
+                    },"Account - Address Change Success ");
                     //     this.dataService.removeMspAccountApp();
                     window.location.href = this.addressChangeBCUrl;
                     return;
                 }).catch((error: ResponseType | any) => {
                 this.logService.log({
-                    name: 'MSP Account Maintenance Address Change Only Request received failure message from API server',
+                    name: 'Account - Address Change Failure ',
                     error: error._body,
                     request: error._requestBody
-                });
+                },"Account - Address Change Failure");
 
                 //     this.dataService.removeMspAccountApp();
                 window.location.href = this.addressChangeBCUrl;
                 return;
             });
-
+            return;
         }
 
         /*

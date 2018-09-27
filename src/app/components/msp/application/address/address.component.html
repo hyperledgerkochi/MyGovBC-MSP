@@ -9,19 +9,19 @@
                  (onChange)="handleAddressUpdate($event)">
     </msp-address>
     <div class="row">
-        <div class="form-group col-sm-5">
+        <div class="form-group col-md-5">
             <msp-phone #phone
                        [phoneNumber]="mspApplication.phoneNumber"
                        (phoneNumberChange)="handlePhoneNumberChange($event)"></msp-phone>
         </div>
     </div>
     <hr>
-    <button [mspLogger]="'msp-enrollment_contact-info_continue'"
+    <button
             class="btn btn-primary" type="submit"
             [innerHTML]="lang('./en/index.js').continueButton"
             [disabled]="!canContinue()">
     </button>
+    <msp-cancel></msp-cancel>
 </form>
 
 
-<msp-cancel></msp-cancel>

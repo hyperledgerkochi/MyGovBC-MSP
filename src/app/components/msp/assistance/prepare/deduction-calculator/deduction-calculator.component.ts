@@ -3,12 +3,12 @@ import {
   SimpleChange, ViewChild, AfterViewInit, OnChanges, SimpleChanges, DoCheck
 } from '@angular/core';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/pluck';
-import 'rxjs/add/operator/catch';
+import {Observable} from 'rxjs';
+
+
+
+
+
 import * as _ from 'lodash';
 
 import {Eligibility} from '../../../model/eligibility.model';
@@ -16,12 +16,13 @@ import { MspDataService } from '../../../service/msp-data.service';
 import {FinancialAssistApplication} from '../../../model/financial-assist-application.model';
 import * as moment from 'moment';
 
-import'./deduction-calculator.less';
+import'./deduction-calculator.scss';
 import {ProcessService} from "../../../service/process.service";
 
 @Component({
   selector: 'deduction-calculator',
-  templateUrl: './deduction-calculator.html'
+  templateUrl: './deduction-calculator.html',
+    styleUrls: ['./deduction-calculator.scss']
 })
 
 export class DeductionCalculatorComponent implements DoCheck {
@@ -294,4 +295,7 @@ export class DeductionCalculatorComponent implements DoCheck {
   get currentCalendarYear(): Number {
     return moment().year();
   }
+    get nextCalendarYear(): Number {
+        return moment().year()+1;
+    }
 }

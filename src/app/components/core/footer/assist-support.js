@@ -3,7 +3,7 @@ var config;
 var activeSession = false;
 var banner;
 
-import { environment } from '../../../../environments/environment';
+
 
 /**
  * Provides a simple sdk call to integrate assist into the current page.
@@ -88,7 +88,7 @@ window.AssistBoot = {
          */
         document.getElementById('help-want-to-share').addEventListener('click', function () {
             config.cobrowseOnly = true;
-            config.url = environment.appConstants.assistSDKUrl;
+            config.url = "https://video-poc1.maximusbc.ca";
             config.sdkPath = config.url + "/assistserver/sdk/web/consumer"
 
             if (config.destination) {

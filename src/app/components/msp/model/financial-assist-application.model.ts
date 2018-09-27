@@ -67,6 +67,16 @@ export class FinancialAssistApplication implements ApplicationBase {
     }
   }
 
+   get isUniquePhns () {
+        let allPhs:string[] = this.allPersons.filter(x => x) .map(x => x.previous_phn).filter(x => x)  .filter(x => x.length >= 10) ;
+        return new Set(allPhs).size === allPhs.length ;
+    }
+
+    get isUniqueSin () {
+        let allPhs:string[] = this.allPersons.filter(x => x) .map(x => x.sin).filter(x => x)  ;
+        return new Set(allPhs).size === allPhs.length ;
+    }
+
   set attendantCareExpense(n:number) {
     this._attendantCareExpense = n || 0;
   }
@@ -121,6 +131,19 @@ export class FinancialAssistApplication implements ApplicationBase {
   spouseAgeOver65: boolean;
 
   private _hasSpouseOrCommonLaw: boolean;
+
+  /**
+   * Returns an array of ALL persons uses in financial assistance.
+   *
+   * Useful, for example, to make sure all PHNs are unique.
+   */
+  get allPersons(): Array<Person> {
+    return [
+      this.applicant,
+      this.spouse,
+    ]
+    .filter(x => x); //no 'undefined's
+  }
 
 
   /**

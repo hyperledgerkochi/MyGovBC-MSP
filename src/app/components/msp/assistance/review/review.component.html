@@ -1,11 +1,11 @@
 <h1 [innerHTML]="lang('./en/index.js').pageTitle" tabindex="0"></h1>
-<button class="btn btn-default" onclick="window.print();">
+<button class="btn btn-default" onclick="window.print();return false;">
   <i class="fa fa-print fa-lg pointer" 
     aria-hidden="true"></i>
   Print
 </button>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-lg-6">
         <msp-person-card [person]="application.applicant"
                          [editRouterLink]="'/msp/assistance/personal-info'"></msp-person-card>
         <msp-person-card [person]="application.spouse" *ngIf="application.hasSpouseOrCommonLaw"
@@ -19,7 +19,7 @@
                 [editRouterLink]="'/msp/assistance/personal-info'"></msp-contact-card>
 
     </div>
-    <div class="col-md-6">
+    <div class="col-lg-6">
         <div class="person-card-preview-zone">
             <div *ngFor="let mspImage of application.assistYeaDocs" class="preview-item">
                 <msp-thumbnail [imageObject] ="mspImage" [reviewMode]="true">
@@ -34,7 +34,7 @@
 
 
 <hr>
-<button [mspLogger]="'msp-premium-assistance_review'"
+<button
         class="btn btn-primary" type="submit" (click)="continue()"
         [innerHTML]="lang('./en/index.js').continueButton"></button>
 

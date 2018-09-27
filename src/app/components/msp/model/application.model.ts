@@ -64,6 +64,11 @@ class MspApplication implements ApplicationBase {
     return this._children;
   }
 
+  get isUniquePhns () {
+        let allPhs:string[] = this.allPersons.filter(x => x).map(x => x.previous_phn).filter(x => x)  .filter(x => x.length >= 10) ;
+        return new Set(allPhs).size === allPhs.length ;
+  }
+
   set children(children: Array<Person>) {
     this._children = children;
   }
@@ -92,6 +97,20 @@ class MspApplication implements ApplicationBase {
 
   removeSpouse(): void {
     this._spouse = null;
+  }
+
+  /**
+   * Returns an array of ALL persons uses in application.
+   *
+   * Useful, for example, to make sure all PHNs are unique.
+   */
+  get allPersons(): Array<Person> {
+    return [
+      this.applicant,
+      ...this.children,
+      this.spouse,
+    ]
+    .filter(x => x); //no 'undefined's
   }
 
   // Address and Contact Info

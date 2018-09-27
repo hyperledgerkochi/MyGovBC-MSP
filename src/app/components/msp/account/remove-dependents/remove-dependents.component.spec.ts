@@ -25,7 +25,7 @@ import { MspOutofBCRecordComponent } from '../../common/outof-bc/outof-bc.compon
 import { Mod11CheckValidator } from "../../common/phn/phn.validator";
 import { MspCountryComponent } from "../../common/country/country.component";
 import { MspDataService } from '../../service/msp-data.service';
-import { Ng2CompleterModule } from "ng2-completer";
+import { TypeaheadModule } from 'ngx-bootstrap'
 import { MspDepartureDateComponent } from '../../common/departure-date/departure-date.component';
 import {MspReturnDateComponent} from '../../common/return-date/return-date.component';  
 import { Person } from '../../model/person.model';
@@ -35,8 +35,8 @@ import {RouterTestingModule} from "@angular/router/testing";
 import { ProcessService } from "../../service/process.service";
 import { CompletenessCheckService } from '../../service/completeness-check.service';
 import { MspValidationService} from '../../service/msp-validation.service';
-
-
+import { ServicesCardDisclaimerModalComponent } from '../../../msp/common/services-card-disclaimer/services-card-disclaimer.component';
+import {ModalModule} from "ngx-bootstrap";
 
 
 
@@ -46,15 +46,16 @@ describe('RemoveDependentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [RemoveDependentComponent, MspToggleComponent, MspStatusInCanadaRadioComponent, MspDateComponent, AccountPersonalDetailsComponent, CalendarYearValidator, CalendarMonthValidator, CalendarDayValidator, CalendarYearFormatter, AddNewDependentBeneficiaryComponent, MspNameComponent, MspGenderComponent, MspBirthDateComponent, MspPhnComponent, MspPhoneComponent, MspDischargeDateComponent, MspSchoolDateComponent, MspAddressComponent, MspProvinceComponent, MspArrivalDateComponent, MspOutofBCRecordComponent, Mod11CheckValidator, MspCountryComponent, MspDepartureDateComponent, MspReturnDateComponent],
+      declarations: [RemoveDependentComponent, MspToggleComponent, MspStatusInCanadaRadioComponent, MspDateComponent, AccountPersonalDetailsComponent, CalendarYearValidator, CalendarMonthValidator, CalendarDayValidator, CalendarYearFormatter, AddNewDependentBeneficiaryComponent, MspNameComponent, MspGenderComponent, MspBirthDateComponent, MspPhnComponent, MspPhoneComponent, MspDischargeDateComponent, MspSchoolDateComponent, MspAddressComponent, MspProvinceComponent, MspArrivalDateComponent, MspOutofBCRecordComponent, Mod11CheckValidator, MspCountryComponent, MspDepartureDateComponent, ServicesCardDisclaimerModalComponent,MspReturnDateComponent],
       imports: [
         FormsModule, 
-        Ng2CompleterModule,
+        TypeaheadModule,
         LocalStorageModule.withConfig({
           prefix: 'ca.bc.gov.msp',
           storageType: 'sessionStorage'
         }),
-        RouterTestingModule
+        RouterTestingModule,
+          ModalModule.forRoot()
       ],
       providers: [
         MspDataService,
@@ -81,8 +82,7 @@ describe('RemoveDependentComponent', () => {
     expect(component.getCancellationReasonsIterable(Relationship.Child19To24)).toBeDefined();
     expect(component.getCancellationReasonsIterable(Relationship.Child19To24).length).toBeDefined();
     expect(component.getCancellationReasonsIterable(Relationship.Child19To24).length).toBeDefined();
-    expect(component.getCancellationReasonsIterable(Relationship.Child19To24)[0].index).toEqual(0);
-    expect(component.getCancellationReasonsIterable(Relationship.Child19To24)[0].prop).toBeDefined();
+    expect(component.getCancellationReasonsIterable(Relationship.Child19To24)[0]).toBeDefined();
   });
 
   it('should return "Other" for reason for cancellation when a custom reason is provided to person', () => {
@@ -91,7 +91,7 @@ describe('RemoveDependentComponent', () => {
   });
 
   it('should return a default reason for cancellation if a default reason is used', () => {
-    let reason = component.getCancellationReasonsIterable(Relationship.Child19To24)[0].prop
+    let reason = component.getCancellationReasonsIterable(Relationship.Child19To24)[0];
     component.onChangeReasonForCancellation(reason);
     expect(component.reasonForCancellation).toEqual(reason);
   });

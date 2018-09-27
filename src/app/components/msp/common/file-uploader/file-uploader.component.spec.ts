@@ -5,11 +5,11 @@ import { MspDataService } from '../../service/msp-data.service';
 import { LocalStorageService, LocalStorageModule } from 'angular-2-local-storage';
 import {ThumbnailComponent} from "../thumbnail/thumbnail.component";
 import {ModalModule} from "ngx-bootstrap";
-
+import { RouterTestingModule } from '@angular/router/testing';
 import {MspLogService} from "../../service/log.service";
 import {LogEntry} from "../logging/log-entry.model";
-import {Http, Headers, RequestOptions, ConnectionBackend, HttpModule} from "@angular/http"
 import * as moment from 'moment';
+import {HttpClientModule} from "@angular/common/http";
 
 
 
@@ -18,7 +18,7 @@ describe('FileUploaderComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [FileUploaderComponent, ThumbnailComponent],
-      imports: [FormsModule, ModalModule.forRoot(), HttpModule, LocalStorageModule.withConfig({
+      imports: [FormsModule, ModalModule.forRoot(),RouterTestingModule , HttpClientModule, LocalStorageModule.withConfig({
         prefix: 'ca.bc.gov.msp',
         storageType: 'sessionStorage'
       })],

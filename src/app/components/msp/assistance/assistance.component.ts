@@ -1,20 +1,25 @@
-import {Component, Inject, ViewChild, ChangeDetectorRef} from '@angular/core';
+import { Component, Inject, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MspProgressBarItem } from '../common/progressBar/progressBarDataItem.model';
-import {MspProgressBarComponent} from "../common/progressBar/progressBar.component";
-import {ProcessService, ProcessStep} from "../service/process.service";
+import { MspProgressBarComponent } from "../common/progressBar/progressBar.component";
+import { ProcessService, ProcessStep } from "../service/process.service";
 import { environment } from '../../../../environments/environment';
+import { Router, NavigationEnd } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { MspLogService } from '../service/log.service';
 
 /**
  * Application for Premium Assistance
  */
 @Component({
   templateUrl: './assistance.component.html',
-  styleUrls: ['./assistance.component.less']
+  styleUrls: ['./assistance.component.scss']
 })
 export class AssistanceComponent {
   lang = require('./i18n');
 
   @ViewChild('progressBar') progressBar: MspProgressBarComponent;
+  routerSubscription: Subscription;
 
   get assistanceProgressBarList(): Array<MspProgressBarItem> {
     if (this.processService.process == null ||
@@ -30,9 +35,36 @@ export class AssistanceComponent {
     ];
   }
 
-  constructor (private processService: ProcessService, private changeRef: ChangeDetectorRef) {
+  constructor(private processService: ProcessService,
+              private changeRef: ChangeDetectorRef,
+              private logService: MspLogService,
+              private router: Router) {
     environment.appConstants.serviceName = this.lang('./en/index.js').serviceName;
     this.initProcessService();
+  }
+
+  ngOnInit() {
+    /*this.logService.log({
+      name: "Assistance - Loaded Page",
+      url: this.router.url
+    },"Assistance - Page Load")*/
+
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(event => {
+          if (this.router.url.indexOf("/confirmation/") === -1) {//toned down logs.no log for confirmation page
+              this.logService.log({
+                  name: "PA - Loaded Page ",
+                  url: this.router.url
+              }, "PA - Loaded Page ")
+          }
+      });
+  }
+
+  ngOnDestroy() {
+      if(this.routerSubscription && !this.routerSubscription.closed) {
+          this.routerSubscription.unsubscribe();
+      }
   }
 
   private initProcessService () {

@@ -1,8 +1,9 @@
 import {
     Component, Input, Output, OnChanges, EventEmitter,
     SimpleChange, ViewChild, AfterViewInit, OnInit, OnDestroy,
-    state, trigger, style, ElementRef, QueryList, ViewChildren, ChangeDetectorRef
+    ElementRef, QueryList, ViewChildren, ChangeDetectorRef
 } from '@angular/core';
+import { state, trigger, style, } from '@angular/animations';
 import {NgForm} from '@angular/forms';
 import {Person} from '../../../model/person.model';
 import {MspAccountApp} from '../../../model/account.model';
@@ -33,13 +34,13 @@ import {MspDataService} from '../../../service/msp-data.service';
 import {MspArrivalDateComponent} from "../../../common/arrival-date/arrival-date.component";
 import {MspOutofBCRecordComponent} from "../../../common/outof-bc/outof-bc.component";
 import {MspProvinceComponent} from "../../../common/province/province.component";
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
+import {Observable} from 'rxjs';
 
-import './personal-details.component.less';
+
+
+
+
+import './personal-details.component.scss';
 import {BaseComponent} from "../../../common/base.component";
 import {MspCountryComponent} from "../../../common/country/country.component";
 
@@ -236,6 +237,21 @@ export class AccountPersonalDetailsComponent extends BaseComponent {
                 return false;
             }
         }
+        // residential address if exists , it shud be BC
+
+        if (this.person.residentialAddress && this.person.residentialAddress.isValid) {
+            if (!this.person.residentialAddress.isBCOnly){
+                return false ;
+            }
+        }
+
+
+        if (!this.person.mailingSameAsResidentialAddress) {
+            if (!this.person.mailingAddress.isValid){
+                return false;
+            }
+        }
+    
         return true;
     }
 }

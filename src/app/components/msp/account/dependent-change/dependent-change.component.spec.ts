@@ -31,7 +31,6 @@ import { MspBirthDateComponent } from '../../common/birthdate/birthdate.componen
 import { MspProvinceComponent } from '../../common/province/province.component';
 import { MspCountryComponent } from '../../common/country/country.component';
 import { MspPhnComponent } from '../../common/phn/phn.component';
-import { Ng2BootstrapModule } from "ngx-bootstrap";
 import { CalendarYearValidator } from '../../common/calendar/calendar-year.validator';
 import { CalendarMonthValidator } from '../../common/calendar/calendar-month.validator';
 import { CalendarDayValidator } from '../../common/calendar/calendar-day.validator';
@@ -41,12 +40,15 @@ import { MspDepartureDateComponent } from "../../common/departure-date/departure
 import { MspReturnDateComponent } from "../../common/return-date/return-date.component";
 import { MspOutofBCRecordComponent } from '../../common/outof-bc/outof-bc.component';
 import { Mod11CheckValidator } from "../../common/phn/phn.validator";
-import { Ng2CompleterModule } from "ng2-completer";
+import { TypeaheadModule } from 'ngx-bootstrap'
+import { ModalModule } from "ngx-bootstrap";
 
 import { MspLogService } from '../../service/log.service';
 import { async } from '@angular/core/testing';
 import { CompletenessCheckService } from '../../service/completeness-check.service';
 import { MspValidationService} from '../../service/msp-validation.service';
+import { ServicesCardDisclaimerModalComponent } from '../../../msp/common/services-card-disclaimer/services-card-disclaimer.component'
+
 
 
 describe("AccountDependentChangeComponent", () => {
@@ -61,7 +63,7 @@ describe("AccountDependentChangeComponent", () => {
         };
 
         TestBed.configureTestingModule({
-            declarations: [AccountDependentChangeComponent, CaptchaComponent, AddDependentComponent, RemoveDependentComponent, AccountPersonalDetailsComponent, MspLoggerDirective, MspCancelComponent, MspAddressComponent, MspToggleComponent, MspDateComponent, AddNewDependentBeneficiaryComponent, MspStatusInCanadaRadioComponent, MspNameComponent, MspGenderComponent, MspBirthDateComponent, MspPhnComponent, MspPhoneComponent, MspProvinceComponent, MspCountryComponent, CalendarYearValidator, CalendarMonthValidator, CalendarDayValidator, CalendarYearFormatter, MspDischargeDateComponent, MspOutofBCRecordComponent, Mod11CheckValidator, MspReturnDateComponent, MspDepartureDateComponent],
+            declarations: [AccountDependentChangeComponent, CaptchaComponent, AddDependentComponent, RemoveDependentComponent, AccountPersonalDetailsComponent, MspLoggerDirective, MspCancelComponent, MspAddressComponent, MspToggleComponent, MspDateComponent, AddNewDependentBeneficiaryComponent, MspStatusInCanadaRadioComponent, MspNameComponent, MspGenderComponent, MspBirthDateComponent, MspPhnComponent, MspPhoneComponent, MspProvinceComponent, MspCountryComponent, CalendarYearValidator, CalendarMonthValidator, CalendarDayValidator, CalendarYearFormatter, MspDischargeDateComponent, MspOutofBCRecordComponent, Mod11CheckValidator, MspReturnDateComponent, MspDepartureDateComponent, ServicesCardDisclaimerModalComponent],
             providers: [
                 MspDataService,
                 { provide: ProcessService, useValue: processServiceStub },
@@ -75,7 +77,7 @@ describe("AccountDependentChangeComponent", () => {
                 prefix: 'ca.bc.gov.msp',
                 storageType: 'sessionStorage'
             }), 
-            RouterTestingModule, Ng2BootstrapModule.forRoot(), Ng2CompleterModule]
+            RouterTestingModule, TypeaheadModule, ModalModule.forRoot()]
         })
         .compileComponents();
     

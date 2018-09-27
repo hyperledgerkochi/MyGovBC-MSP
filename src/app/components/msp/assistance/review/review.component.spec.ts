@@ -10,13 +10,13 @@ import {EligibilityCardComponent} from "../prepare/eligibility-card/eligibility-
 import {MspAddressCardPartComponent} from "../../common/address-card-part/address-card-part.component";
 import {ThumbnailComponent} from "../../common/thumbnail/thumbnail.component";
 import {RouterTestingModule} from "@angular/router/testing";
-import {Ng2BootstrapModule} from "ngx-bootstrap";
 import {MspCancelComponent} from "../../common/cancel/cancel.component";
 import {MspLoggerDirective} from "../../common/logging/msp-logger.directive";
 import {MspLogService} from "../../service/log.service";
-import {HttpModule} from "@angular/http";
+import { ModalModule } from "ngx-bootstrap";
 
 import { ProcessService } from "../../service/process.service";
+import {HttpClientModule} from "@angular/common/http";
 
 describe('AssistanceReviewComponent', () => {
 
@@ -25,10 +25,10 @@ describe('AssistanceReviewComponent', () => {
       declarations: [AssistanceReviewComponent, MspPersonCardComponent, MspContactCardComponent,
         EligibilityCardComponent, MspAddressCardPartComponent, ThumbnailComponent, MspCancelComponent,
         MspLoggerDirective],
-      imports: [FormsModule, RouterTestingModule, Ng2BootstrapModule.forRoot(), HttpModule, LocalStorageModule.withConfig({
+      imports: [FormsModule, RouterTestingModule,  HttpClientModule, LocalStorageModule.withConfig({
         prefix: 'ca.bc.gov.msp',
         storageType: 'sessionStorage'
-      })],
+      })  ,ModalModule.forRoot()],
       providers: [MspDataService,MspLogService, ProcessService,
         
         

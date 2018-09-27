@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing'
 import { FormsModule } from '@angular/forms';
-import { HttpModule }    from '@angular/http';
+import { HttpClientModule} from "@angular/common/http";
 import { PersonalInfoComponent } from './personal-info.component';
 import { PersonalDetailsComponent } from './personal-details/personal-details.component';
 import { MspDataService } from '../../service/msp-data.service';
@@ -18,7 +18,7 @@ import {MspSchoolDateComponent} from "../../common/schoolDate/school-date.compon
 import {FileUploaderComponent} from "../../common/file-uploader/file-uploader.component";
 import {MspAddressComponent} from "../../common/address/address.component";
 import {Mod11CheckValidator} from "../../common/phn/phn.validator";
-import {Ng2CompleterModule} from "ng2-completer";
+import { TypeaheadModule } from 'ngx-bootstrap';
 import {ThumbnailComponent} from "../../common/thumbnail/thumbnail.component";
 import {ModalModule, AccordionModule} from "ngx-bootstrap";
 import {HealthNumberComponent} from "../../common/health-number/health-number.component";
@@ -39,6 +39,8 @@ import {CalendarYearFormatter} from '../../common/calendar/calendar-year-formatt
 import {CalendarYearValidator} from '../../common/calendar/calendar-year.validator';
 import {CalendarDayValidator} from '../../common/calendar/calendar-day.validator';
 import { ProcessService } from "../../service/process.service";
+import { ServicesCardDisclaimerModalComponent  } from '../../common/services-card-disclaimer/services-card-disclaimer.component';
+
 
 describe('PersonalInfoComponent', () => {
 
@@ -49,9 +51,10 @@ describe('PersonalInfoComponent', () => {
         MspBirthDateComponent, MspSchoolDateComponent, FileUploaderComponent, MspAddressComponent,
         Mod11CheckValidator, ThumbnailComponent, HealthNumberComponent, MspCountryComponent, MspIdReqModalComponent,
         MspOutofBCRecordComponent, MspDepartureDateComponent, MspReturnDateComponent, MspCancelComponent,
-        MspImageErrorModalComponent, MspLoggerDirective, CalendarYearFormatter, CalendarYearValidator, CalendarDayValidator
+        MspImageErrorModalComponent, MspLoggerDirective, CalendarYearFormatter, CalendarYearValidator, CalendarDayValidator,
+        ServicesCardDisclaimerModalComponent
         ],
-      imports: [FormsModule, Ng2CompleterModule, ModalModule.forRoot(), AccordionModule.forRoot(), HttpModule, RouterTestingModule, LocalStorageModule.withConfig({
+      imports: [FormsModule, TypeaheadModule, ModalModule.forRoot(), AccordionModule.forRoot(), HttpClientModule, RouterTestingModule, LocalStorageModule.withConfig({
         prefix: 'ca.bc.gov.msp',
         storageType: 'sessionStorage'
       })],

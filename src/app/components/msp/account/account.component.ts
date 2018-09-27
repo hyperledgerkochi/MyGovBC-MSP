@@ -1,16 +1,22 @@
-import { Component, Inject, ViewChild } from '@angular/core';
-import { MspProgressBarItem } from '../common/progressBar/progressBarDataItem.model';
-import { MspProgressBarComponent } from "../common/progressBar/progressBar.component";
-import { ProcessService, ProcessStep, ProcessUrls } from "../service/process.service";
-import { MspAccountApp } from '../model/account.model';
-import { ProgressBarHelper } from './ProgressBarHelper';
-import { MspDataService } from '../service/msp-data.service';
-import { environment } from '../../../../environments/environment';
+import {Component, Inject, ViewChild} from '@angular/core';
+import {MspProgressBarItem} from '../common/progressBar/progressBarDataItem.model';
+import {MspProgressBarComponent} from "../common/progressBar/progressBar.component";
+import {ProcessService, ProcessStep, ProcessUrls} from "../service/process.service";
+import {MspAccountApp} from '../model/account.model';
+import {ProgressBarHelper} from './ProgressBarHelper';
+import {MspDataService} from '../service/msp-data.service';
+import {environment} from '../../../../environments/environment';
+import {Router, NavigationEnd} from '@angular/router';
+import { filter } from 'rxjs/operators';
+import {MspLogService} from '../service/log.service';
+import {Subscription} from "rxjs/internal/Subscription";
 
-require('./account.component.less');
+
+require('./account.component.scss');
+
 /**
  * AccountComponent for MSP, this houses everything that happens under the
- * Account Change section.  This component contains the ProgressBar and the
+ * Account Change section..  This component contains the ProgressBar and the
  * RouterOutlet, and through the Router it contains every account page.
  */
 @Component({
@@ -19,11 +25,43 @@ require('./account.component.less');
 export class AccountComponent {
     lang = require('./i18n');
     @ViewChild('progressBar') progressBar: MspProgressBarComponent;
+    routerSubscription: Subscription;
 
-    constructor(private processService: ProcessService, private dataService: MspDataService) {
+
+    constructor(private processService: ProcessService,
+                private dataService: MspDataService,
+                private router: Router,
+                private logService: MspLogService) {
         environment.appConstants.serviceName = this.lang('./en/index.js').serviceName;
         this.initProcessService();
     }
+
+    ngOnInit() {
+
+        /*  this.logService.log({
+              name: "Account - Loaded Page",
+              url: this.router.url
+          },"Account -Page Load")
+        */
+        this.routerSubscription = this.router.events
+          .pipe(filter(event => event instanceof NavigationEnd))
+          .subscribe(event => {
+                if (this.router.url.indexOf("/confirmation/") === -1) {//toned down logs.no log for confirmation page
+                    this.logService.log({
+                        name: "Account - Loaded Page ",
+                        url: this.router.url
+                    }, "Account - Loaded Page ")
+                }
+            });
+    }
+
+    ngOnDestroy() {
+        if(this.routerSubscription && !this.routerSubscription.closed) {
+            this.routerSubscription.unsubscribe();
+        }
+        /*this.routerSubscription.unsubscribe();*/
+    }
+
 
     get accountProgressBarList(): Array<MspProgressBarItem> {
 
@@ -51,7 +89,7 @@ export class AccountComponent {
 
         if (this.dataService.getMspAccountApp()) {
             const accountChangeOptions = this.dataService.getMspAccountApp().accountChangeOptions;
-            
+
             const progressBarHelper: ProgressBarHelper = new ProgressBarHelper(this.dataService.getMspAccountApp().accountChangeOptions);
 
             widthMainMenu = progressBarHelper.widthMainMenu;
@@ -67,17 +105,17 @@ export class AccountComponent {
             if (accountChangeOptions.dependentChange) {
                 newProgressBarItems.push(new MspProgressBarItem(progressBarHelper.dependentsLabel, ProcessUrls.ACCOUNT_DEPENDENTS_URL, widthDependents));
             }
-        
+
         }
 
 
         let progressBar: MspProgressBarItem[] = [
-            new MspProgressBarItem(this.lang("./en/index.js").progressStepMainMenu, this.processService.process.processSteps[0].route,  widthMainMenu),
-            new MspProgressBarItem(this.lang("./en/index.js").progressStepDocumentation,  ProcessUrls.ACCOUNT_FILE_UPLOADER_URL,  widthDocumentUpload),
-            new MspProgressBarItem(this.lang("./en/index.js").progressStepReview, ProcessUrls.ACCOUNT_REVIEW_URL,widthReview),
+            new MspProgressBarItem(this.lang("./en/index.js").progressStepMainMenu, this.processService.process.processSteps[0].route, widthMainMenu),
+            new MspProgressBarItem(this.lang("./en/index.js").progressStepDocumentation, ProcessUrls.ACCOUNT_FILE_UPLOADER_URL, widthDocumentUpload),
+            new MspProgressBarItem(this.lang("./en/index.js").progressStepReview, ProcessUrls.ACCOUNT_REVIEW_URL, widthReview),
         ];
 
-        
+
         if (newProgressBarItems && newProgressBarItems.length > 0) {
             progressBar.splice(1, 0, ...newProgressBarItems);
         }
@@ -92,9 +130,9 @@ export class AccountComponent {
      * configured by AccountPrepareComponent.  The static incomplete state does
      * NOT include the dynamic options, like AccountDependentChangeComponent,
      * which the user selects at runtime via AccountPrepareComponent.
-     * 
+     *
      * ProcessService is stored in LocalStorage and persists through refreshes.
-     * 
+     *
      */
     private initProcessService() {
 

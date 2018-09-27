@@ -1,8 +1,8 @@
 import  {
   Component, Input, Output, OnChanges, EventEmitter,
-  SimpleChange, ViewChild, AfterViewInit, OnInit, OnDestroy,
-  state, trigger, style, ElementRef, QueryList, ViewChildren, ChangeDetectorRef
+  SimpleChange, ViewChild, AfterViewInit, OnInit, OnDestroy, ElementRef, QueryList, ViewChildren, ChangeDetectorRef
 } from '@angular/core';
+import { state, trigger, style } from '@angular/animations';
 import { NgForm } from '@angular/forms';
 import { Person } from '../../../model/person.model';
 import { OutofBCRecord } from '../../../model/outof-bc-record.model';
@@ -23,22 +23,22 @@ import {MspSchoolDateComponent} from "../../../common/schoolDate/school-date.com
 import {HealthNumberComponent} from "../../../common/health-number/health-number.component";
 import {MspDischargeDateComponent} from "../../../common/discharge-date/discharge-date.component";
 import {MspAddressComponent} from "../../../common/address/address.component";
+import {ServicesCardDisclaimerModalComponent} from "../../../common/services-card-disclaimer/services-card-disclaimer.component"
 
 import {MspArrivalDateComponent} from "../../../common/arrival-date/arrival-date.component";
 import {MspOutofBCRecordComponent} from "../../../common/outof-bc/outof-bc.component";
 import {MspProvinceComponent} from "../../../common/province/province.component";
-import { Observable } from 'rxjs/Rx';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
+
+
+
+
 
 import {BaseComponent} from "../../../common/base.component";
 import {MspCountryComponent} from "../../../common/country/country.component";
 @Component({
     selector: 'msp-personal-details',
     templateUrl: './personal-details.component.html',
-    styleUrls: ['./personal-details.component.less'],
+    styleUrls: ['./personal-details.component.scss'],
 
     animations: [
       trigger('shrinkOut', [
@@ -100,6 +100,7 @@ export class PersonalDetailsComponent extends BaseComponent {
   @ViewChild('inBCAfterStudiesQuestion') inBCAfterStudiesQuestion: HTMLElement;
   @ViewChild('schoolAddress') schoolAddress: MspAddressComponent;
   @ViewChild('schoolDate') schoolDate: MspSchoolDateComponent;
+  @ViewChild('mspServicesCardModal') servicesCardDisclaimerModalComponent: ServicesCardDisclaimerModalComponent;
 
   @Input() person: Person;
   @Input() id: string;
@@ -107,10 +108,12 @@ export class PersonalDetailsComponent extends BaseComponent {
   @Output() notifyChildRemoval: EventEmitter<Person> = new EventEmitter<Person>();
   @Output() notifySpouseRemoval: EventEmitter<Person> = new EventEmitter<Person>();
   @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
+
   shrinkOut: string;
   shrinkOutStatus: string;
   genderListSignal: string;
   institutionWorkSignal: string;
+  showServicesCardModal: boolean = false;
 
   constructor(private el:ElementRef,
     private cd: ChangeDetectorRef){
@@ -137,13 +140,21 @@ export class PersonalDetailsComponent extends BaseComponent {
     if(p.status !== StatusInCanada.CitizenAdult){
       p.institutionWorkHistory = 'No';
     }
+    this.showServicesCardModal = true ;
+
     this.onChange.emit(value);
   }
 
   setActivity(value:Activities) {
-    this.person.currentActivity = value;
-    this.person.movedFromProvinceOrCountry = '';
-    this.onChange.emit(value);
+
+      if (this.showServicesCardModal && this.person.bcServiceCardShowStatus && this.person.relationship != this.Relationship.ChildUnder19) {
+          this.servicesCardDisclaimerModalComponent.showModal();
+          this.showServicesCardModal = false;
+      }
+
+      this.person.currentActivity = value;
+      this.person.movedFromProvinceOrCountry = '';
+      this.onChange.emit(value);
   }
 
   /**
@@ -326,6 +337,10 @@ export class PersonalDetailsComponent extends BaseComponent {
   handleOutofBCRecordChange(evt:OutofBCRecord){
     this.onChange.emit(evt);
   }
+    //If false, then we don't want users continuing to further application;
+  checkEligibility(): boolean {
+        return !this.person.ineligibleForMSP;
+  }
 
   setMovedToBCPermanently(moved:boolean){
     this.person.madePermanentMoveToBC = moved;
@@ -376,6 +391,14 @@ export class PersonalDetailsComponent extends BaseComponent {
       console.log("institutionWorkHistory invalid");
       return false;
     }
+
+    if (this.person.isArrivalToBcBeforeDob){
+      return false;
+    }
+
+      if (this.person.isArrivalToCanadaBeforeDob){
+          return false;
+      }
 
     // school
     if (this.schoolQuestion != null &&

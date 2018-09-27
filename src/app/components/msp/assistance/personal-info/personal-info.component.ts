@@ -10,6 +10,7 @@ import {AssistancePersonalDetailComponent} from "./personal-details/personal-det
 import {MspAddressComponent} from "../../common/address/address.component";
 import {MspPhoneComponent} from "../../common/phone/phone.component";
 import {ProcessService} from "../../service/process.service";
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   templateUrl: './personal-info.component.html'
@@ -36,11 +37,13 @@ export class AssistancePersonalInfoComponent extends BaseComponent{
   }
 
   ngAfterViewInit() {
-    this.personalInfoForm.valueChanges.debounceTime(250)
-      .distinctUntilChanged().subscribe( values => {
-        // console.log('Personal info form change triggering save: ', values);
-        this.dataService.saveFinAssistApplication();
-      });
+
+    this.personalInfoForm.valueChanges.pipe(
+      debounceTime(250),
+      distinctUntilChanged()
+    ).subscribe( values => {
+      this.dataService.saveFinAssistApplication();
+    });
   }
 
   ngOnInit(){
@@ -55,6 +58,10 @@ export class AssistancePersonalInfoComponent extends BaseComponent{
   onSubmit(form: NgForm){
    this._router.navigate(['/msp/assistance/retro']);
   }
+
+    isValid(): boolean {
+        return this.dataService.finAssistApp.isUniquePhns && this.dataService.finAssistApp.isUniqueSin;
+    }
 
   get canContinue():boolean{
     return this.isAllValid();

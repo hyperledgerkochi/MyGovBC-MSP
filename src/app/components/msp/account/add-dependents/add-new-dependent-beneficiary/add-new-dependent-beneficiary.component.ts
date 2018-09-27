@@ -22,7 +22,7 @@ import { OutofBCRecord } from '../../../model/outof-bc-record.model';
 @Component({
     selector: 'msp-add-new-dependent-beneficiary',
     templateUrl: './add-new-dependent-beneficiary.component.html',
-    styleUrls: ['./add-new-dependent-beneficiary.component.less']
+    styleUrls: ['./add-new-dependent-beneficiary.component.scss']
 })
 export class AddNewDependentBeneficiaryComponent extends BaseComponent implements OnInit {
     Relationship: typeof Relationship = Relationship;
@@ -46,8 +46,13 @@ export class AddNewDependentBeneficiaryComponent extends BaseComponent implement
     }
 
     change($event) {
-        this.onChange.emit();
+        this.onChange.emit($event);
         this.emitIsFormValid();
+    }
+
+    //If false, then we don't want users continuing to further application;
+    checkEligibility(): boolean {
+        return !this.person.ineligibleForMSP;
     }
 
     handleDeleteOutofBCRecord(evt:OutofBCRecord){
@@ -101,7 +106,8 @@ export class AddNewDependentBeneficiaryComponent extends BaseComponent implement
                 return false;
             }
         }
-        return true;
+
+        return this.checkEligibility();
     }
 
 }

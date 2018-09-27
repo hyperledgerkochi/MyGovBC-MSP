@@ -1,6 +1,5 @@
 import {TestBed, inject, async} from '@angular/core/testing'
 import { FormsModule } from '@angular/forms';
-import { HttpModule }    from '@angular/http';
 import { AddressComponent } from './address.component'
 import { MspDataService } from '../../service/msp-data.service';
 import { CompletenessCheckService } from '../../service/completeness-check.service';
@@ -8,7 +7,7 @@ import { LocalStorageService, LocalStorageModule } from 'angular-2-local-storage
 import {MspApplication} from "../../model/application.model";
 import {MspAddressComponent} from "../../common/address/address.component";
 import {MspPhoneComponent} from "../../common/phone/phone.component";
-import {Ng2CompleterModule} from "ng2-completer";
+import { TypeaheadModule } from 'ngx-bootstrap';
 import {MspProvinceComponent} from "../../common/province/province.component";
 import {MspDepartureDateComponent} from "../../common/departure-date/departure-date.component";
 import {MspReturnDateComponent} from "../../common/return-date/return-date.component";
@@ -20,6 +19,7 @@ import { MspLogService } from '../../service/log.service';
 import { MspValidationService } from '../../service/msp-validation.service';
 import { ProcessService } from "../../service/process.service";
 import {RouterTestingModule} from "@angular/router/testing";
+import {HttpClientModule} from "@angular/common/http";
 
 describe('Application Address Component Test', () => {
 
@@ -28,7 +28,7 @@ describe('Application Address Component Test', () => {
             declarations: [AddressComponent, MspAddressComponent, MspPhoneComponent, MspProvinceComponent,
                 MspDepartureDateComponent, MspReturnDateComponent, MspCountryComponent,
                 MspCancelComponent, MspLoggerDirective],
-            imports: [FormsModule, Ng2CompleterModule, ModalModule.forRoot(), HttpModule, RouterTestingModule, LocalStorageModule.withConfig({
+            imports: [FormsModule, TypeaheadModule, ModalModule.forRoot(), HttpClientModule, RouterTestingModule, LocalStorageModule.withConfig({
                 prefix: 'ca.bc.gov.msp',
                 storageType: 'sessionStorage'
               })],

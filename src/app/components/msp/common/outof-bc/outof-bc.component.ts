@@ -3,10 +3,10 @@ import {
 } from '@angular/core'
 import {OutofBCRecord} from "../../model/outof-bc-record.model";
 import {NgForm} from "@angular/forms";
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/catch';
+
+
+
+
 import {BaseComponent} from "../base.component";
 import {MspDepartureDateComponent} from "../departure-date/departure-date.component";
 import {MspReturnDateComponent} from "../return-date/return-date.component";
@@ -28,6 +28,10 @@ export class MspOutofBCRecordComponent extends BaseComponent {
   @ViewChild('mspDepartureDate') mspDepartureDate: MspDepartureDateComponent;
   @ViewChild('mspReturnDate') mspReturnDate: MspReturnDateComponent;
   @ViewChild('formRef') form:NgForm;
+    @Input()maxMonthsRange: number;
+    @Input()maxMonthsRangeErrorMsg: string;
+    @Input()minMonthsRange: number;
+    @Input()minMonthsRangeErrorMsg: string;
 
   constructor(private cd: ChangeDetectorRef) {
     super(cd);
@@ -36,4 +40,9 @@ export class MspOutofBCRecordComponent extends BaseComponent {
   delete(id:string){
     this.onDelete.emit(this.outofBCRecord);
   }
+
+    isValid(): boolean {
+        return this.mspReturnDate.inputDate().isAfter(this.mspDepartureDate.inputDate());
+    }
+
 }

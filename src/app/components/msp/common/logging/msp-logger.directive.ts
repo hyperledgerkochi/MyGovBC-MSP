@@ -21,11 +21,7 @@ export class MspLoggerDirective{
 
   }
   @HostListener('click', ['$event']) onclick($event:any) {
-    // console.log('log on click event');
-    this.sendLog(this.makeGeneralLog());
-  }
-  @HostListener('load', ['$event']) onLoad($event:any) {
-    // console.log('log on load event');
+    console.log('log on click event');
     this.sendLog(this.makeGeneralLog());
   }
 
@@ -53,9 +49,9 @@ export class MspLoggerDirective{
 
   ngOnInit(){
   }
-
+  //unused method
   private sendLog(entry:LogEntry){
-    this.logService.logIt(entry).subscribe(
+    this.logService.logIt(entry,"mspLogger").subscribe(
       (response)=>{
         // console.log('log rest service response: ');
         // console.log(response);

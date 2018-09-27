@@ -33,15 +33,15 @@ export class AssistanceSendingComponent implements AfterContentInit  {
     // After view inits, begin sending the application
     this.transmissionInProcess = true;
     this.hasError = false;
-    
+     // this.logService.log({name: 'PA - application submitting request'},"PA : Submission Request");
     // After view inits, begin sending the application
     this.service
       .sendApplication(this.application)
       .then((application:FinancialAssistApplication) => {
         this.application = application;
 
-        this.logService.log({name: 'premium assistance application received success confirmation from API server', 
-          confirmationNumber: this.application.referenceNumber});
+        this.logService.log({name: 'PA - received refNo ',
+          confirmationNumber: this.application.referenceNumber},"PA - Submission Response Success ");
 
         //delete the premium assistance application content from local storage
         this.dataService.removeFinAssistApplication();
@@ -59,12 +59,18 @@ export class AssistanceSendingComponent implements AfterContentInit  {
         this.rawError = error;
         this.rawRequest = error._requestBody;
 
-        this.logService.log({name: 'premium assistance application received failure message from API server', 
+        this.logService.log({name: 'PA - Received Failure ',
           error: error._body,
-          request: error._requestBody});
+          request: error._requestBody},"PA - Submission Response Error" );
         this.transmissionInProcess = false;
         // this.router.navigate(["/msp/assistance/confirmation"]);
+          let oldUUID = this.application.uuid;
+          this.application.regenUUID();
+
+          console.log('PA uuid updated: from %s to %s', oldUUID, this.dataService.finAssistApp.uuid);
+
         this.application.authorizationToken = null;
+          this.dataService.saveFinAssistApplication();
       });
   }
 

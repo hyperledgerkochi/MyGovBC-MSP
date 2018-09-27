@@ -14,8 +14,8 @@
 // var NODE_ENV = process.env.NODE_ENV || "production"
 
 export const environment = {
+    runtimeEnv: "development",
     appConstants: {
-        runtimeEnv: "development", // run-time env. by default same as build-time node env
         coreApiBaseUrl: 'http://localhost:9000/api',
         serviceName: 'Apply for BC Health Care',
         logBaseUrl: '/msp/api/logging',
@@ -33,16 +33,16 @@ export const environment = {
           reductionScaleFactor: 0.8,
           acceptMimeType: "image/*",
           convertToMimeType: "image/jpeg",
-          jpegQuality: 0.5
+          jpegQuality: 0.5,
+          pdfScaleFactor: 2.0
         },
-        // general state of the app, if unavailable, display Unavailable message and don't continue
-        mspIsInMaintenanceFlag: process.env.mspIsInMaintenanceFlag,
-        mspIsInMaintenanceText: process.env.mspIsInMaintenanceText,
-        mspIsInMaintenanceTimes: process.env.mspIsInMaintenanceTimes,
-
+        mspIsInMaintenanceFlag: false,
+        // These values are never used as long as the flag is False.
+        mspIsInMaintenanceText: null,
+        mspIsInMaintenanceTimes: null,
 
         /** Set at runtime to be either the internal or external URL as appropriate. */
-        assistSDKUrl: null, 
+        assistSDKUrl: null,
         assistSDKExternalUrl: 'https://video-poc1.maximusbc.ca',
         assistPath: '/assistserver/sdk/web/consumer/assist.js',
         // Only accessible via intranet.

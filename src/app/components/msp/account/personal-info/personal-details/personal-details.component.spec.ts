@@ -17,7 +17,7 @@ import {MspSchoolDateComponent} from "../../../common/schoolDate/school-date.com
 import {FileUploaderComponent} from "../../../common/file-uploader/file-uploader.component";
 import {MspAddressComponent} from "../../../common/address/address.component";
 import {Mod11CheckValidator} from "../../../common/phn/phn.validator";
-import {Ng2CompleterModule} from "ng2-completer";
+import { TypeaheadModule } from 'ngx-bootstrap';
 import {ThumbnailComponent} from "../../../common/thumbnail/thumbnail.component";
 import {ModalModule, AccordionModule} from "ngx-bootstrap";
 import {HealthNumberComponent} from "../../../common/health-number/health-number.component";
@@ -32,8 +32,9 @@ import {CalendarDayValidator} from '../../../common/calendar/calendar-day.valida
 import { MspLogService } from '../../../service/log.service';
 import {MspValidationService} from '../../../service/msp-validation.service';
 import { ProcessService } from "../../../service/process.service";
-
+import { ServicesCardDisclaimerModalComponent } from '../../../common/services-card-disclaimer/services-card-disclaimer.component';
 import { MspStatusInCanadaRadioComponent } from '../../../common/status-in-canada-radio/status-in-canada-radio.component';
+import { RouterTestingModule } from "@angular/router/testing";
 
 describe('AccountPersonalDetailsComponent', () => {
 
@@ -45,8 +46,8 @@ describe('AccountPersonalDetailsComponent', () => {
         MspBirthDateComponent,MspPhoneComponent, MspSchoolDateComponent, FileUploaderComponent, MspAddressComponent,
         Mod11CheckValidator, ThumbnailComponent, HealthNumberComponent, MspCountryComponent, MspIdReqModalComponent,
         MspOutofBCRecordComponent, MspDepartureDateComponent, MspReturnDateComponent, MspImageErrorModalComponent,
-        CalendarYearFormatter, CalendarYearValidator, CalendarDayValidator, MspStatusInCanadaRadioComponent],
-      imports: [FormsModule, Ng2CompleterModule, ModalModule.forRoot(), AccordionModule.forRoot(),LocalStorageModule.withConfig({
+        CalendarYearFormatter, CalendarYearValidator, CalendarDayValidator, MspStatusInCanadaRadioComponent,ServicesCardDisclaimerModalComponent],
+      imports: [FormsModule, RouterTestingModule, TypeaheadModule, ModalModule.forRoot(), AccordionModule.forRoot(),LocalStorageModule.withConfig({
           prefix: 'ca.bc.gov.msp',
           storageType: 'sessionStorage'
       })],

@@ -12,6 +12,9 @@ import {PersonalDetailsComponent} from "./personal-details/personal-details.comp
 import {BaseComponent} from "../../common/base.component";
 import {ProcessService} from "../../service/process.service";
 import { StatusInCanada} from "../../model/status-activities-documents";
+
+import { ServicesCardDisclaimerModalComponent  } from '../../common/services-card-disclaimer/services-card-disclaimer.component'
+
 @Component({
   templateUrl: './personal-info.component.html'
 })
@@ -23,6 +26,7 @@ export class PersonalInfoComponent extends BaseComponent {
   Relationship: typeof Relationship = Relationship;
 
   @ViewChild('formRef') form: NgForm;
+  @ViewChild('mspServicesCardModal') mspServicesCardModal: ServicesCardDisclaimerModalComponent;
   @ViewChildren(PersonalDetailsComponent) personalDetailsComponent: QueryList<PersonalDetailsComponent>;
 
   constructor(private dataService: MspDataService,
@@ -40,6 +44,7 @@ export class PersonalInfoComponent extends BaseComponent {
   onChange(values:any){
     this.dataService.saveMspApplication();
   }
+
 
   get application(): MspApplication {
     return this.dataService.getMspApplication();
@@ -106,7 +111,18 @@ export class PersonalInfoComponent extends BaseComponent {
     return this.isAllValid();
   }
 
-  continue():void {
+  isValid(): boolean {
+     return this.dataService.getMspApplication().isUniquePhns;
+  }
+
+  checkAnyDependentsIneligible(): boolean {
+        let target = [this.dataService.getMspApplication().applicant,this.dataService.getMspApplication().spouse ,...this.dataService.getMspApplication().children]
+        return target.filter(x => x)
+            .filter(x => x.ineligibleForMSP).length >= 1;
+    }
+
+
+    continue():void {
 
     // console.log('personal info form itself valid: %s', this.form.valid);
     console.log('combinedValidationState on personal info: %s', this.isAllValid());

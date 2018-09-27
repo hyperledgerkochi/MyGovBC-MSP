@@ -2,13 +2,14 @@ import { Component, Input, ViewChildren, ElementRef, QueryList, Renderer } from 
 import { Router, NavigationEnd } from '@angular/router';
 import { MspProgressBarItem } from "./progressBarDataItem.model";
 import { ProgressBarHelper } from '../../account/ProgressBarHelper';
-import { Subject } from 'rxjs';
+import {Subject} from "rxjs/internal/Subject";
+import {debounceTime} from "rxjs/operators";
 
 
 @Component({
   selector: 'msp-progressBar',
   templateUrl: './progressBar.component.html',
-  styleUrls: ['./progressBar.component.less'],
+  styleUrls: ['./progressBar.component.scss'],
 })
 export class MspProgressBarComponent {
   @Input() public progressBarList: MspProgressBarItem[];
@@ -27,9 +28,9 @@ export class MspProgressBarComponent {
 
   constructor(public router: Router, private renderer: Renderer) {
     //Ensure we only process the event once every resizeThrottleTime ms.
-    this.resizeEvent$
-      .debounceTime(this.RESIZE_DEBOUNCE_TIME - 10)
-      .subscribe(_ => {
+    this.resizeEvent$.pipe(
+      debounceTime(this.RESIZE_DEBOUNCE_TIME - 10))
+        .subscribe(_ => {
         setTimeout(_ => this.calcualteMinHeight());
       });
   }
@@ -139,7 +140,7 @@ export class MspProgressBarComponent {
   }
 
   /**
-   * Returns a string which matches classes found in progressBar.component.less.
+   * Returns a string which matches classes found in progressBar.component.scss.
    * This class should only be responsible for the height of the progress bar
    * when it's at the -sm- breakpoint or larger in bootstrap.
    * 

@@ -1,68 +1,33 @@
-import {Injectable, Inject} from '@angular/core';
-import {MspApplication} from "../model/application.model";
-import {
-    GenderType, NameType, AttachmentUuidsType, AddressType, NameTypeFactory,
-    AttachmentUuidsTypeFactory, BasicCitizenshipTypeFactory, AddressTypeFactory
-} from "../api-model/commonTypes";
-import {Address} from "../model/address.model";
-import {Person, OperationActionType as OperationActionTypeEnum} from "../model/person.model";
-import {
-    ResidencyType,
-    EnrolmentApplicationType,
-    EnrolmentApplicantType,
-    EnrolmentChildrenType,
-    PersonTypeFactory,
-    ResidencyTypeFactory,
-    LivedInBCTypeFactory,
-    EnrolmentApplicationTypeFactory,
-    EnrolmentApplicantTypeFactory,
-    EnrolmentChildrenTypeFactory,
-    PreviousCoverageTypeFactory,
-    OutsideBCTypeFactory,
-    WillBeAwayTypeFactory,
-    DependentType,
-    DependentTypeFactory,
-    EnrolmentDependentsTypeFactory
-} from "../api-model/enrolmentTypes";
-import {StatusInCanada, Activities, Relationship} from "../model/status-activities-documents";
-import {CitizenshipType} from "../api-model/commonTypes";
-import {BasicCitizenshipType} from "../api-model/commonTypes";
-import {LivedInBCType} from "../api-model/enrolmentTypes";
-import {PersonType} from "../api-model/enrolmentTypes";
-import {
-    ApplicationType, AttachmentsType, document, _ApplicationTypeNameSpace,
-    AttachmentType, ApplicationTypeFactory, DocumentFactory, AttachmentsTypeFactory, AttachmentTypeFactory
-} from "../api-model/applicationTypes";
-import {MspImage} from "../model/msp-image";
-import {SimpleDate} from '../model/simple-date.interface';
-import {PersonDocuments} from "../model/person-document.model";
-import {ResponseType} from "../api-model/responseTypes";
-import {Http, Response, Headers, RequestOptions} from "@angular/http";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import * as moment from "moment";
+import { environment } from '../../../../environments/environment';
+import { AccountChangeAccountHolderFactory, AccountChangeAccountHolderType, AccountChangeApplicationTypeFactory, AccountChangeChildType, AccountChangeChildTypeFactory, AccountChangeChildrenFactory, AccountChangeSpouseType, AccountChangeSpouseTypeFactory, AccountChangeSpousesTypeFactory, OperationActionType } from "../api-model/accountChangeTypes";
+import { ApplicationTypeFactory, AttachmentType, AttachmentTypeFactory, AttachmentsType, AttachmentsTypeFactory, DocumentFactory, _ApplicationTypeNameSpace, document } from "../api-model/applicationTypes";
+import { AssistanceApplicantTypeFactory, AssistanceApplicationTypeFactory, AssistanceSpouseTypeFactory, FinancialsType, FinancialsTypeFactory } from "../api-model/assistanceTypes";
+import { AddressType, AddressTypeFactory, AttachmentUuidsType, AttachmentUuidsTypeFactory, BasicCitizenshipTypeFactory, CitizenshipType, GenderType, NameType, NameTypeFactory } from "../api-model/commonTypes";
+import { DependentType, DependentTypeFactory, EnrolmentApplicantTypeFactory, EnrolmentApplicationTypeFactory, EnrolmentChildrenTypeFactory, EnrolmentDependentsTypeFactory, LivedInBCTypeFactory, OutsideBCTypeFactory, PersonType, PersonTypeFactory, PreviousCoverageTypeFactory, ResidencyType, ResidencyTypeFactory, WillBeAwayTypeFactory } from "../api-model/enrolmentTypes";
+import { ResponseType } from "../api-model/responseTypes";
+import { MspAccountApp } from "../model/account.model";
+import { Address } from "../model/address.model";
+import { ApplicationBase } from "../model/application-base.model";
+import { MspApplication } from "../model/application.model";
+import { AssistanceApplicationType, FinancialAssistApplication } from "../model/financial-assist-application.model";
+import { MspImage } from "../model/msp-image";
+import { OperationActionType as OperationActionTypeEnum, Person } from "../model/person.model";
+import { SimpleDate } from '../model/simple-date.interface';
+import { Activities, Relationship, StatusInCanada } from "../model/status-activities-documents";
+import { MspLogService } from './log.service';
 import ISO_8601 = moment.ISO_8601;
-import {FinancialAssistApplication, AssistanceApplicationType} from "../model/financial-assist-application.model";
-import {
-    AssistanceApplicationTypeFactory, AssistanceApplicantType,
-    AssistanceApplicantTypeFactory, FinancialsType, FinancialsTypeFactory, AssistanceSpouseTypeFactory
-} from "../api-model/assistanceTypes";
 
-import {
-    AccountChangeApplicationTypeFactory, AccountChangeAccountHolderType, AccountChangeAccountHolderFactory,
-    AccountChangeSpousesTypeFactory, AccountChangeSpouseTypeFactory, AccountChangeSpouseType, OperationActionType,
-    AccountChangeChildrenFactory, AccountChangeChildType, AccountChangeChildTypeFactory
-} from "../api-model/accountChangeTypes";
 
-import {ApplicationBase} from "../model/application-base.model";
-import {AssistanceYear} from "../model/assistance-year.model";
-import {environment} from '../../../../environments/environment';
-import {MspAccountApp} from "../model/account.model";
 
 let jxon = require("jxon/jxon");
 
 @Injectable()
 export class MspApiService {
 
-    constructor(private http: Http) {
+    constructor(private http: HttpClient, private logService: MspLogService) {
     }
 
     /**
@@ -97,12 +62,11 @@ export class MspApiService {
                 // second convert to XML
                 let convertedAppXml = this.toXmlString(documentModel);
 
-
                 // if no errors, then we'll sendApplication all attachments
                 return this.sendAttachments(app.authorizationToken, documentModel.application.uuid, app.getAllImages()).then(() => {
 
                     // once all attachments are done we can sendApplication in the data
-                    return this.sendDocument(app.authorizationToken, documentModel).then(
+                    return this.sendDocument(app.authorizationToken, documentModel, convertedAppXml).then(
                         (response: ResponseType) => {
                             console.log("sent application resolved");
                             // Add reference number
@@ -119,9 +83,17 @@ export class MspApiService {
                 })
                     .catch((error: Response | any) => {
                         console.log("sent all attachments rejected: ", error);
+                        this.logService.log({
+                            text: "Attachment - Send All Rejected ",
+                            response: error,
+                        }, "Attachment - Send All Rejected ")
                         return reject(error);
                     });
             } catch (error) {
+                this.logService.log({
+                    text: "Application - Send Failure ",
+                    exception: error,
+                }, "Application - Send Failure ")
                 console.log("error: ", error);
                 return reject(error);
             }
@@ -141,17 +113,34 @@ export class MspApiService {
             for (let attachment of attachments) {
                 attachmentPromises.push(this.sendAttachment(token, applicationUUID, attachment));
             }
+            // this.logService.log({
+            //    text: "Send All Attachments - Before Sending",
+            //     numberOfAttachments: attachmentPromises.length
+            // }, "Send Attachments - Before Sending")
+
             // Execute all promises are waiting for results
             return Promise.all(attachmentPromises).then(
                 (responses: ResponseType[]) => {
+                    // this.logService.log({
+                    //     text: "Send All Attachments - Success",
+                    //     response: responses,
+                    // }, "Send All Attachments - Success")
                     return resolve();
                 },
                 (error: Response | any) => {
+                    this.logService.log({
+                        text: "Attachments - Send Error ",
+                        error: error,
+                    }, "Attachments - Send Error ")
                     console.log("error sending attachment: ", error);
                     return reject(error);
                 }
             )
                 .catch((error: Response | any) => {
+                    this.logService.log({
+                        text: "Attachments - Send Error ",
+                        error: error,
+                    }, "Attachments - Send Error ")
                     console.log("error sending attachment: ", error);
                     return reject(error);
                 });
@@ -184,12 +173,12 @@ export class MspApiService {
             // description - UI does NOT collect this property
 
             // Setup headers
-            let headers = new Headers({
+            let headers = new HttpHeaders({
                 'Content-Type': attachment.contentType,
                 'Access-Control-Allow-Origin': '*',
                 'X-Authorization': 'Bearer ' + token
             });
-            let options = new RequestOptions({headers: headers});
+            let options = {headers: headers, responseType: "text" as "text"};
 
             let binary = atob(attachment.fileContent.split(',')[1]);
             let array = <any>[];
@@ -201,18 +190,28 @@ export class MspApiService {
             return this.http
                 .post(url, blob, options)
                 .toPromise()
-                .then((response: Response) => {
-                        return resolve(<ResponseType>{
-                            status: response.status + ''
-                        });
+                .then((response) => {
+                        // this.logService.log({
+                        //     text: "Send Individual Attachment - Success",
+                        //     response: response,
+                        // }, "Send Individual Attachment - Success")
+                        return resolve();
                     },
                     (error: Response | any) => {
                         console.log('error response in its origin form: ', error);
+                        this.logService.log({
+                            text: "Attachment - Send Error ",
+                            response: error,
+                        }, "Attachment - Send Error ")
                         return reject(error);
                     }
                 )
                 .catch((error: Response | any) => {
                     console.log("Error in sending individual attachment: ", error);
+                    this.logService.log({
+                        text: "Attachment - Send Error ",
+                        response: error,
+                    }, "Attachment - Send Error ")
                     let response = this.convertResponse(error);
                     reject(response || error);
                 });
@@ -225,7 +224,7 @@ export class MspApiService {
      * @param document
      * @returns {Promise<ResponseType>}
      */
-    private sendDocument(token: string, document: document): Promise<ResponseType> {
+    private sendDocument(token: string, document: document, documentXmlString: string): Promise<ResponseType> {
         return new Promise<ResponseType>((resolve, reject) => {
             /*
              Create URL
@@ -236,22 +235,31 @@ export class MspApiService {
                 + "?programArea=enrolment";
 
             // Setup headers
-            let headers = new Headers({
+            let headers = new HttpHeaders({
                 'Content-Type': 'application/xml',
-                'X-Authorization': 'Bearer ' + token
+                'Response-Type': 'application/xml',
+                'X-Authorization': 'Bearer ' + token,
             });
-            let options = new RequestOptions({headers: headers});
+            let options = {headers: headers, responseType: "text" as "text"};
 
             // Convert doc to XML
-            let documentXmlString = this.toXmlString(document);
+            // let documentXmlString = this.toXmlString(document);
 
             return this.http.post(url, documentXmlString, options)
                 .toPromise()
-                .then((response: Response) => {
-                    console.log("sent application resolved");
-                    return resolve(this.convertResponse(response.text()));
+                .then((response: string) => {
+                    // this.logService.log({
+                    //    text: "Send Document XML - Success",
+                    //    response: response,
+                    // }, "Send Document XML - Success")
+                    console.log("sent application resolved")
+                    return resolve(this.convertResponse(response));
                 })
-                .catch((error: Response | any) => {
+                .catch((error) => {
+                    this.logService.log({
+                        text: "Application - XML Send Error ",
+                        response: error,
+                    }, "Application - XML Send Error ")
                     console.log("full error: ", error)
                     return reject(error);
                 });
@@ -370,7 +378,6 @@ export class MspApiService {
     convertMspAccountApp(from: MspAccountApp): document {
         let to = DocumentFactory.make();
         to.application = ApplicationTypeFactory.make();
-
         // UUID
         to.application.uuid = from.uuid;
 
@@ -999,8 +1006,8 @@ export class MspApiService {
             accountHolder.residenceAddress = this.unknownAddress();
         }
 
-        if (from.phoneNumber) {
-            accountHolder.telephone = Number(from.phoneNumber.replace(new RegExp("[^0-9]", "g"), ""));
+        if (from.applicant.phoneNumber) {
+            accountHolder.telephone = Number(from.applicant.phoneNumber.replace(new RegExp("[^0-9]", "g"), ""));
         }
         if (from.applicant.previous_phn) {
             accountHolder.phn = Number(from.applicant.previous_phn.replace(new RegExp("[^0-9]", "g"), ""));
@@ -1319,7 +1326,6 @@ export class MspApiService {
     }
 
     static ApplicationTypeNameSpace = _ApplicationTypeNameSpace;
-    private static XmlDocumentType = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
 
     /**
      * Converts any JS object to XML with optional namespace
@@ -1330,10 +1336,7 @@ export class MspApiService {
     toXmlString(from: any): string {
         let xml = jxon.jsToXml(from);
         let xmlString = jxon.xmlToString(xml);
-        //TODO: namespace not working properly, fix it and remove this hack
-        xmlString = xmlString.replace("<application>", '<ns2:application xmlns:ns2="http://www.gov.bc.ca/hibc/applicationTypes">');
-        xmlString = xmlString.replace("</application>", '</ns2:application>');
-        return MspApiService.XmlDocumentType + xmlString;
+        return this.correctNSinXmlString (xmlString);
     }
 
     stringToJs<T>(from: string): T {
@@ -1355,6 +1358,67 @@ export class MspApiService {
             month: date.month - 1, // moment use 0 index for month :(
             day: date.day,
         }); // use UTC mode to prevent browser timezone shifting
+    }
+
+    // trim in the XML the leading <xx:application xmlns="xx"> and trailing </xx:application>
+    // note that xx: might be missing
+
+    private static XmlRootSimple = '<application';
+    private static XmlRootNS = ':application';
+    private static XmlDocumentHeader = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><ns2:application xmlns:ns2="http://www.gov.bc.ca/hibc/applicationTypes">';
+    private static XmlDocumentFooter = '</ns2:application>';
+
+    correctNSinXmlString(xmlString : string) : string {
+
+        // deal with the beginning
+        // check the simple case
+        let beginIndex = xmlString.indexOf(MspApiService.XmlRootSimple);
+        if (beginIndex >= 0) {
+            for (var i = beginIndex; i < xmlString.length; i++) {
+                if (xmlString.charAt(i) == '>') {
+                    beginIndex = i + 1;
+                    break;
+                }
+            }
+            if (beginIndex == xmlString.length)
+                beginIndex = 0;
+        }
+        // not the simple case, check to see the NS case, ie <xx:application>
+        else {
+            beginIndex = xmlString.indexOf(MspApiService.XmlRootNS);
+            if (beginIndex > 0) {
+                for (var i = beginIndex; i < xmlString.length; i++) {
+                    if (xmlString.charAt(i) == '>') {
+                        beginIndex = i + 1;
+                        break;
+                    }
+                }
+                if (beginIndex == xmlString.length)
+                    beginIndex = 0;
+            }
+            // cannot find the element <xx:applicationxx> or <applicationxx>
+            else {
+                let endHeader = xmlString.indexOf("Application>");
+                let headerns = "Header after jxon : " + xmlString.substring(0, endHeader);
+                this.logService.log({
+                    text: headerns
+                }, "Application - Header Info")
+            }
+        }
+
+        // deal with the end
+        var endre = /<\/application>/;
+        let endIndex = xmlString.search(endre);
+        if (endIndex < 0) {
+            endre = /<\/[a-z,A-Z,0-9]+:application>/;
+            endIndex = xmlString.search(endre);
+        }
+
+        if (beginIndex < 0 || endIndex <= 0)
+            return xmlString;
+        else {
+            return MspApiService.XmlDocumentHeader + xmlString.substring(beginIndex, endIndex) + MspApiService.XmlDocumentFooter;
+        }
     }
 
     readonly ISO8601DateFormat = "YYYY-MM-DD";

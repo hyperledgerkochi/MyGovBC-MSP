@@ -4,6 +4,12 @@
         "changeOrigin": true,
         "secure": false
     },
+    "/msp/app/images":{
+        "target" : "http://localhost:4300",
+        "pathRewrite": {
+            "^/msp": ""
+        }
+    },
     "/assistserver": {
         "target": "https://video-poc1.maximusbc.ca",
         "secure": false,

@@ -1,8 +1,7 @@
 <div role="alert" aria-live="assertive">
     <h1 [innerHTML]="lang('./en/index.js').pageTitle"></h1>
     <div class="alert alert-info" role="alert">
-        <h2 [mspLogger]="'msp-enrollment_confirmation'"
-            class="to-upper">
+        <h2 class="to-upper">
             Reference # {{confirmationNum? confirmationNum : 'N/A'}}
         </h2>
     </div>
@@ -30,9 +29,6 @@
     <ul>
         <li>
             <h3 [innerHTML]="lang('./en/index.js').depNextStep1"></h3>
-        </li>
-        <li>
-            <h3 [innerHTML]="lang('./en/index.js').depNextStep2"></h3>
         </li>
         <li>
             <h3 [innerHTML]="lang('./en/index.js').depNextStep3"></h3>
