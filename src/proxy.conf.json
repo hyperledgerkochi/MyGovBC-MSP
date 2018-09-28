@@ -1,11 +1,4 @@
 {
-    "/msp/api/captcha": {
-        "target": "https://mygovbc-msp-dev.pathfinder.gov.bc.ca/xxx",
-        "changeOrigin": true,
-        "secure": false,
-        "debug": true,
-        "logLevel": "debug"
-    },
     "/msp/api": {
         "target": "https://mygovbc-msp-dev.pathfinder.gov.bc.ca",
         "changeOrigin": true,
