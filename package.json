@@ -14,7 +14,7 @@
     "start": "npm run dev",
     "dev": "ng serve --o --proxy-config src/proxy.conf.json",
     "dev-build": "ng build",
-    "build": "ng build --prod",
+    "build": "ng build --prod --proxy-config src/proxy.conf.json",
     "test": "ng test",
     "postinstall": "npm run build"
   },
