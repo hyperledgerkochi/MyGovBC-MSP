@@ -56,7 +56,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "msp:build",
-            "port": 4300
+            "port": 4300,
+            "proxyConfig": "src/proxy.conf.json"
           },
           "configurations": {
             "production": {
