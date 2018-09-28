@@ -7,7 +7,7 @@ export const environment = {
         serviceName: 'Apply for BC Health Care',
         logBaseUrl: '/msp/api/logging',
         apiBaseUrl: '/msp/api',
-        captchaApiBaseUrl: '/msp/api/captcha',
+        captchaApiBaseUrl: '/msp/api',
         addressChangeBCUrl: 'https://www.addresschange.gov.bc.ca/',
         images: {
           maxImagesPerPerson: 50,
