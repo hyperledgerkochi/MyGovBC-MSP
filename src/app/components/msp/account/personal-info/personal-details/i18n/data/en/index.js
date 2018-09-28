@@ -34,7 +34,7 @@ module.exports = {
         'Child\’s Current Status in Canada',
         'Child\’s Current Status in Canada'],
 
-    canadaStatusLabel: [' Canadian Citizen ',
+    canadaStatusLabel: [' British Citizen ',
         ' Permanent Resident ',
         ' Temporary Permit Holder or Diplomat '],
 

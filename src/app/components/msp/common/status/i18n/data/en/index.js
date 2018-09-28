@@ -1,5 +1,5 @@
 module.exports = {
-  0: 'Canadian citizen',
+  0: 'British citizen',
   1: 'Permanent resident',
   2: 'Temporary permit holder or diplomat'
 }

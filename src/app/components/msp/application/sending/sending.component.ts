@@ -46,10 +46,14 @@ export class SendingComponent implements AfterContentInit {
     this.transmissionInProcess = true;
     this.hasError = undefined;
     //  this.logService.log({name: 'Enrollment application submitting request'},"Enrollment : Submission Request");
-    this.service
+  /*  this.service
       .sendApplication(this.application)
       .then((application: MspApplication) => {
-        this.application = application;
+        this.application = application;*/
+
+
+
+        this.application.referenceNumber = Math.floor(100000 + Math.random() * 900000)+"";
         this.logService.log({name: 'Enrolment - Received refNo ',
           confirmationNumber: this.application.referenceNumber},"Enrolment - Submission Response Success");
 
@@ -59,12 +63,15 @@ export class SendingComponent implements AfterContentInit {
         this.dataService.removeMspApplication();
 
         //  go to confirmation
+      setTimeout(() => {
+          console.log('Test');
+          this.router.navigate(["/msp/application/confirmation"],
+              {queryParams: {confirmationNum:tempRef}});
 
-        this.router.navigate(["/msp/application/confirmation"], 
-          {queryParams: {confirmationNum:tempRef}});
+      }, 1000);
 
 
-      }).catch((error: ResponseType | any) => {
+   /*   }).catch((error: ResponseType | any) => {
         console.log('error in sending application: ', error);
         this.hasError = true;
         this.rawUrl = error.url;
@@ -82,7 +89,7 @@ export class SendingComponent implements AfterContentInit {
 
         this.application.authorizationToken = null;
         this.dataService.saveMspApplication();
-      });
+      });*/
 
   }
 

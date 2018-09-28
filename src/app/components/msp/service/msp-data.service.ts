@@ -642,10 +642,10 @@ export  class MspDataService {
 
         //if page is refreshed before filling address, the province and country is lost..so initialising..
         if (!output.applicant.residentialAddress.province) {
-            output.applicant.residentialAddress.province = "British Columbia";
+            output.applicant.residentialAddress.province = "England";
         }
         if (!output.applicant.residentialAddress.country ){
-            output.applicant.residentialAddress.country = "Canada";
+            output.applicant.residentialAddress.country = "UK";
         }
 
         if (dto.applicant.addedSpouse) {

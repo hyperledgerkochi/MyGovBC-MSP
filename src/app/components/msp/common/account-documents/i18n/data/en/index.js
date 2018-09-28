@@ -7,9 +7,9 @@ false ==> no samples can be provided. Dont show sample document link
 
  */
 module.exports = {
-  0: ['Canadian Birth certificate',true],
-  1: ['Canadian Passport',true],
-  2: ['Canadian Citizenship card or certificate',true],
+  0: ['Canadian Birth certificate',false],
+  1: ['Canadian Passport',false],
+  2: ['Canadian Citizenship card or certificate',false],
   3:['Record of Landing',true],
   4: ['Permanent Resident Card (front and back)',true],
   5: ['Work permit',true],

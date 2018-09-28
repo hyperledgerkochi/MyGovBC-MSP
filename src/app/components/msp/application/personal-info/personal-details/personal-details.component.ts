@@ -362,54 +362,50 @@ export class PersonalDetailsComponent extends BaseComponent {
     // Some inputs can be determine via the form.isValid,
     // check these explicitly
 
-    // Status
-    if (this.person.currentActivity == null) {
-      return false;
-    }
 
     // moved to bc permanently
     if (this.person.madePermanentMoveToBC == null) {
       console.log("madePermanentMoveToBC invalid");
-      return false;
+    //  return false;
     }
 
     // outside bc 30 days
     if (this.person.declarationForOutsideOver30Days == null) {
       console.log("declarationForOutsideOver30Days invalid");
-      return false;
+   //   return false;
     }
 
     // previous PHN
     if (this.person.hasPreviousBCPhn == null) {
       console.log("hasPreviousBCPhn invalid");
-      return false;
+   //   return false;
     }
 
     // armed forces
     if (this.armedForcedQuestion != null &&
       this.person.institutionWorkHistory == null) {
       console.log("institutionWorkHistory invalid");
-      return false;
+    //  return false;
     }
 
     if (this.person.isArrivalToBcBeforeDob){
-      return false;
+   //   return false;
     }
 
       if (this.person.isArrivalToCanadaBeforeDob){
-          return false;
+  //        return false;
       }
 
     // school
     if (this.schoolQuestion != null &&
       this.person.fullTimeStudent == null) {
       console.log("schoolQuestion invalid");
-      return false;
+   //   return false;
     }
     if (this.person.fullTimeStudent &&
       this.person.inBCafterStudies == null) {
       console.log("inBCafterStudies invalid");
-      return false;
+   //   return false;
     }
 
     return true;

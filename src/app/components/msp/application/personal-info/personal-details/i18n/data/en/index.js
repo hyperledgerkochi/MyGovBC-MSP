@@ -15,10 +15,10 @@ module.exports = {
   /*
    * Status for each relationship type
    */
-  statusLabel: ['Your Status in Canada',
-    'Spouse\'s Status in Canada',
-    'Child\'s Status in Canada',
-    'Child\'s Status in Canada'],
+  statusLabel: ['Your Status in the United Kingdom',
+    'Spouse\'s Status in the United Kingdom',
+    'Child\'s Status in the United Kingdom',
+    'Child\'s Status in the United Kingdom'],
   documentInstructionLabel: ['Your ID requirements',
     'Spouse\'s ID requirements',
     'Child\'s ID requirements',
@@ -47,10 +47,10 @@ module.exports = {
     'Child\'s previous B.C. Personal Health Number',
     'Child\'s previous B.C. Personal Health Number'],
 
-  previousBCHealthNumber: ['Do you have a previous B.C. Personal Health Number?',
-      'Does your spouse have a previous B.C. Personal Health Number?',
-      'Does your child have a previous B.C. Personal Health Number?',
-      'Does your child have a previous B.C. Personal Health Number?'],
+  previousBCHealthNumber: ['Can you go up or move down two steps without difficulty?',
+      'Can your spouse go up or move down two steps without difficulty?',
+      'Can your child go up or move down two steps without difficulty?',
+      'Can your child go up or move down two steps without difficulty?'],
 
   movedFromProvinceLabel: ['Which province are you moving from?',
     'Which province are they moving from?',
@@ -68,8 +68,8 @@ module.exports = {
       "Since you arrived, have they been outside B.C. for more than 30 days in total?",
       "Since you arrived, have they been outside B.C. for more than 30 days in total?",
       "Since you arrived, have they been outside B.C. for more than 30 days in total?"],
-  beenOutsideBCForMoreThan30DaysInTotalInThePast12Months: "Have you been outside B.C. for more than 30 days in total in the past 12 months",
-  fullTimeStudentLabel: 'Are you a full-time student in B.C.?',
+  beenOutsideBCForMoreThan30DaysInTotalInThePast12Months: "Can you move around and use steps without difficulty",
+  fullTimeStudentLabel: 'Can you lift at least one of your arms without difficulty',
   haveYouMovedToBCPermanently: ['Have you moved to BC permanently?',
       'Have they moved to BC permanently?',
       'Have they moved to BC permanently?',
@@ -78,10 +78,10 @@ module.exports = {
   inBCAfterStudiesLabel: 'Will you reside in B.C. upon completion of your studies?',
   childStayInBCAfterStudiesLabel: 'Will this child reside in B.C. after completing study in this school?',
 
-  canadianForcesQuestion: ['Have you been released from the Canadian Armed Forces or an Institution?',
-    'Have they been released from the Canadian Armed Forces or an Institution?',
-    'Have they been released from the Canadian Armed Forces or an Institution?',
-    'Have they been released from the Canadian Armed Forces or an Institution?'],
+  canadianForcesQuestion: ['Can you stand or sit without difficulty?',
+    'Can you stand or sit without difficulty?',
+    'Can you stand or sit without difficulty?',
+    'Can you stand or sit without difficulty?'],
 
   nameOfSchool: 'Name of school that this child is attending',
   fullAttendanceLabel: '(must be in full-time attendance)',

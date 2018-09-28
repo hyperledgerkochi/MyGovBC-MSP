@@ -226,8 +226,8 @@ class MspApplication implements ApplicationBase {
   }
   constructor() {
     // Set some defaults
-    this.residentialAddress.province = "British Columbia";
-    this.residentialAddress.country = "Canada";
+    this.residentialAddress.province = "England";
+    this.residentialAddress.country = "UK";
   }
 }
 

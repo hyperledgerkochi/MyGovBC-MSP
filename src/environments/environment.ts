@@ -17,7 +17,7 @@ export const environment = {
     runtimeEnv: "development",
     appConstants: {
         coreApiBaseUrl: 'http://localhost:9000/api',
-        serviceName: 'Apply for BC Health Care',
+        serviceName: 'Capability for Work Questionnaire',
         addressChangeBCUrl: 'https://www.addresschange.gov.bc.ca/',
         logBaseUrl: '/msp/api/logging',
         apiBaseUrl: '/msp/api',

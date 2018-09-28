@@ -25,21 +25,21 @@ module.exports = {
             documentContentList: [
                 {
                     document: 0,
-                    title: "Canadian Birth Certificate",
+                    title: "Birth Certificate",
                     body: "<ul><li>Include front and back</li><li>Ensure all text is legible and photo is in focus</li></ul>",
                     image: require('./images/canadian_birth_certs.jpg'),
                     imageAlt: 'Pictures of various sample Canadian Birth Certificates'
                 },
                 {
                     document: 1,
-                    title: "Canadian Passport",
+                    title: "Passport",
                     body: "<ul><li>Must include your full legal name</li><li>Include entire page, corner to corner</li><li>Ensure all text is legible and photo is in focus</li></ul>",
                     image: require('./images/Data_Page_of_Canadian_Passport.jpg'),
                     imageAlt: 'A picture of a sample Canadian Passport'
                 },
                 {
                     document: 2,
-                    title: "Canadian Citizenship Card or Certificate",
+                    title: "Citizenship Card or Certificate",
                     body: "<ul><li>Include front and back, corner to corner</li><li>Ensure all text is legible and photo is in focus</li></ul>",
                     image: require('./images/canadian_cit_card-cert.jpg'),
                     imageAlt: 'Picture of a sample Canadian Citizenship Card and a Certificate'

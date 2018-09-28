@@ -8,7 +8,7 @@ module.exports = {
   genderValues: {F: 'Female', M: 'Male'},
 
   dobLabel: 'Birthdate:',
-  statusLabel: 'Status in Canada:',
+  statusLabel: 'Status in UK:',
   livedInBCSinceBirth: 'Lived in B.C. since birth:',
   movedFromProvinceLabel: 'Moved from province:',
   movedFromCountryLabel: 'Moved from country:',
@@ -16,7 +16,7 @@ module.exports = {
   personalHealthNumberLabel: 'Personal health number:',
   sinNumberLabel: 'Social insurance number:',
   arrivedToBCLabel: 'Date arrived in B.C.:',
-  arrivedToCanadaLabel: 'Date arrived in Canada:',
+  arrivedToCanadaLabel: 'Date arrived in UK:',
   outsideBCLabel: 'Outside BC for more than 30 days:',
     outsideBCFutureLabel: 'Outside BC for more than 30 days during next 6 months:',
   outsideBCReasonLabel: 'Reason for leaving:',
