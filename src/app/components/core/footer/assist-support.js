@@ -67,18 +67,18 @@ window.AssistBoot = {
         /**
          * Place a call to an Agent, cobrowsing can happen after the call is established.
          */
-
-         document.getElementById('help-call-and-share').addEventListener('click', function () {
-             var helpModal = document.getElementById("assist-modal-help");
-            helpModal.style.opacity = 0;
-            setTimeout(helpModal.style.display = "", 150);
-             config.allowedIframeOrigins = false; // important: disable iframe messaging if not required for security
-            if (AssistSDK.isBrowserSupported()) {
-                AssistSDK.startSupport(config);
-             } else {
-                window.alert("Your browser is not supported!");
-            }
-         });
+        //  This option is DISABLED for the MSP Prototype.
+        // document.getElementById('help-call-and-share').addEventListener('click', function () {
+        //     var helpModal = document.getElementById("assist-modal-help");
+        //     helpModal.style.opacity = 0;
+        //     setTimeout(helpModal.style.display = "", 150);
+        //     config.allowedIframeOrigins = false; // important: disable iframe messaging if not required for security
+        //     if (AssistSDK.isBrowserSupported()) {
+        //         AssistSDK.startSupport(config);
+        //     } else {
+        //         window.alert("Your browser is not supported!");
+        //     }
+        // });
 
         /**
          *  Short Code Assist required.
@@ -163,7 +163,7 @@ window.AssistBoot = {
         document.getElementById('code-no-help-needed').addEventListener('click', function () {
             var codeModal = document.getElementById("assist-modal-code");
             codeModal.style.opacity = 0;
-            codeModal.classList.remove('in');            
+            codeModal.classList.remove('in');
             setTimeout(codeModal.style.display = "", 150);
             AssistSDK.endSupport();
         });
@@ -451,16 +451,16 @@ function getHelpModal() {
         "            <div class=\"modal-content\">\n" +
         "                <div class=\"modal-header modal-header-primary\">\n" +
         "                    <h2>Co-Browsing</h2>\n"+
-         "                    <button type=\"button\"\n" +
-         "                            class=\"close\"\n" +
-         "                            id=\"assist-modal-help-close\">&times;</button>\n" +
+        // "                    <button type=\"button\"\n" +
+        // "                            class=\"close\"\n" +
+        // "                            id=\"assist-modal-help-close\">&times;</button>\n" +
         "                </div>\n" +
         "                <div class=\"modal-body\">\n\n" +
-        "                    <p>Share my screen with a support agent</p>\n" +        
-         "                    <button type=\"button\"\n" +
-         "                            id=\"help-call-and-share\"\n" +
-         "                            class=\"btn btn-success btn-lg btn-block\">Call support and then share</button>\n" +
-         "                    <br>\n" +
+        "                    <p>Share my screen with a support agent</p>\n" +
+        // "                    <button type=\"button\"\n" +
+        // "                            id=\"help-call-and-share\"\n" +
+        // "                            class=\"btn btn-success btn-lg btn-block\">Call support and then share</button>\n" +
+        // "                    <br>\n" +
         "                    <button type=\"button\"\n" +
         "                            id=\"help-want-to-share\"\n" +
         "                            class=\"code btn btn-success btn-lg btn-block\">Already on the call, want to share</button>\n" +
