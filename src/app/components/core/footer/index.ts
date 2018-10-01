@@ -22,7 +22,7 @@ export class CoreFooterComponent {
         http.get(url)
             .subscribe(data => {
                     // console.log('using internal assistSDK link');
-                    this.useInternalAssistSdk = true;
+                    this.useInternalAssistSdk = false;
                 },
                 err => {
                     // console.log('using external assistSDK link');

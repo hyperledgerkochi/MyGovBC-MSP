@@ -88,7 +88,7 @@ window.AssistBoot = {
          */
         document.getElementById('help-want-to-share').addEventListener('click', function () {
             config.cobrowseOnly = true;
-            config.url = "https://video-poc1.maximusbc.ca";
+            config.url = "https://t1cafex.maximusbc.ca";
             config.sdkPath = config.url + "/assistserver/sdk/web/consumer"
 
             if (config.destination) {
