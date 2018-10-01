@@ -7,22 +7,20 @@
                 <li class="nav-item"><a class="nav-link"  href="http://www2.gov.bc.ca/gov/content/home/accessibility" target="_blank">Accessibility</a></li>
                 <li class="nav-item"><a class="nav-link"  href="http://www2.gov.bc.ca/gov/content/home/copyright" target="_blank">Copyright</a></li>
                 <li class="nav-item"><a class="nav-link"  href="https://mcap-dev.pathfinder.gov.bc.ca/" target="_blank">Contact Us</a></li>
- 				<li>
-
+                <li class="nav-item">
                     <div id="assist">
                         <button id="assistlink" 
-                            (click)='clickedAssist()' 
-                            type="button" 
-                            class="btn btn-default btn-sm"
+                            (click)='clickedAssist()'
+                            type="button"
+                            class="btn btn-default btn-sm navbar-btn"
                             aria-label="Visual Assist"
-                            tooltip="Setup a Co-Browsing Session, inviting a support agent to assist you in using the website."
-                            tooltipPopupDelay="200"
+                            data-toggle="tooltip" data-placement="top"
+                            title="Setup a Co-Browsing Session, inviting a support agent to assist you in using the website."
                             >
-                            <i class="fa fa-question-circle" aria-hidden="true"></i>                            
+                            <i class="fa fa-question-circle" aria-hidden="true"></i>
                             Live Assist
                         </button>
                     </div>
-
                 </li>
             </ul>
         </div>
