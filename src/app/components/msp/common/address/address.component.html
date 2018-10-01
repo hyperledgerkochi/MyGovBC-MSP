@@ -62,7 +62,7 @@
             <input [(ngModel)]='residentialAddress.postal' type="text" class="form-control to-upper"
                    id="residentialAddressPostalCode{{objectId}}" name="residentialAddressPostalCode" #residentialAddressPostalCodeRef="ngModel"
                    required tabindex="0"
-                   [pattern]="Address.PostalCodeBCRegEx">
+                   >
             <div *ngIf='residentialAddressPostalCodeRef.touched || showError'
                  role="alert" aria-live="assertive">
                 <div class="text-danger" *ngIf="residentialAddressPostalCodeRef.errors?.required"

@@ -1,6 +1,6 @@
 module.exports = {
   pageTitle: 'See if you may qualify for disability.',
-    servicesCardMsg:'If you already have Medical Services Plan (MSP) coverage and received a letter notifying you to renew your BC Services Card, you do not have to submit a new Application for MSP Enrolment; you only need to renew your BC Services Card. Follow the instructions on the letter to renew your card.',
+    servicesCardMsg:'The Health Assessment Advisory Service arranges and carries out assessments on behalf of the Department for Work and Pensions (DWP). If you are claiming benefits as a result of a disability, injury or ill health, you may be required by DWP to have an assessment with a qualified Healthcare Professional as part of your claim process.',
   question1: 'Do you currently live in United Kingdom (i.e. Do you have an address here)?',
   badAnswer1: 'You might not qualify for public health insurance if you do not live in B.C. Contact <a href="http://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents-contact-us" target="_blank">Health Insurance BC</a> for more information.',
 
