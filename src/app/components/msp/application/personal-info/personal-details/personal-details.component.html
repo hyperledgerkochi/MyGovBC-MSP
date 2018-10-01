@@ -256,17 +256,7 @@
                     </div>
                 </div>
             </div>
-            <div *ngIf="person.declarationForOutsideOver30Days === true" class="row" style="margin-bottom: 20px">
-                <div class="col-md-12">
-                    <msp-outof-bc-record #outOfBCRecord [minMonthsRange]="12"  [minMonthsRangeErrorMsg]="lang('./en/index.js').minMonths"
-                                         [outofBCRecord]="person.outOfBCRecord"
-                                         (onDelete)="handleDeleteOutofBCRecord($event)"
-                                         (onUpdate)="handleOutofBCRecordChange($event)"
-                                          [showError]="showError"
-                                          >
-                    </msp-outof-bc-record>
-                </div>
-            </div>
+
         </div>
         <div class="row" style="margin-bottom: 20px">
             <div class="col-lg-6">
@@ -288,18 +278,7 @@
               </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-6" *ngIf="person.hasPreviousBCPhn === true">
-                <msp-phn #phn
-                         [phn]="person.previous_phn"
-                         (phnChange)="person.previous_phn = $event"
-                         [required]="false"
-                         [bcPhn]="true"
-                         [phnLabel]="lang('./en/index.js').phnLabel[this.person.relationship]"
-                         (onChange) = "onChange.emit($event)"
-                         [showError] = "showError"></msp-phn>
-            </div>
-        </div>
+
 
     </div>
 

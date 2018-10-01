@@ -42,10 +42,10 @@ module.exports = {
       'Has your child lived in B.C. since birth?',
       'Has your child lived in B.C. since birth?'],
 
-  phnLabel: ['Your previous B.C. Personal Health Number',
-    'Spouse\'s previous B.C. Personal Health Number',
-    'Child\'s previous B.C. Personal Health Number',
-    'Child\'s previous B.C. Personal Health Number'],
+  phnLabel: ['Your previous Personal Health Number',
+    'Spouse\'s previous Personal Health Number',
+    'Child\'s previous Personal Health Number',
+    'Child\'s previous Personal Health Number'],
 
   previousBCHealthNumber: ['Can you go up or move down two steps without difficulty?',
       'Can your spouse go up or move down two steps without difficulty?',

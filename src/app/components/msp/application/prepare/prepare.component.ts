@@ -129,8 +129,6 @@ export class PrepareComponent extends BaseComponent {
 
   isValid(): boolean {
     let app = this.dataService.getMspApplication();
-    return app.applicant.plannedAbsence === false
-      && app.applicant.liveInBC === true
-      && app.unUsualCircumstance === false;
+    return  app.applicant.liveInBC === true ;
   }
 }

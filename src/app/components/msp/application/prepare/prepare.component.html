@@ -30,11 +30,8 @@
                 #noPlannedAbsenceBtn type="button" class="btn btn-default">No&nbsp;</button>
         </div>
 
-        <p class="intro text-danger" *ngIf="plannedAbsence === true"
-            [innerHtml]="lang('./en/index.js').badAnswer3" role="alert" aria-live="assertive">
-        </p>
     </div>
-    <div [hidden]= "plannedAbsence !== false || !liveInBC" role="dialog" aria-labelledby="q3">
+    <div [hidden]= "plannedAbsence === null || !liveInBC" role="dialog" aria-labelledby="q3">
         <p id="q3" class="intro" [innerHtml]="lang('./en/index.js').specialCircumstanceQuestion"></p>
         <div class="btn-group" role="group">
             <button [class.msp-btn-radio]="unUsualCircumstance === true" tabindex="0"
@@ -42,9 +39,7 @@
             <button [class.msp-btn-radio]="unUsualCircumstance === false" tabindex="0"
                    #noUnusualCircustanceBtn type="button" class="btn btn-default">No&nbsp;</button>
         </div>
-        <p class="intro text-danger" *ngIf="unUsualCircumstance === true"
-            [innerHtml]="lang('./en/index.js').badAnswer4" role="alert" aria-live="assertive">
-        </p>
+
     </div>
     <div *ngIf="unUsualCircumstance === false" [innerHtml]="lang('./en/index.js').allRightAnswers" role="alert" aria-live="assertive">
     </div>
