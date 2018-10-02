@@ -4,7 +4,7 @@ export const environment = {
     runtimeEnv: "production",
     appConstants: {
         coreApiBaseUrl: 'http://localhost:9000/api',
-        serviceName: 'Apply for BC Health Care',
+        serviceName: 'Capability for Work Questionnaire',
         logBaseUrl: '/msp/api/logging',
         apiBaseUrl: '/msp/api',
         captchaApiBaseUrl: '/msp/api/captcha',
