@@ -10,7 +10,7 @@
 
 // Make .btn-primary yellow.  The primary colour stays blue.
 .btn-primary {
-    @include button-variant($color-secondary, #f8b103);
+    @include button-variant($color-secondary, #12c0e6);
 
     &.disabled, &:disabled, &[disabled] {
         color: #777;
