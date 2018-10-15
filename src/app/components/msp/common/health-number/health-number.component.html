@@ -9,7 +9,7 @@
                minlength="1"
                maxlength="50"
                id='healthNumber{{objectId}}' name='healthNumber' #healthNumberRef="ngModel"
-               class="form-control">
+               class="form-control assist-no-show">
         <div *ngIf='healthNumberRef.touched || showError' role="alert" aria-live="assertive">
             <div class="text-danger" *ngIf="healthNumberRef.errors?.required"
                  [innerHTML]="lang('./en/index.js').healthNumberErrorRequired"></div>
