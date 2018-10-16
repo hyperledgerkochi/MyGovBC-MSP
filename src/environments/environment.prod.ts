@@ -8,6 +8,7 @@ export const environment = {
         logBaseUrl: '/msp/api/logging',
         apiBaseUrl: '/msp/api',
         captchaApiBaseUrl: '/msp/api/captcha',
+        envServerBaseUrl: '/msp/api/env',
         addressChangeBCUrl: 'https://www.addresschange.gov.bc.ca/',
         images: {
           maxImagesPerPerson: 50,

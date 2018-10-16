@@ -58,7 +58,8 @@ window.AssistBoot = {
     /**
      * Add start assists models and all the associated behaviour.
      */
-    addAssistBehaviour: function addAssistBehaviour() {
+    addAssistBehaviour: function addAssistBehaviour(assistURL) {
+        console.log("addAssistBehaviour:assistURL :"+assistURL);
         delete AssistSDK.onScreenshareRequest;
 
         document.body.appendChild(getHelpModal());
@@ -88,7 +89,7 @@ window.AssistBoot = {
          */
         document.getElementById('help-want-to-share').addEventListener('click', function () {
             config.cobrowseOnly = true;
-            config.url = "https://t1cafex.maximusbc.ca";
+            config.url = assistURL;
             config.sdkPath = config.url + "/assistserver/sdk/web/consumer"
 
             if (config.destination) {

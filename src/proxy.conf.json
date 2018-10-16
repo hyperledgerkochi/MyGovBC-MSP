@@ -30,5 +30,11 @@
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"
+    },
+    "/env": {
+        "target": "https://spa-env-server-dev.pathfinder.gov.bc.ca/",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
     }
 }

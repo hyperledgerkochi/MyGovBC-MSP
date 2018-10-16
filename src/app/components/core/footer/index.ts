@@ -14,6 +14,7 @@ export class CoreFooterComponent {
 
     /** Defaults to using external assistSdk. Only use internal if we're sure we can get it. */
     private useInternalAssistSdk: boolean = false;
+    private assistUrl ;
 
     constructor(private http: HttpClient) {
         // Determine if we can access the internal assistSDK link.
@@ -30,6 +31,25 @@ export class CoreFooterComponent {
 
 
 
+        // Setup headers
+        let headers = new HttpHeaders({
+            /*'Authorization': 'spaenv 5993117a-2384-4b70-ad42-1e9b9e6044d9',
+            'Access-Control-Allow-Origin': '*',*/
+            'SPA_ENV_NAME': 'SPA_ENV_VIDEO_ASSIST_URL'
+        });
+        console.log("environment.appConstants.envServerBaseUrl"+environment.appConstants.envServerBaseUrl);
+        this.http.post(environment.appConstants.envServerBaseUrl ,null, {headers: headers, responseType: "text" as "text"})
+            .toPromise()
+            .then((response: string) => {
+                console.log("succeful env value from env server.."+response);
+                this.assistUrl = response ;
+            })
+            .catch((error) => {
+                console.log("error:"+error);
+                console.log("cant fetch url from env server..defaulting to properties file"+environment.appConstants.assistSDKExternalUrl);
+                this.assistUrl = environment.appConstants.assistSDKExternalUrl ;
+            });
+
     }
     clickedAssist = () => {
 
@@ -38,7 +58,7 @@ export class CoreFooterComponent {
             System.import('./assist-support.js'),
             System.import('./short-code-assist.js')
         ]).then(modules => {
-            (<any>window).AssistBoot.addAssistBehaviour();
+            (<any>window).AssistBoot.addAssistBehaviour(this.assistUrl);
             (<any>window).AssistBoot.startAssistDialog();
         }).then(_ => {
             environment.appConstants.assistSDKUrl = this.useInternalAssistSdk ?

@@ -21,6 +21,7 @@ export const environment = {
         addressChangeBCUrl: 'https://www.addresschange.gov.bc.ca/',
         logBaseUrl: '/msp/api/logging',
         apiBaseUrl: '/msp/api',
+        envServerBaseUrl: '/msp/api/env',
         captchaApiBaseUrl: '/msp/api/captcha',
         // logBaseUrl: 'https://mygovbc-msp-dev.pathfinder.gov.bc.ca/msp/api/logging',
         // apiBaseUrl: 'https://mygovbc-msp-dev.pathfinder.gov.bc.ca/msp/api',
