@@ -25,7 +25,8 @@
             "assets": [
               "src/app/images",
               "src/app/fonts",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "demo"
             ],
             "styles": [
               "src/app/index.scss"
@@ -90,7 +91,8 @@
             "assets": [
               "src/app/images",
               "src/app/fonts",
-              "src/favicon.ico"
+              "src/favicon.ico",
+              "demo"
             ]
           }
         },
