@@ -30,7 +30,7 @@ window.AssistBoot = {
 
         config = assistConfig();
 
-        config.url = 'https://video-poc1.maximusbc.ca';
+        config.url = 'https://t1cafex.maximusbc.ca';
         config.sdkPath = config.url + "/assistserver/sdk/web/consumer"
 
         if (config.cobrowseOnly && config.correlationId) {

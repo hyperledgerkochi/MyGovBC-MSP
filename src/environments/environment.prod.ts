@@ -30,9 +30,9 @@ export const environment = {
 
         /** Set at runtime to be either the internal or external URL as appropriate. */
         assistSDKUrl: null,
-        assistSDKExternalUrl: 'https://video-poc1.maximusbc.ca',
+        assistSDKExternalUrl: 'https://t1cafex.maximusbc.ca',
         assistPath: '/assistserver/sdk/web/consumer/assist.js',
         // Only accessible via intranet.
-        assistSDKInternalUrl: 'https://video-poc1.maximusbc.ca:8443'
+        assistSDKInternalUrl: 'https://t1cafex.maximusbc.ca:8443'
       }
 }

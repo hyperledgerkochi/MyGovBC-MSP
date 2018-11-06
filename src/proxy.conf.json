@@ -13,12 +13,12 @@
         }
     },
     "/assistserver": {
-        "target": "https://video-poc1.maximusbc.ca",
+        "target": "https://t1cafex.maximusbc.ca",
         "secure": false,
         "changeOrigin": true
     },
     "/assistsdk" : {
-        "target": "https://video-poc1.maximusbc.ca/assistserver/sdk/web/consumer/",
+        "target": "https://t1cafex.maximusbc.ca/assistserver/sdk/web/consumer/",
         "secure": false,
         "changeOrigin": true,
         "pathRewrite": {
@@ -26,7 +26,7 @@
         }
     },
     "/shared": {
-        "target": "https://video-poc1.maximusbc.ca/assistserver/sdk/web/",
+        "target": "https://t1cafex.maximusbc.ca/assistserver/sdk/web/",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"

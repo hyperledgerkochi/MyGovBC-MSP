@@ -1,6 +1,6 @@
 var EXPAND_CLASS = 'expanded';
 var MOBILE_MAX_WIDTH = 767; //px
-var ASSISTJS_URL = 'https://video-poc1.maximusbc.ca/assistserver/sdk/web/consumer/assist.js';
+var ASSISTJS_URL = 'https://t1cafex.maximusbc.ca/assistserver/sdk/web/consumer/assist.js';
 
 
 $(document).ready(function(event) {
