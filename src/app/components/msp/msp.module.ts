@@ -88,6 +88,7 @@ import { MspDataService } from './service/msp-data.service';
 import { MspValidationService } from './service/msp-validation.service';
 import { ProcessService } from "./service/process.service";
 import { TypeaheadModule } from 'ngx-bootstrap';
+import {MspSpaEnvServices} from './service/msp-spa-env.service';
 
 
 
@@ -338,7 +339,7 @@ const APP_ROUTES : Routes = [
         EligibilityCardComponent,
 
         //Account
-
+        
         AccountComponent,
         AccountPrepareComponent,
         AccountPersonalInfoComponent,
@@ -360,8 +361,7 @@ const APP_ROUTES : Routes = [
         // Services
         MspDataService,
         MspValidationService,
-
-
+        MspSpaEnvServices,
         CompletenessCheckService,
         MspApiService,
         MspLogService,

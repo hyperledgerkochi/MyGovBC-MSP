@@ -30,7 +30,12 @@ window.AssistBoot = {
 
         config = assistConfig();
 
-        config.url = 'https://t1cafex.maximusbc.ca';
+        this.spaEnv.fetchAssistURL().subscribe(envs => {
+            config.url = (envs && envs.SPA_ENV_VIDEO_ASSIST_URL) ? envs.SPA_ENV_VIDEO_ASSIST_URL : environment.appConstants.assistSDKExternalUrl;
+            console.log('Assist-Support SPA Env Url:'+config.url);
+        });
+
+        //config.url = 'https://t1cafex.maximusbc.ca';
         config.sdkPath = config.url + "/assistserver/sdk/web/consumer"
 
         if (config.cobrowseOnly && config.correlationId) {
@@ -262,7 +267,6 @@ function assistConfig() {
                 settings.destination = QueryString.agent;
             } else {
                 //TODO: TRY WITH AGENT1 AGAIN TO SEE IF HANGING BUG PERSISTS! THERE IS SOME POTENTIAL ISSUES WITH THE SIP ADDR.
-
                 // console.log("Assist Calling agent: agent1");
                 // settings.destination = 'agent1';
                 console.log('Assist calling default agent: sip:7783727966@aaa.qaz');

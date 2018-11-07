@@ -278,7 +278,10 @@ function assistConfig() {
                 settings.destination = QueryString.agent;
             } else {
                 console.log("Assist Calling agent: agent1");
-                settings.destination = 'agent1';
+                this.spaEnv.fetchAssistURL().subscribe(envs => {
+                    settings.destination = (envs && envs.SPA_ENV_AGENT_ID) ? envs.SPA_ENV_AGENT_ID : 'agent1';
+                })
+                //settings.destination = 'agent1';
             }
         }
 
