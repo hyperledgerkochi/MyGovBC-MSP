@@ -17,7 +17,7 @@ describe('PHN Component', () => {
   let element:Element;
   let validator:Mod11CheckValidator;
   let debugElement:DebugElement;
-  let testLabel:string = 'Your previous BC Personal Health Number';
+  let testLabel:string = 'Your previous National Insurance Number';
 
   
   beforeEach(() => {

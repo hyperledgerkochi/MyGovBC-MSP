@@ -1,6 +1,6 @@
 module.exports = {
   addressLine1Label: 'Street',
-  addressLine1LabelResidence: 'Full street address or rural route',
+  addressLine1LabelResidence: 'First line of address',
   addressLine1LabelMailing: 'Full street address, rural route, PO Box or general delivery',
   addressLine1ErrorIsRequired: 'Street is required',
   addressLine1ErrorMaxLength: 'Address Line cannot be more than {length} characters',
@@ -22,9 +22,9 @@ module.exports = {
 
   countryLabel: 'Country',
 
-  postalCodeLabel: 'Postal or zip code',
-  postalCodeErrorIsRequired: 'Postal or zip code is required',
-  postalCodeErrorPattern: 'Postal code must be a valid BC postal code',
+  postalCodeLabel: 'Postcode',
+  postalCodeErrorIsRequired: 'Postcode is required',
+  postalCodeErrorPattern: 'Postcode must be a valid postcode',
 
   mailingAddressSameQuestion: 'Is your <strong>mailing address</strong> the same as above?',
   mailingAddressHeading: 'Mailing Address',

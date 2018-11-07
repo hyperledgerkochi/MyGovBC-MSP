@@ -1,6 +1,6 @@
 module.exports = {
     invalidYearPattern: 'In the year field, use a 4-digt number starting with a non-zero digit',
-    birthdateLabel: 'Birthdate',
+    birthdateLabel: 'Date of birth',
     yearLabel: 'Year',
     dayLabel: 'Day',
     monthLabel: 'Month',

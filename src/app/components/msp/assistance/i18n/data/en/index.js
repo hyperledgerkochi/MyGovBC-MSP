@@ -4,5 +4,5 @@ module.exports = {
   progressStep2: 'Personal Info',
   progressStep3: 'Upload Documents',
   progressStep4: 'Review',
-  progressStep5: 'Authorize & Submit'
+  progressStep5: 'Authorise & Submit'
 }

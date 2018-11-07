@@ -49,8 +49,10 @@
            [innerHtml]="lang('./en/index.js').badAnswerStudies" role="alert" aria-live="assertive">
         </p>
       <div class="col-2">
+          <!-- class="btn btn-primary" type="submit" [disabled] = "!documentsReady()|| !isStayinginBCAfterstudies() ||checkAnyDependentsIneligible()   "
+            -->
         <button
-            class="btn btn-primary" type="submit" [disabled] = "!documentsReady()|| !isStayinginBCAfterstudies() ||checkAnyDependentsIneligible()   "
+          class="btn btn-primary" type="submit" [disabled] = "false"
             [innerHTML]="lang('./en/index.js').continueButton"></button>
         
       </div>

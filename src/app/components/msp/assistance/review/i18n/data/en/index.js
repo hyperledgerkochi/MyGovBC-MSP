@@ -17,7 +17,7 @@ module.exports = {
 
   nameLabel: 'Name:',
   birthDateLabel: 'Birthdate:',
-  phnLabel: 'Personal Health Number (PHN):',
+  phnLabel: 'National insurance number:',
   sinLabel: 'Social Insurance Number (SIN):',
   changePersonalInfoButton: 'Edit Personal Info',
 

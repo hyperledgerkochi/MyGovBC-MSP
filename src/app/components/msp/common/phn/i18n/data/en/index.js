@@ -1,9 +1,9 @@
 module.exports = {
-  phnLabel: 'Personal Health Number (PHN)',
-  phnErrorRequired: 'PHN is required',
-  phnErrorMinLength: 'PHN must be at least 10 characters long',
-  phnErrorMod11Check: 'PHN is not valid',
-  phnErrorBCPhn: 'PHN is not from B.C.',
-  phnLabelMsgForAccount: ' This number will be used to verify your MSP account',
-  phnErrorUnique: "This PHN was already used for another family member. Please provide the PHN that is listed on the family member's BC Services Card."
+  phnLabel: 'National insurance number',
+  phnErrorRequired: 'National insurance number is required',
+  phnErrorMinLength: 'National insurance number must be at least 10 characters long',
+  phnErrorMod11Check: 'National insurance number is not valid',
+  phnErrorBCPhn: 'National insurance number is not from UK',
+  phnLabelMsgForAccount: ' This number will be used to verify your account',
+  phnErrorUnique: "This National insurance number was already used for another family member. Please provide the National Insurance number that is listed for your family member."
 }

@@ -1,6 +1,6 @@
 module.exports = {
-  healthNumberLabel: 'Health Number ',
-  healthNumberErrorRequired: 'Health Number is required',
-  healthNumberErrorMinLength: 'Health Number must be at least 10 characters long',
-  healthNumberErrorHealthNumberCheck: 'healthNumber is not valid',
+  healthNumberLabel: 'National insurance number ',
+  healthNumberErrorRequired: 'National insurance number is required',
+  healthNumberErrorMinLength: 'National insurance number must be at least 10 characters long',
+  healthNumberErrorHealthNumberCheck: 'National insurance number is not valid',
 }

@@ -2,7 +2,7 @@ module.exports = {
   pageTitle: 'Review your Request',
   printForRecord:'Please print a copy of this request for your records.',
   changePersonalInfoButton: 'Edit Personal Info & Documents',
-  agreementLabel: 'Authorize your update request',
+  agreementLabel: 'Authorise your update request',
   doYouAgreeLabel: '{name}, do you agree?',
   agreeLabel: 'Yes, I agree',
   submitButton: 'Submit Request',
