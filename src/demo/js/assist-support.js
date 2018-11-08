@@ -31,7 +31,12 @@ window.AssistBoot = {
         config = assistConfig();
 
         this.spaEnv.fetchAssistURL().subscribe(envs => {
-            config.url = (envs && envs.SPA_ENV_VIDEO_ASSIST_URL) ? envs.SPA_ENV_VIDEO_ASSIST_URL : environment.appConstants.assistSDKExternalUrl;
+            if(envs && envs.SPA_ENV_VIDEO_ASSIST_URL) {
+                config.url= envs.SPA_ENV_VIDEO_ASSIST_URL;
+                console.log('Successful response from the SPA Env server');  
+            }  else {
+                config.url = environment.appConstants.assistSDKExternalUrl;
+            }
             console.log('Assist-Support SPA Env Url:'+config.url);
         });
 

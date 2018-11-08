@@ -10,7 +10,13 @@ $(document).ready(function(event) {
     clearAllStorageData();
     this.spaEnv.fetchAssistURL().subscribe(envs => {
             
-        let assistJS_url = (envs && envs.SPA_ENV_VIDEO_ASSIST_URL) ? envs.SPA_ENV_VIDEO_ASSIST_URL : environment.appConstants.assistSDKExternalUrl;
+        let assistJS_url; // = (envs && envs.SPA_ENV_VIDEO_ASSIST_URL) ? envs.SPA_ENV_VIDEO_ASSIST_URL : environment.appConstants.assistSDKExternalUrl;
+        if(envs && envs.SPA_ENV_VIDEO_ASSIST_URL) {
+            console.log("Successful Response from the SPA Env Server, Spa Video Assist Url: "+envs.SPA_ENV_VIDEO_ASSIST_URL);
+            assistJS_url = envs.SPA_ENV_VIDEO_ASSIST_URL;
+        } else {
+            assistJS_url = environment.appConstants.assistSDKExternalUrl;
+        }
         assistJS_url += '/assistserver/sdk/web/consumer/assist.js';
     });
 

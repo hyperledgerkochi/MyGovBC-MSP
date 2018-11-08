@@ -32,8 +32,12 @@ export class CoreFooterComponent {
                 });
 
         this.spaEnv.fetchAssistURL().subscribe(envs => {
-            this.assistUrl = (envs && envs.SPA_ENV_VIDEO_ASSIST_URL) ? envs.SPA_ENV_VIDEO_ASSIST_URL : environment.appConstants.assistSDKExternalUrl;
-            console.log('SPA ENV Assist URL:'+this.assistUrl);
+            if(envs && envs.SPA_ENV_VIDEO_ASSIST_URL) {
+                console.log('Successful response from the SPA Env server, SPA ENV Assist URL: '+envs.SPA_ENV_VIDEO_ASSIST_URL);  
+                this.assistUrl = envs.SPA_ENV_VIDEO_ASSIST_URL;
+            }  else {
+                this.assistUrl = environment.appConstants.assistSDKExternalUrl;
+            }
         }) 
     }
 
