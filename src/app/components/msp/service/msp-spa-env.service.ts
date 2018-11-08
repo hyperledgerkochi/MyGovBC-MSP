@@ -29,7 +29,7 @@ export class MspSpaEnvServices extends AbstractHttpService {
     }
 
     fetchAssistURL(): Observable<SpaEnvResponse> {
-        const url = environment.appConstants.assistSDKInternalUrl + environment.appConstants.assistPath;
+        const url = environment.appConstants.envServerBaseUrl;
         return this.post<SpaEnvResponse>(url, null);
     }
     

@@ -19,6 +19,18 @@ export class CoreFooterComponent {
     private assistUrl ;
     
     constructor(private http: HttpClient, private spaEnv: MspSpaEnvServices) {
+        // Determine if we can access the internal assistSDK link.
+        // Should only be accessible on the intranet.
+        const url = environment.appConstants.assistSDKInternalUrl + environment.appConstants.assistPath;
+        http.get(url)
+            .subscribe(data => {
+                    // console.log('using internal assistSDK link');
+                    this.useInternalAssistSdk = false;
+                },
+                err => {
+                    // console.log('using external assistSDK link');
+                });
+
         this.spaEnv.fetchAssistURL().subscribe(envs => {
             this.assistUrl = (envs && envs.SPA_ENV_VIDEO_ASSIST_URL) ? envs.SPA_ENV_VIDEO_ASSIST_URL : environment.appConstants.assistSDKExternalUrl;
             console.log('SPA ENV Assist URL:'+this.assistUrl);
