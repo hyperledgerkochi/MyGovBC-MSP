@@ -277,14 +277,15 @@ function assistConfig() {
                 console.log("Assist Calling agent: " + QueryString.agent);
                 settings.destination = QueryString.agent;
             } else {
-                this.spaEnv.fetchAssistURL().subscribe(envs => {
+                settings.destination = 'agent1';/*
+                MspSpaEnvServices.fetchAssistURL().subscribe(envs => {
                     if(envs && envs.SPA_ENV_AGENT_ID) {
                         console.log('Successful response from the SPA Env server, SPA Env Agent Id: '+envs.SPA_ENV_AGENT_ID);  
                         settings.destination = envs.SPA_ENV_AGENT_ID;
                     } else {
                         settings.destination = 'agent1';
                     }
-                })
+                })*/
             }
         }
 

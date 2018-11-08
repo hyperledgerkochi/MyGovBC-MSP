@@ -1,6 +1,6 @@
 var EXPAND_CLASS = 'expanded';
 var MOBILE_MAX_WIDTH = 767; //px
-//var ASSISTJS_URL = 'https://t1cafex.maximusbc.ca/assistserver/sdk/web/consumer/assist.js';
+var ASSISTJS_URL = 'https://t1cafex.maximusbc.ca/assistserver/sdk/web/consumer/assist.js';
 
 
 $(document).ready(function(event) {
@@ -8,7 +8,7 @@ $(document).ready(function(event) {
     //Remove all Live-Assist sessions. Can't restore sessions, but no bugs from
     //failed restorations.
     clearAllStorageData();
-    this.spaEnv.fetchAssistURL().subscribe(envs => {
+    /*this.spaEnv.fetchAssistURL().subscribe(envs => {
             
         let assistJS_url; // = (envs && envs.SPA_ENV_VIDEO_ASSIST_URL) ? envs.SPA_ENV_VIDEO_ASSIST_URL : environment.appConstants.assistSDKExternalUrl;
         if(envs && envs.SPA_ENV_VIDEO_ASSIST_URL) {
@@ -18,10 +18,10 @@ $(document).ready(function(event) {
             assistJS_url = environment.appConstants.assistSDKExternalUrl;
         }
         assistJS_url += '/assistserver/sdk/web/consumer/assist.js';
-    });
+    }); */
 
     //Co-Browse Setup -----
-    addScript(assistJS_url)
+    addScript(ASSISTJS_URL)
     .done(initCobrowse)
     .fail(onCobrowseFailToLoad);
 

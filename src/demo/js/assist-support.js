@@ -30,15 +30,17 @@ window.AssistBoot = {
 
         config = assistConfig();
 
-        this.spaEnv.fetchAssistURL().subscribe(envs => {
+        /*this.spaEnv.fetchAssistURL().subscribe(envs => {
             if(envs && envs.SPA_ENV_VIDEO_ASSIST_URL) {
                 config.url= envs.SPA_ENV_VIDEO_ASSIST_URL;
                 console.log('Successful response from the SPA Env server');  
             }  else {
                 config.url = environment.appConstants.assistSDKExternalUrl;
             }
-            console.log('Assist-Support SPA Env Url:'+config.url);
-        });
+            
+        });*/
+        config.url = environment.appConstants.assistSDKExternalUrl;
+        console.log('Assist-Support SPA Env Url:'+config.url);
 
         //config.url = 'https://t1cafex.maximusbc.ca';
         config.sdkPath = config.url + "/assistserver/sdk/web/consumer"
