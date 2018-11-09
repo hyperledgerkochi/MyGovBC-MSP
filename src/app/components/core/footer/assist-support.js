@@ -4,6 +4,7 @@ var activeSession = false;
 var banner;
 
 import { callAPIServer } from '../../../../demo/js/spa-env-api';
+import { environment } from '../../../../environments/environment';
 
 
 /**
@@ -276,10 +277,9 @@ function assistConfig() {
         } else {
             if (QueryString.agent) {
                 console.log("Assist Calling agent: " + QueryString.agent);
-                
                 settings.destination = QueryString.agent;
             } else {
-                callAPIServer('POST','/msp/api/env').then(function(e) {
+                callAPIServer('POST', environment.appConstants.envServerBaseUrl).then(function(e) {
                     var obj = JSON.parse(e.target.response);
                     if(obj && obj.SPA_ENV_AGENT_ID) {
                         console.log('Successful response from the server, SPA-Env Agent Id: '+obj.SPA_ENV_AGENT_ID);

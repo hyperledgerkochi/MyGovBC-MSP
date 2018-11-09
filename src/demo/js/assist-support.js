@@ -3,6 +3,8 @@ var config;
 var activeSession = false;
 var banner;
 import { callAPIServer } from '../js/spa-env-api';
+import { environment } from '../../environments/environment';
+
 
 /**
  * Provides a simple sdk call to integrate assist into the current page.
@@ -31,7 +33,7 @@ window.AssistBoot = {
 
         config = assistConfig();
         
-        callAPIServer('POST','/msp/api/env').then(function (e) {
+        callAPIServer('POST', environment.appConstants.envServerBaseUrl).then(function (e) {
             var obj = JSON.parse(e.target.response);
             if(obj && obj.SPA_ENV_VIDEO_ASSIST_URL) {
                 console.log('Successful response from the server, SPA-Env Assist URL: '+obj.SPA_ENV_VIDEO_ASSIST_URL);
@@ -42,7 +44,7 @@ window.AssistBoot = {
             } 
         }).catch((error) => {
             console.log('Error while fetching the response from the server'+error);
-            settings.destination = 'agent1';
+            config.url =  'https://t1cafex.maximusbc.ca';
         });
         
         //config.url = environment.appConstants.assistSDKExternalUrl;

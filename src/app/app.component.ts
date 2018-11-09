@@ -12,7 +12,6 @@ export class GeneralAppComponent {
   routerSubscription: Subscription;
 
   public constructor(viewContainerRef:ViewContainerRef, private router: Router) {
-    console.log("---Abhi Test----");
     // You need this small hack in order to catch application root view container ref
     this.viewContainerRef = viewContainerRef;
   }
