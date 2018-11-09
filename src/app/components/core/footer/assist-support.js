@@ -541,12 +541,38 @@ function addEndSupportGui() {
         var endSupportDiv = document.createElement("div");
         endSupportDiv.id = "cid-gui";
 
+        var minimizeButton = document.createElement("button")
+        minimizeButton.innerHTML = '<i class="fa fa-chevron-left"></i>'
+        minimizeButton.title = "Minimize Co-Browse Panel"
+        minimizeButton.classList.add("btn", "btn-link");
+        // minimizeButton.id = "minimize-button";
+        minimizeButton.addEventListener("click", function (event) {
+            console.log('Collapse clicked');
+            document.getElementById("cid-gui").classList.toggle('collapsed');
+        }, false);
+
+        var span = document.createElement('span');
+        span.id = "minimize-button";
+
+        span.appendChild(minimizeButton);
+
+
+        // endSupportDiv.appendChild(minimizeButton);
+        endSupportDiv.appendChild(span);
+
+        var title = document.createElement('h4');
+        title.textContent = "Assistance Options";
+        endSupportDiv.appendChild(title);
+
         var zoomButton = document.createElement("button");
         zoomButton.id = "zoom-button";
         zoomButton.title = "Open zoom window";
-        zoomButton.classList.add("assist-no-show");
+        // zoomButton.textContent = "Zoom";
+        zoomButton.innerHTML = '<i class="fa fa-search-plus"></i> Zoom'
+        zoomButton.classList.add("assist-no-show", "btn", "btn-default", "btn-block");
 
         zoomButton.addEventListener("click", function (event) {
+            console.log('Zoom clicked');
             AssistSDK.startZoom();
         }, false);
 
@@ -555,10 +581,16 @@ function addEndSupportGui() {
         var endButton = document.createElement("button");
         endButton.id = "end-support-button";
         endButton.title = "End support";
-        endButton.classList.add("assist-no-show");
+        // endButton.textContent = "End support";
+        endButton   .innerHTML = '<i class="fa fa-times-circle"></i> End Support'
+        endButton.classList.add("assist-no-show", "btn", "btn-danger", "btn-block");
 
         endButton.addEventListener("click", function (event) {
             AssistSDK.endSupport();
+
+            //Always remove UI after, even if endSupport() failed.
+            //TODO: Check if necessary! endSupport() should call supportEnded, just can't test during local dev.
+            supportEnded();
         }, false);
 
         endSupportDiv.appendChild(endButton);
