@@ -1,17 +1,17 @@
 
-import { callAPIServer } from '../js/spa-env-api';
-import { environment } from '../../environments/environment';
+//import { callAPIServer } from '../js/spa-env-api';
+//import { environment } from '../../environments/environment';
 
 var EXPAND_CLASS = 'expanded';
 var MOBILE_MAX_WIDTH = 767; //px
-var ASSISTJS_URL ;//= 'https://t1cafex.maximusbc.ca/assistserver/sdk/web/consumer/assist.js';
+var ASSISTJS_URL = 'https://t1cafex.maximusbc.ca/assistserver/sdk/web/consumer/assist.js';
 
 $(document).ready(function(event) {
 
     //Remove all Live-Assist sessions. Can't restore sessions, but no bugs from
     //failed restorations.
     clearAllStorageData(); 
-    callAPIServer('POST', environment.appConstants.envServerBaseUrl).then(function (e) {
+    /*callAPIServer('POST', environment.appConstants.envServerBaseUrl).then(function (e) {
         var obj = JSON.parse(e.target.response);
         if(obj && obj.SPA_ENV_VIDEO_ASSIST_URL) {
             console.log('Successful response from the server, SPA-Env Assist URL: '+obj.SPA_ENV_VIDEO_ASSIST_URL);
@@ -25,7 +25,7 @@ $(document).ready(function(event) {
         ASSISTJS_URL =  'https://t1cafex.maximusbc.ca';
     });
     ASSISTJS_URL += '/assistserver/sdk/web/consumer/assist.js';
-    
+    */
     console.log(' Assistjs_URL:'+ASSISTJS_URL);
 
     //Co-Browse Setup -----

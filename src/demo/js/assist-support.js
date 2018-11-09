@@ -2,8 +2,8 @@
 var config;
 var activeSession = false;
 var banner;
-import { callAPIServer } from '../js/spa-env-api';
-import { environment } from '../../environments/environment';
+//import { callAPIServer } from '../js/spa-env-api';
+//import { environment } from '../../environments/environment';
 
 
 /**
@@ -32,8 +32,29 @@ window.AssistBoot = {
         }
 
         config = assistConfig();
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/msp/api/env');
+        xhr.setRequestHeader('SPA_ENV_NAME', '{"SPA_ENV_VIDEO_ASSIST_URL":"","SPA_ENV_AGENT_ID":""}');
+        xhr.send();
+        xhr.onload=(e)=> {
+            if (xhr.status === 200) {  
+                var obj = JSON.parse(xhr.responseText);
+                if(obj && obj.SPA_ENV_VIDEO_ASSIST_URL) {
+                    console.log('Successful response from the server, SPA-Env Assist URL: '+obj.SPA_ENV_VIDEO_ASSIST_URL);
+                    config.url = obj.SPA_ENV_VIDEO_ASSIST_URL;
+                } else {
+                    console.log('Unable to get the proper response from the Spa-Env server');
+                    config.url =  'https://t1cafex.maximusbc.ca';
+                }
+
+            } else {
+                console.log('Error while fetching the response from the Spa-Env server');
+                config.url =  'https://t1cafex.maximusbc.ca';
+            }
+        }
         
-        callAPIServer('POST', environment.appConstants.envServerBaseUrl).then(function (e) {
+        /*callAPIServer('POST', environment.appConstants.envServerBaseUrl).then(function (e) {
             var obj = JSON.parse(e.target.response);
             if(obj && obj.SPA_ENV_VIDEO_ASSIST_URL) {
                 console.log('Successful response from the server, SPA-Env Assist URL: '+obj.SPA_ENV_VIDEO_ASSIST_URL);
@@ -45,7 +66,7 @@ window.AssistBoot = {
         }).catch((error) => {
             console.log('Error while fetching the response from the server'+error);
             config.url =  'https://t1cafex.maximusbc.ca';
-        });
+        });*/
         
         //config.url = environment.appConstants.assistSDKExternalUrl;
         console.log('Assist-Support SPA Env Url:'+config.url);
