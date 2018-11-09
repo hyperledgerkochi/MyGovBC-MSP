@@ -2,6 +2,7 @@
 var config;
 var activeSession = false;
 var banner;
+import { callAPIServer } from '../js/spa-env-api';
 
 /**
  * Provides a simple sdk call to integrate assist into the current page.
@@ -29,17 +30,22 @@ window.AssistBoot = {
         }
 
         config = assistConfig();
-
-        /*this.spaEnv.fetchAssistURL().subscribe(envs => {
-            if(envs && envs.SPA_ENV_VIDEO_ASSIST_URL) {
-                config.url= envs.SPA_ENV_VIDEO_ASSIST_URL;
-                console.log('Successful response from the SPA Env server');  
-            }  else {
-                config.url = environment.appConstants.assistSDKExternalUrl;
-            }
-            
-        });*/
-        config.url = environment.appConstants.assistSDKExternalUrl;
+        
+        callAPIServer('POST','/msp/api/env').then(function (e) {
+            var obj = JSON.parse(e.target.response);
+            if(obj && obj.SPA_ENV_VIDEO_ASSIST_URL) {
+                console.log('Successful response from the server, SPA-Env Assist URL: '+obj.SPA_ENV_VIDEO_ASSIST_URL);
+                config.url = obj.SPA_ENV_VIDEO_ASSIST_URL;
+            } else {
+                console.log('Unable to get the proper response from the Spa-Env server');
+                config.url =  'https://t1cafex.maximusbc.ca';
+            } 
+        }).catch((error) => {
+            console.log('Error while fetching the response from the server'+error);
+            settings.destination = 'agent1';
+        });
+        
+        //config.url = environment.appConstants.assistSDKExternalUrl;
         console.log('Assist-Support SPA Env Url:'+config.url);
 
         //config.url = 'https://t1cafex.maximusbc.ca';

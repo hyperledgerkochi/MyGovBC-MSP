@@ -3,6 +3,7 @@ var config;
 var activeSession = false;
 var banner;
 
+import { callAPIServer } from '../../../../demo/js/spa-env-api';
 
 
 /**
@@ -275,17 +276,22 @@ function assistConfig() {
         } else {
             if (QueryString.agent) {
                 console.log("Assist Calling agent: " + QueryString.agent);
+                
                 settings.destination = QueryString.agent;
             } else {
-                settings.destination = 'agent1';/*
-                MspSpaEnvServices.fetchAssistURL().subscribe(envs => {
-                    if(envs && envs.SPA_ENV_AGENT_ID) {
-                        console.log('Successful response from the SPA Env server, SPA Env Agent Id: '+envs.SPA_ENV_AGENT_ID);  
-                        settings.destination = envs.SPA_ENV_AGENT_ID;
+                callAPIServer('POST','/msp/api/env').then(function(e) {
+                    var obj = JSON.parse(e.target.response);
+                    if(obj && obj.SPA_ENV_AGENT_ID) {
+                        console.log('Successful response from the server, SPA-Env Agent Id: '+obj.SPA_ENV_AGENT_ID);
+                        settings.destination = obj.SPA_ENV_AGENT_ID;
                     } else {
+                        console.log('Unable to get the proper response from the Spa-Env server');
                         settings.destination = 'agent1';
-                    }
-                })*/
+                    } 
+                }).catch((error) => {
+                    console.log('Error while fetching the response from the server'+error);
+                    settings.destination = 'agent1';
+                });
             }
         }
 
@@ -331,6 +337,7 @@ function assistConfig() {
 
     return selectMode();
 }
+
 
 // Example of how to use connection status callbacks...
 function setupConnectionStatusCallbacks(settings){
