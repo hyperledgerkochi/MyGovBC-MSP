@@ -281,9 +281,9 @@ function assistConfig() {
             } else {
                 callAPIServer('POST', environment.appConstants.envServerBaseUrl).then(function(e) {
                     var obj = JSON.parse(e.target.response);
-                    if(obj && obj.SPA_ENV_AGENT_ID) {
-                        console.log('Successful response from the server, SPA-Env Agent Id: '+obj.SPA_ENV_AGENT_ID);
-                        settings.destination = obj.SPA_ENV_AGENT_ID;
+                    if(obj && obj.SPA_ENV_MCAP_AGENT_ID) {
+                        console.log('Successful response from the server, SPA-Env Agent Id: '+obj.SPA_ENV_MCAP_AGENT_ID);
+                        settings.destination = obj.SPA_ENV_MCAP_AGENT_ID;
                     } else {
                         console.log('Unable to get the proper response from the Spa-Env server');
                         settings.destination = 'agent1';

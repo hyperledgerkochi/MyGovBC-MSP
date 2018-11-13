@@ -15,7 +15,7 @@ $(document).ready(function(event) {
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/msp/api/env');
-    xhr.setRequestHeader('SPA_ENV_NAME', 'SPA_ENV_ASSISTJS_URL');
+    xhr.setRequestHeader('SPA_ENV_NAME', 'SPA_ENV_MCAP_ASSISTJS_URL');
     xhr.send();
     xhr.onload=(e)=> {
         if (xhr.status === 200) { 

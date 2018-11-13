@@ -9,8 +9,8 @@ import { throwError, BehaviorSubject, Observable } from 'rxjs';
 import { of } from 'rxjs';
 
 export interface SpaEnvResponse {
-    SPA_ENV_VIDEO_ASSIST_URL: '',
-    SPA_ENV_AGENT_ID: '',
+    SPA_ENV_MCAP_VIDEO_ASSIST_URL: '',
+    SPA_ENV_MCAP_AGENT_ID: '',
 };
 
 /**
@@ -50,7 +50,7 @@ export class MspSpaEnvServices extends AbstractHttpService {
     }
     
     protected _headers: HttpHeaders = new HttpHeaders({
-        'SPA_ENV_NAME': '{"SPA_ENV_VIDEO_ASSIST_URL":"","SPA_ENV_AGENT_ID":""}',
+        'SPA_ENV_NAME': '{"SPA_ENV_MCAP_VIDEO_ASSIST_URL":"","SPA_ENV_MCAP_AGENT_ID":""}',
         'program': 'msp',
         'timestamp' : moment().toISOString(),
         'method': 'fetchAssistURL',
