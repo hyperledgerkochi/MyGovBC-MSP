@@ -35,14 +35,14 @@ window.AssistBoot = {
 
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/msp/api/env');
-        xhr.setRequestHeader('SPA_ENV_NAME', '{"SPA_ENV_VIDEO_ASSIST_URL":"","SPA_ENV_AGENT_ID":""}');
+        xhr.setRequestHeader('SPA_ENV_NAME', 'SPA_ENV_VIDEO_ASSIST_URL');
         xhr.send();
         xhr.onload=(e)=> {
             if (xhr.status === 200) {  
-                var obj = JSON.parse(xhr.responseText);
-                if(obj && obj.SPA_ENV_VIDEO_ASSIST_URL) {
-                    console.log('Successful response from the server, SPA-Env Assist URL: '+obj.SPA_ENV_VIDEO_ASSIST_URL);
-                    config.url = obj.SPA_ENV_VIDEO_ASSIST_URL;
+                var obj = xhr.responseText;
+                if(obj) {
+                    console.log('Successful response from the server, SPA-Env Assist URL: '+obj);
+                    config.url = obj ;
                 } else {
                     console.log('Unable to get the proper response from the Spa-Env server');
                     config.url =  'https://t1cafex.maximusbc.ca';
@@ -52,50 +52,30 @@ window.AssistBoot = {
                 console.log('Error while fetching the response from the Spa-Env server');
                 config.url =  'https://t1cafex.maximusbc.ca';
             }
-        }
         
-        /*callAPIServer('POST', environment.appConstants.envServerBaseUrl).then(function (e) {
-            var obj = JSON.parse(e.target.response);
-            if(obj && obj.SPA_ENV_VIDEO_ASSIST_URL) {
-                console.log('Successful response from the server, SPA-Env Assist URL: '+obj.SPA_ENV_VIDEO_ASSIST_URL);
-                config.url = obj.SPA_ENV_VIDEO_ASSIST_URL;
+            console.log('Assist-Support SPA Env Url:'+config.url);
+            config.sdkPath = config.url + "/assistserver/sdk/web/consumer"
+
+            if (config.cobrowseOnly && config.correlationId) {
+                // Both the cobrowseOnly and cid URL parameters have been specified.
+                // Start support immediately.
+                config.allowedIframeOrigins = false; // important: disable iframe messaging if not required for security
+
+                if (!AssistSDK){
+                    console.error('startAssistDialog error, AssistSDK is not defined.');
+                }
+
+                if (AssistSDK.isBrowserSupported()) {
+                    AssistSDK.startSupport(config);
+                } else {
+                    window.alert("Your browser is not supported!");
+                }
             } else {
-                console.log('Unable to get the proper response from the Spa-Env server');
-                config.url =  'https://t1cafex.maximusbc.ca';
-            } 
-        }).catch((error) => {
-            console.log('Error while fetching the response from the server'+error);
-            config.url =  'https://t1cafex.maximusbc.ca';
-        });*/
-        
-        //config.url = environment.appConstants.assistSDKExternalUrl;
-        console.log('Assist-Support SPA Env Url:'+config.url);
-
-        //config.url = 'https://t1cafex.maximusbc.ca';
-        config.sdkPath = config.url + "/assistserver/sdk/web/consumer"
-
-        if (config.cobrowseOnly && config.correlationId) {
-            // Both the cobrowseOnly and cid URL parameters have been specified.
-            // Start support immediately.
-            config.allowedIframeOrigins = false; // important: disable iframe messaging if not required for security
-
-            if (!AssistSDK){
-                console.error('startAssistDialog error, AssistSDK is not defined.');
+                // Present the User with a dialog to choose to make Voice & Vide call,
+                // or to use Short Code Assist.
+                $('#assist-modal-help').modal();
             }
-
-            if (AssistSDK.isBrowserSupported()) {
-                AssistSDK.startSupport(config);
-            } else {
-                window.alert("Your browser is not supported!");
-            }
-        } else {
-            // Present the User with a dialog to choose to make Voice & Vide call,
-            // or to use Short Code Assist.
-            $('#assist-modal-help').modal();
         }
-
-
-
 
     },
 

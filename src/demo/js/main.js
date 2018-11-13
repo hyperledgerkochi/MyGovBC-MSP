@@ -4,34 +4,46 @@
 
 var EXPAND_CLASS = 'expanded';
 var MOBILE_MAX_WIDTH = 767; //px
-var ASSISTJS_URL = 'https://t1cafex.maximusbc.ca/assistserver/sdk/web/consumer/assist.js';
+ //= 'https://t1cafex.maximusbc.ca/assistserver/sdk/web/consumer/assist.js';
 
 $(document).ready(function(event) {
 
     //Remove all Live-Assist sessions. Can't restore sessions, but no bugs from
     //failed restorations.
     clearAllStorageData(); 
-    /*callAPIServer('POST', environment.appConstants.envServerBaseUrl).then(function (e) {
-        var obj = JSON.parse(e.target.response);
-        if(obj && obj.SPA_ENV_VIDEO_ASSIST_URL) {
-            console.log('Successful response from the server, SPA-Env Assist URL: '+obj.SPA_ENV_VIDEO_ASSIST_URL);
-            ASSISTJS_URL = obj.SPA_ENV_VIDEO_ASSIST_URL;
-        } else {
-            console.log('Unable to get the proper response from the Spa-Env server');
-            ASSISTJS_URL =  'https://t1cafex.maximusbc.ca';
-        } 
-    }).catch((error) => {
-        console.log('Error while fetching the response from the server'+error);
-        ASSISTJS_URL =  'https://t1cafex.maximusbc.ca';
-    });
-    ASSISTJS_URL += '/assistserver/sdk/web/consumer/assist.js';
-    */
-    console.log(' Assistjs_URL:'+ASSISTJS_URL);
+    var ASSISTJS_URL;
 
-    //Co-Browse Setup -----
-    addScript(ASSISTJS_URL)
-    .done(initCobrowse)
-    .fail(onCobrowseFailToLoad);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/msp/api/env');
+    xhr.setRequestHeader('SPA_ENV_NAME', 'SPA_ENV_ASSISTJS_URL');
+    xhr.send();
+    xhr.onload=(e)=> {
+        if (xhr.status === 200) { 
+            var thisResponse = xhr.responseText; 
+            if(thisResponse) {
+                console.log('Successful response from the server, SPA-Env Assist URL: '+thisResponse);
+                ASSISTJS_URL = thisResponse;
+            } else {
+                console.log('Unable to get the proper response from the Spa-Env server');
+                ASSISTJS_URL = 'https://t1cafex.maximusbc.ca/assistserver/sdk/web/consumer/assist.js';
+            }
+
+        } else {
+            console.log('Error while fetching the response from the Spa-Env server');
+            ASSISTJS_URL = 'https://t1cafex.maximusbc.ca/assistserver/sdk/web/consumer/assist.js';
+        }
+
+        console.log(' Assistjs_URL:'+ASSISTJS_URL);
+        
+        //Co-Browse Setup -----
+        addScript(ASSISTJS_URL)
+        .done(initCobrowse)
+        .fail(onCobrowseFailToLoad);
+    }
+        
+    
+
+    
 
     $('#main-content .collapse').on('show.bs.collapse', onExpandSection)
 
