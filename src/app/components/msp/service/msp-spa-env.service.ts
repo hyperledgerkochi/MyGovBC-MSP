@@ -9,11 +9,13 @@ import { throwError, BehaviorSubject, Observable } from 'rxjs';
 import { of } from 'rxjs';
 
 export interface SpaEnvResponse {
-    SPA_ENV_MCAP_VIDEO_ASSIST_URL: '',
-    SPA_ENV_MCAP_AGENT_ID: '',
+    SPA_ENV_MCAP_VIDEO_ASSIST_URL: string ,
+    SPA_ENV_MCAP_AGENT_ID: string,
+    SPA_ENV_MCAP_MAINTENANCE_OPS: string,
+    SPA_ENV_MCAP_MAINTENANCE_MESSAGE:string
 };
 
-/**
+/*
  * Responsible for retrieving values from the spa-env-server on OpenShift.
  *
  * Subscribe to SpaEnvService.values() to get the env values.
@@ -28,7 +30,7 @@ export class MspSpaEnvServices extends AbstractHttpService {
         super(http);  
     }
 
-    fetchAssistURL(): Observable<SpaEnvResponse> {
+    callSpaServer(): Observable<SpaEnvResponse> {
         const url = environment.appConstants.envServerBaseUrl;
         return this.post<SpaEnvResponse>(url, null);
     }
@@ -50,10 +52,10 @@ export class MspSpaEnvServices extends AbstractHttpService {
     }
     
     protected _headers: HttpHeaders = new HttpHeaders({
-        'SPA_ENV_NAME': '{"SPA_ENV_MCAP_VIDEO_ASSIST_URL":"","SPA_ENV_MCAP_AGENT_ID":""}',
+        'SPA_ENV_NAME': '{"SPA_ENV_MCAP_VIDEO_ASSIST_URL":"","SPA_ENV_MCAP_AGENT_ID":"","SPA_ENV_MCAP_MAINTENANCE_OPS":"","SPA_ENV_MCAP_MAINTENANCE_MESSAGE":""}',
         'program': 'msp',
         'timestamp' : moment().toISOString(),
-        'method': 'fetchAssistURL',
+        'method': 'callSpaServer',
         'severity': 'info',
     });
 }

@@ -2,9 +2,11 @@
 
 export const environment = {
     runtimeEnv: "production",
+    logHTTPRequestsToConsole: false,
     appConstants: {
         coreApiBaseUrl: 'http://localhost:9000/api',
         serviceName: 'Capability for Work Questionnaire',
+        enableLogging: true,
         logBaseUrl: '/msp/api/logging',
         apiBaseUrl: '/msp/api',
         captchaApiBaseUrl: '/msp/api/captcha',

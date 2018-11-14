@@ -88,8 +88,8 @@ import { MspDataService } from './service/msp-data.service';
 import { MspValidationService } from './service/msp-validation.service';
 import { ProcessService } from "./service/process.service";
 import { TypeaheadModule } from 'ngx-bootstrap';
-import {MspSpaEnvServices} from './service/msp-spa-env.service';
-
+import { MspSpaEnvServices } from './service/msp-spa-env.service';
+import { MspLog2Service } from './service/log2.service';
 
 
 
@@ -365,6 +365,8 @@ const APP_ROUTES : Routes = [
         CompletenessCheckService,
         MspApiService,
         MspLogService,
+        MspSpaEnvServices,
+        MspLog2Service,
         ProcessService,
         CaptchaDataService
     ]

@@ -6,6 +6,9 @@ import {ApplicationBase} from "../../model/application-base.model";
 // 
 
 import { environment } from '../../../../../environments/environment';
+import {MspSpaEnvServices, SpaEnvResponse} from '../../../msp/service/msp-spa-env.service';
+import { MspLog2Service } from '../../../msp/service/log2.service';
+
 
 @Component({
   selector: 'msp-consent-modal',
@@ -21,9 +24,12 @@ export class MspConsentModalComponent {
   @Output() onClose = new EventEmitter<void>();
 
   public appConstants;
+  public spaEnvRes: SpaEnvResponse = {} as any;
 
-  constructor() {
+
+  constructor(private logService: MspLog2Service, private spaEnvService : MspSpaEnvServices) {
     this.appConstants = environment.appConstants;
+    this.inMaintenance();
     console.log("mspIsInMaintenanceFlag"+this.appConstants.mspIsInMaintenanceFlag);
   }
 
@@ -39,5 +45,16 @@ export class MspConsentModalComponent {
     this.application.infoCollectionAgreement = true;
     this.fullSizeViewModal.hide();
     this.onClose.emit();
+  }
+
+  inMaintenance() {
+    this.spaEnvService.callSpaServer().subscribe(response => {
+        this.spaEnvRes = <SpaEnvResponse> response;
+        console.log("=====SPA ENV MSP Maintenance Flag==="+this.spaEnvRes.SPA_ENV_MCAP_MAINTENANCE_OPS+'--Message--'+this.spaEnvRes.SPA_ENV_MCAP_MAINTENANCE_MESSAGE);
+    }, (error: Response | any) => {
+       console.log('Error when calling the MSP Maintenance: '+error);
+       console.log(this.logService.log({event: 'error', key: 'Error when calling the Maintenance API'}));
+       this.logService.log({event: 'error', key: 'Error when calling the Maintenance API'});
+    });
   }
 }

@@ -15,9 +15,11 @@
 
 export const environment = {
     runtimeEnv: "development",
+    logHTTPRequestsToConsole: false,
     appConstants: {
         coreApiBaseUrl: 'http://localhost:9000/api',
         serviceName: 'Capability for Work Questionnaire',
+        enableLogging: true,
         addressChangeBCUrl: 'https://www.addresschange.gov.bc.ca/',
         logBaseUrl: '/msp/api/logging',
         apiBaseUrl: '/msp/api',

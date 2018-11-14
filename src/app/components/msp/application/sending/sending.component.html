@@ -12,8 +12,15 @@
 
 <div class="row" *ngIf="!transmissionInProcess && hasError" role="alert" aria-live="assertive">
   <div class="col-sm-12 col-lg-6">
-    <h1 [innerHtml]="lang('./en/index.js').transmissionErrorTitle"></h1>
-    <h3 [innerHtml]="lang('./en/index.js').instructionForUserOnErrorLine1"></h3>
+    <h1> {{ spaEnvRes.SPA_ENV_MCAP_MAINTENANCE_OPS == 'true' ? lang('./en/index.js').systemMaintenanceTitle : lang('./en/index.js').transmissionErrorTitle }} </h1>
+    <div *ngIf="spaEnvRes.SPA_ENV_MCAP_MAINTENANCE_OPS == 'true'">
+      <p><strong>{{spaEnvRes.SPA_ENV_MCAP_MAINTENANCE_MESSAGE}}</strong>
+    </div>
+
+    <!--<h1 [innerHtml]="lang('./en/index.js').transmissionErrorTitle"></h1> 
+    <h3 [innerHtml]="lang('./en/index.js').instructionForUserOnErrorLine1"></h3>-->
+    <h3 [innerHtml]="spaEnvRes.SPA_ENV_MCAP_MAINTENANCE_OPS == 'true' ? lang('./en/index.js').instructionForUserOnMaintenanceLine1 : lang('./en/index.js').instructionForUserOnErrorLine1"></h3>
+    <div *ngIf="spaEnvRes.SPA_ENV_MCAP_MAINTENANCE_OPS != 'true'">
     <div style="font-size: 18px">
       <ul>
         <li> 
@@ -25,7 +32,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="!transmissionInProcess && hasError" style="margin-top: 30px;">
+<div class="row" *ngIf="!transmissionInProcess && hasError && spaEnvRes.SPA_ENV_MCAP_MAINTENANCE_OPS != 'true'" style="margin-top: 30px;">
   <msp-transmission-error-view [rawError]="rawError"></msp-transmission-error-view>
 </div>
 <div *ngIf="false">

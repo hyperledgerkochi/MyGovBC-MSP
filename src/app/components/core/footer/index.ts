@@ -31,7 +31,7 @@ export class CoreFooterComponent {
                     // console.log('using external assistSDK link');
                 });
 
-        this.spaEnv.fetchAssistURL().subscribe(envs => {
+        this.spaEnv.callSpaServer().subscribe(envs => {
             if(envs && envs.SPA_ENV_MCAP_VIDEO_ASSIST_URL) {
                 console.log('Successful response from the SPA Env server, SPA ENV Assist URL: '+envs.SPA_ENV_MCAP_VIDEO_ASSIST_URL);  
                 this.assistUrl = envs.SPA_ENV_MCAP_VIDEO_ASSIST_URL;
