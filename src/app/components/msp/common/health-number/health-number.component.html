@@ -3,7 +3,7 @@
          [ngClass]="{'has-error': !formRef.controls.healthNumber?.valid && (healthNumberRef.touched || showError)}">
         <label class="control-label" for="healthNumber{{objectId}}"
                [innerHTML]="lang('./en/index.js').healthNumberLabel"></label>
-        <input type="text"
+        <input type="text" pattern="^[A-Za-z]{2}\d{6}[A-Za-z]{1}$"
                [ngModel]="healthNumber"
                (ngModelChange) = "updateHealthNumber($event)"
                minlength="1"

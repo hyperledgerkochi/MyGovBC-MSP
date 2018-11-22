@@ -99,10 +99,10 @@
                                     >
                 </msp-health-number>
             </div>
-            <div class="col-md-4" >
-                    <label  for="schoolName{{objectId}}">Unique Identifier</label>
-                    <input [(ngModel)]='person.schoolName' type="text" class="form-control"
-                    id="schoolName{{objectId}}" name="Unique Identifier" #schoolNameRef="ngModel"
+            <div class="col-md-4 form-group"  [ngClass]="{'has-error': !formRef.controls.schoolName?.valid && (schoolNameRef.touched || showError)}" >
+                    <label  for="schoolName" class="control-label">Unique Identifier</label>
+                    <input [(ngModel)]='person.schoolName' type="text" class="form-control"  pattern="^[A-Za-z]{3}\d{9}$"
+                    id="schoolName" name="schoolName" #schoolNameRef="ngModel"
                     maxlength="12">
             </div>
         </div>
