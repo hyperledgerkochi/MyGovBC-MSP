@@ -66,7 +66,7 @@ import { MspLoggerDirective } from "./common/logging/msp-logger.directive";
 import { MspNameComponent } from './common/name/name.component';
 import { MspOutofBCRecordComponent } from "./common/outof-bc/outof-bc.component";
 import { MspPersonCardComponent } from './common/person-card/person-card.component';
-import { MultiLineTextArea } from './common/Multiline-Text-Area/MultilineTextArea.component';
+//import { MultiLineTextArea } from './common/Multiline-Text-Area/MultilineTextArea.component';
 import { MspPhnComponent } from './common/phn/phn.component';
 import { Mod11CheckValidator } from './common/phn/phn.validator';
 import { MspPhoneComponent } from './common/phone/phone.component';
@@ -316,7 +316,7 @@ const APP_ROUTES : Routes = [
         CaptchaComponent,
         MspToggleComponent,        
         MspDateComponent,
-        MultiLineTextArea,
+       // MultiLineTextArea,
 
         // View cards
         MspPersonCardComponent,
