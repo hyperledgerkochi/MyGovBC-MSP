@@ -101,10 +101,15 @@
             </div>
             <div class="col-md-4 form-group"  [ngClass]="{'has-error': !formRef.controls.schoolName?.valid && (schoolNameRef.touched || showError)}" >
                     <label  for="schoolName" class="control-label">Unique Identifier</label>
-                    <input [(ngModel)]='person.schoolName' type="text" class="form-control"  pattern="^[A-Za-z]{3}\d{9}$"
+                    <input [(ngModel)]='person.schoolName' type="text" class="form-control"  pattern="^[A-Za-z]{3}\d{9}$" required="true"
                     id="schoolName" name="schoolName" #schoolNameRef="ngModel"
                     maxlength="12">
+                <div *ngIf='schoolNameRef.touched || showError' role="alert" aria-live="assertive">
+                    <div class="text-danger"
+                    > Unique Identifier not valid</div>
+                </div>
             </div>
+
         </div>
         <div >
         <div class="row">
