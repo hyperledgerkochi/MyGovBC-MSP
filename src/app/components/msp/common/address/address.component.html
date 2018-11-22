@@ -59,7 +59,7 @@
              [ngClass]="{'has-error': !formRef.controls.residentialAddressPostalCode?.valid &&
              (residentialAddressPostalCodeRef.touched  || showError)}">
             <label for="residentialAddressPostalCode{{objectId}}" [innerHtml]="lang('./en/index.js').postalCodeLabel"></label>
-            <input [(ngModel)]='residentialAddress.postal' type="text" class="form-control to-upper"
+            <input [(ngModel)]='residentialAddress.postal' type="text" class="form-control to-upper"  [pattern]="Address.ukpostcodeRegEx"
                    id="residentialAddressPostalCode{{objectId}}" name="residentialAddressPostalCode" #residentialAddressPostalCodeRef="ngModel"
                    required tabindex="0"
                    >
