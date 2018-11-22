@@ -104,7 +104,7 @@
                     <input [(ngModel)]='person.uid' type="text" class="form-control"  pattern="^[A-Za-z]{3}\d{9}$" required="true"
                     id="schoolName" name="schoolName" #schoolNameRef="ngModel" (keyup)=onKeydownEvent()
                     maxlength="12">
-                <div *ngIf='schoolNameRef.touched || showError' role="alert" aria-live="assertive">
+                <div *ngIf='!formRef.controls.schoolName?.valid && (schoolNameRef.touched || showError)' role="alert" aria-live="assertive">
                     <div class="text-danger"
                     > Unique Identifier not valid</div>
                 </div>
