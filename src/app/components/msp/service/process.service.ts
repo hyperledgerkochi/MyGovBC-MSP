@@ -10,7 +10,6 @@ export class ProcessUrls {
     public static readonly ACCOUNT_PERSONAL_INFO_URL = "/msp/account/personal-info" ;
     public static readonly ACCOUNT_DEPENDENTS_URL = "/msp/account/dependent-change" ;
     public static readonly ACCOUNT_SENDING_URL = "/msp/account/sending" ;
-    public static readonly ACCOUNT_HISTORY_URL = "/msp/account/history" ;
 
 
 }

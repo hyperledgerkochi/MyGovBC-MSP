@@ -1,6 +1,4 @@
 import { Address } from "./address.model";
-import { History } from "./history.model";
-import { Question } from "./question.model";
 import { Relationship, StatusInCanada, Activities, Documents } from "./status-activities-documents";
 import { Person } from "./person.model";
 import { UUID } from "angular2-uuid";
@@ -17,9 +15,6 @@ class MspApplication implements ApplicationBase {
   infoCollectionAgreement: boolean = false;
   authorizationToken: string;
   phnRequired: boolean = false;
-  public _history: History = new History();
-  public _question: Question = new Question();
-  
 
   /**
    * Set by the API, not for client use
@@ -35,24 +30,6 @@ class MspApplication implements ApplicationBase {
   private _spouseRemoval: Person;
 
   unUsualCircumstance: boolean;
-
-  // Getter and setter of History and Questions
-  get history(): History {
-    return this._history;
-  }
-
-  set history(history: History) {
-    this._history = history;
-  }
-
-  get question(): Question {
-    return this._question;
-  }
-
-  set question(question: Question) {
-    this._question = question;
-  }  
-
 
 
   get uuid(): string {

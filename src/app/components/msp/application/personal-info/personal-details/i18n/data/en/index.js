@@ -87,7 +87,6 @@ module.exports = {
   fullAttendanceLabel: '(must be in full-time attendance)',
   schoolNameErrorIsRequired: 'Name of school is required',
   schoolAddressLabel: 'School address',
-  addressLabel: 'Address',
 
   removeSpouseButton: 'Remove',
   removeChildButton: 'Remove',

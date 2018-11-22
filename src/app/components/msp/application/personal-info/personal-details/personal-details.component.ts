@@ -28,14 +28,13 @@ import {ServicesCardDisclaimerModalComponent} from "../../../common/services-car
 import {MspArrivalDateComponent} from "../../../common/arrival-date/arrival-date.component";
 import {MspOutofBCRecordComponent} from "../../../common/outof-bc/outof-bc.component";
 import {MspProvinceComponent} from "../../../common/province/province.component";
-import { MspDataService } from '../../../service/msp-data.service';
-import { MspApplication } from '../../../model/application.model';
-import {MspPhoneComponent} from "../../../common/phone/phone.component";
-import {Address} from "../../../model/address.model";
+
+
+
+
+
 import {BaseComponent} from "../../../common/base.component";
 import {MspCountryComponent} from "../../../common/country/country.component";
-
-
 @Component({
     selector: 'msp-personal-details',
     templateUrl: './personal-details.component.html',
@@ -110,19 +109,14 @@ export class PersonalDetailsComponent extends BaseComponent {
   @Output() notifySpouseRemoval: EventEmitter<Person> = new EventEmitter<Person>();
   @Output() onChange: EventEmitter<any> = new EventEmitter<any>();
 
-  @ViewChild('address') address: MspAddressComponent;
-  @ViewChild('phone') phone: MspPhoneComponent;
-
   shrinkOut: string;
   shrinkOutStatus: string;
   genderListSignal: string;
   institutionWorkSignal: string;
   showServicesCardModal: boolean = false;
-  hideAddress: boolean = false;
-  mspApplication: MspApplication;
-      
+
   constructor(private el:ElementRef,
-    private cd: ChangeDetectorRef, private dataService: MspDataService,){
+    private cd: ChangeDetectorRef){
     super(cd);
   }
 
@@ -162,42 +156,6 @@ export class PersonalDetailsComponent extends BaseComponent {
       this.person.movedFromProvinceOrCountry = '';
       this.onChange.emit(value);
   }
-
-
-  setAddressOnchange(evt:any){
-     if(evt.firstName === 'James' && evt.lastName === 'Hamm') {
-       console.log('address update event: %o', evt);
-       
-       this.person.mailingAddress.addressLine1 = '576, East Boulevard St.';
-       this.person.mailingAddress.city = 'London';
-       this.person.mailingAddress.postal = 'WC2N 5DU';
-       
-     } else { 
-        this.person.mailingAddress = new Address();
-     }
-     this.dataService.saveMspApplication();
-     this.person.mailingAddress.country = 'UK';
-  }
-  // Added by Abhi to handle address and phone change 
-
-  handleAddressUpdate(evt:any){
-    // console.log('address update event: %o', evt);
-    this.dataService.saveMspApplication();
-  }
-
-  handlePhoneNumberChange(evt:any) {
-    this.mspApplication.phoneNumber = evt;    
-    this.dataService.saveMspApplication();
-  }
-  
-  toggleMailingSameAsResidentialAddress(evt:boolean){
-    this.mspApplication.mailingSameAsResidentialAddress = evt;
-    if(evt){
-      this.mspApplication.mailingAddress = new Address();
-    }
-    this.dataService.saveMspApplication();
-  }
-  // Added by Abhi
 
   /**
    * Gets the available activities given the known status
@@ -406,7 +364,7 @@ export class PersonalDetailsComponent extends BaseComponent {
 
 
     // moved to bc permanently
-    /*if (this.person.madePermanentMoveToBC == null) {
+    if (this.person.madePermanentMoveToBC == null) {
       console.log("madePermanentMoveToBC invalid");
     //  return false;
     }
@@ -421,7 +379,7 @@ export class PersonalDetailsComponent extends BaseComponent {
     if (this.person.hasPreviousBCPhn == null) {
       console.log("hasPreviousBCPhn invalid");
    //   return false;
-    }*/
+    }
 
     // armed forces
     if (this.armedForcedQuestion != null &&
@@ -451,13 +409,5 @@ export class PersonalDetailsComponent extends BaseComponent {
     }
 
     return true;
-  }
-
-  onKeydownEvent( event: KeyboardEvent): void { 
-    console.log(event);
-    if (event.keyCode === 13 && event.key === 'Enter') {
-      console.log('------1--'+event);
-      this.hideAddress = true;
-    }
   }
 }
