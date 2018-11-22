@@ -172,9 +172,8 @@ export class PersonalDetailsComponent extends BaseComponent {
        this.person.mailingAddress.city = 'London';
        this.person.mailingAddress.postal = 'WC2N 5DU';
        
-     } else { 
-        this.person.mailingAddress = new Address();
-     }
+     } 
+     
      this.dataService.saveMspApplication();
      this.person.mailingAddress.country = 'UK';
   }
