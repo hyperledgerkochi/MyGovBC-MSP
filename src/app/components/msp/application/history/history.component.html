@@ -1,0 +1,229 @@
+<form #formRef="ngForm" novalidate >
+       
+        <p class="intro"
+        [innerHtml]="lang('./en/index.js').pageTitle" role="heading" >
+        </p>
+
+       
+        <!-- Health Condition Block -->      
+        <div class="row" style="margin-top: 10px;">
+                <div class="col-md-8" >
+                        <label  for="Conditions" [innerHTML]="lang('./en/index.js').Conditions"></label>
+                        <h6 [innerHtml]="lang('./en/index.js').editText"></h6>
+                       
+                        <textarea name="Conditions"  (keyup)=onKeydownEvent($event) class="textarea" rows="2" id="Conditions" [(ngModel)]= history.conditionListed>  </textarea>   
+
+                        <!--<input type="textarea" class="form-control"
+                        id="Conditions" name="Conditions"  [(ngModel)]= history.conditionListed
+                        maxlength="200"> -->
+        
+                </div>
+                             
+                <div class="col-md-2" style="margin: 45px;" >
+                        <button
+                        class="btn btn-primary" (click)="showNextQuestion()" [disabled] = "history.conditionListed.length<6"
+                        [innerHTML]="lang('./en/index.js').InformationButton"></button>
+                               
+                </div> 
+             
+        </div>
+
+        <!--  ConditionsHistory  Block -->      
+        <div  *ngIf="history.showConditionHistory" class="row" style="margin-top: 10px;">
+                <div class="col-md-8" >
+                        <label  for="ConditionHistory" [innerHTML]="lang('./en/index.js').ConditionsHistory"></label>
+                        <h6 [innerHtml]="lang('./en/index.js').editText"></h6>
+
+                        <textarea name="Conditions History"  (keyup)=onKeydownEvent($event) class="textarea" rows="4" id="ConditionHistory" [(ngModel)]= history.conditionHistory>  </textarea>   
+
+                       <!-- <input type="textarea" class="form-control"
+                        id="ConditionHistory" name="Conditions History"  [(ngModel)]= history.conditionHistory
+                        maxlength="200"> -->
+        
+                </div>               
+                <div class="col-md-2" style="margin: 45px;" >
+                                <button
+                                class="btn btn-primary" (click)="showNextQuestion()" [disabled] = "history.conditionHistory.length<6"
+                                [innerHTML]="lang('./en/index.js').InformationButton"></button>
+                </div> 
+                
+        </div>
+
+        <!-- Living Arrangment Block -->  
+        <div *ngIf="history.showlivingArrangement"  class="row" style="margin-top: 10px;">
+                <div class="col-md-8" >
+                        <label  for="LivingArrangement" [innerHTML]="lang('./en/index.js').LivingArrangement"></label>
+                        <h6 [innerHtml]="lang('./en/index.js').editText"></h6>
+                        <textarea name="Living Arrangment"  (keyup)=onKeydownEvent($event) class="textarea" rows="3" id="LivingArrangement" [(ngModel)]=  history.livingArrangement>  </textarea>   
+
+                        <!--<input type="text" class="form-control"
+                        id="LivingArrangement" name="Conditions Listed"  [(ngModel)]= history.livingArrangement
+                        maxlength="200"> -->
+        
+                </div>               
+                <div class="col-md-2" style="margin: 45px;" >
+                        <button
+                        class="btn btn-primary" (click)="showNextQuestion()"[disabled] = "history.livingArrangement.length<6"
+                        [innerHTML]="lang('./en/index.js').InformationButton"></button>
+                </div> 
+                
+        </div>
+
+        <!-- Work History Arrangment Block -->
+        <div *ngIf="history.showWorkHistory" class="row" style="margin-top: 10px;">
+                <div class="col-md-8" >
+                        <label  for="WorkHistory" [innerHTML]="lang('./en/index.js').WorkHistory"></label>
+                        <h6 [innerHtml]="lang('./en/index.js').editText"></h6>
+                        <textarea name="Work History"  (keyup)=onKeydownEvent($event) class="textarea" rows="3" id="WorkHistory" [(ngModel)]=  history.workHistory>  </textarea>   
+
+                       <!--<input type="text" class="form-control"
+                        id="WorkHistory" name="Work History"  [(ngModel)]= history.WorkHistory
+                        maxlength="200"> -->
+                </div>               
+                <div class="col-md-2" style="margin: 45px;" >
+                        <button
+                        class="btn btn-primary" (click)="showNextQuestion()" [disabled] = "history.workHistory.length<6"
+                        [innerHTML]="lang('./en/index.js').InformationButton"></button>
+                </div> 
+                
+        </div>  
+
+        <!-------------------------------------------- Continue  and Cancel button ----------------------------------------------->                         
+        <div class="row" style="margin-top: 10px;">
+                <div class="col-2">
+                        <!-- class="btn btn-primary" type="submit" [disabled] = "!documentsReady()|| !isStayinginBCAfterstudies() ||checkAnyDependentsIneligible()   "
+                        -->
+                        <button
+                        class="btn btn-primary" (click)="continue()" type="submit" [disabled] = "!canContinue"
+                        [innerHTML]="lang('./en/index.js').continueButton"></button>
+                        
+                </div>
+                <div class="col-md-6 pull-left" *ngIf="formRef.submitted">
+                        <p class="text-danger" [innerHTML]="lang('./en/index.js').completesAllHighlightedFields">
+                        </p>
+                </div>
+                <msp-cancel class='col'></msp-cancel>
+        </div> 
+</form>
+<!------ Old Code ---------------------------------------------------------------------------------------------------->
+
+        <!--
+                <div class="col-md-4" >
+                        <label  for="MedicationListed" [innerHTML]="lang('./en/index.js').Medication"></label>
+                        <input type="text" class="form-control" [(ngModel)]= history.MedicationListed
+                        id="MedicationListed" name="Medication" 
+                        maxlength="10">
+                </div>
+
+                <div class="col-md-4" >
+                        <label  for="SideEffect" [innerHTML]="lang('./en/index.js').SideEffect"></label>
+                        <input type="text" class="form-control" [(ngModel)]= history.SideEffects
+                        id="SideEffect" name="SideEffects" 
+                        maxlength="10">
+                </div> 
+                
+                <div > 
+                
+                
+                <h3 [innerHtml]="lang('./en/index.js').ConditionsHistory"></h3>
+                <div class="row">
+                <div class="col-md-4" >
+                        <msp-date
+                        [label]="lang('./en/index.js').OnsetDate"
+                        [showError]='showError'
+                        required=false
+                        ></msp-date>
+                </div>
+                <div class="col-md-4" >
+                                <label  for="Specialists" [innerHTML]="lang('./en/index.js').Specialists"></label>
+                                <input type="text" class="form-control"
+                                id="Specialists" name="Specialists" 
+                                maxlength="10">
+                </div>
+                <div class="col-md-4" >
+                                <label  for="Operations" [innerHTML]="lang('./en/index.js').Operations"></label>
+                                <input type="text" class="form-control"
+                                id="Operations" name="Operations" 
+                                maxlength="10">
+                </div>
+                
+                <div class="col-md-4" >
+                                <label  for="Worsening" [innerHTML]="lang('./en/index.js').Worsening"></label>
+                                <input type="text" class="form-control"
+                                id="Worsening" name="Worsening" 
+                                maxlength="10">
+                </div>
+        </div>
+        
+        </div>
+
+        <div > 
+                       
+                <h3 [innerHtml]="lang('./en/index.js').Socialhistory"></h3>
+                <div class="row">
+                <div class="col-md-4" >
+                        <label  for="Type" [innerHTML]="lang('./en/index.js').Type"></label>
+                        <input type="text" class="form-control"
+                        id="Type" name="Type" 
+                        maxlength="10">
+                </div>
+
+                <div class="col-md-4" >
+                        <label  for="LiveWithWhom" [innerHTML]="lang('./en/index.js').LiveWithWhom"></label>
+                        <input type="text" class="form-control"
+                        id="LiveWithWhom" name="LiveWithWhom" 
+                        maxlength="10">
+                </div>
+        </div>
+                        
+        
+        </div>
+
+        <div > 
+                       
+                <h3 [innerHtml]="lang('./en/index.js').Occupationalhistory"></h3>
+                <div class="row">
+                        <div class="col-md-4" >
+                                <label  for="PreviousOccupation" [innerHTML]="lang('./en/index.js').PreviousOccupation"></label>
+                                <input type="text" class="form-control"
+                                id="PreviousOccupation" name="PreviousOccupation" 
+                                maxlength="10">
+                        </div>
+
+                        <div class="col-md-4" >
+                                <label  for="WhenStopped" [innerHTML]="lang('./en/index.js').WhenStopped"></label>
+                                <input type="text" class="form-control"
+                                id="WhenStopped" name="WhenStopped" 
+                                maxlength="10">
+                        </div>
+                        
+                        <div class="col-md-4" >
+                                <label  for="WhyStopped" [innerHTML]="lang('./en/index.js').WhyStopped"></label>
+                                <input type="text" class="form-control"
+                                id="WhyStopped" name="WhyStopped" 
+                                maxlength="10">
+                        </div>
+                </div>
+                        
+        </div>
+        <hr>
+
+        <label for="LeftHand" [innerHtml]="lang('./en/index.js').LeftRightHanded"></label>
+        <div class="form-check">
+                <input class='form-check-input' type="radio" name="LeftHand" id="LeftHand" tabindex="0">
+                <label class='form-check-label' for="LeftHand"> Left Hand </label>
+        </div>
+
+        <div class="form-check">
+                <input class='form-check-input' type="radio" name="gender" id="RightHand">
+                <label class='form-check-label' for="RightHand"> Right Hand </label>
+        </div> -->
+        
+       
+
+
+        
+  
+    
+    
+    
