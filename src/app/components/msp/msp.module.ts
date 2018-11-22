@@ -66,6 +66,7 @@ import { MspLoggerDirective } from "./common/logging/msp-logger.directive";
 import { MspNameComponent } from './common/name/name.component';
 import { MspOutofBCRecordComponent } from "./common/outof-bc/outof-bc.component";
 import { MspPersonCardComponent } from './common/person-card/person-card.component';
+import { MultiLineTextArea } from './common/Multiline-Text-Area/MultilineTextArea.component';
 import { MspPhnComponent } from './common/phn/phn.component';
 import { Mod11CheckValidator } from './common/phn/phn.validator';
 import { MspPhoneComponent } from './common/phone/phone.component';
@@ -90,9 +91,8 @@ import { ProcessService } from "./service/process.service";
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { MspSpaEnvServices } from './service/msp-spa-env.service';
 import { MspLog2Service } from './service/log2.service';
-
-
-
+import { HistoryComponent } from './application/history/history.component';
+import { QuestionComponent } from './application/question/question.component';
 
 
 
@@ -135,6 +135,16 @@ const APP_ROUTES : Routes = [
                         path: 'review',
                         canActivate: [ProcessService],
                         component: ReviewComponent
+                    },
+                    {
+                        path: 'history',
+                        canActivate: [ProcessService],
+                        component: HistoryComponent
+                    },
+                    {
+                        path: 'question',
+                        canActivate: [ProcessService],
+                        component: QuestionComponent
                     },
                     {
                         path: 'sending',
@@ -306,6 +316,7 @@ const APP_ROUTES : Routes = [
         CaptchaComponent,
         MspToggleComponent,        
         MspDateComponent,
+        MultiLineTextArea,
 
         // View cards
         MspPersonCardComponent,
@@ -320,6 +331,8 @@ const APP_ROUTES : Routes = [
         AddressComponent,
         ReviewComponent,
         SendingComponent,
+        HistoryComponent,
+        QuestionComponent,
         ConfirmationComponent,
         
 

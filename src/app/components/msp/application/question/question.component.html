@@ -1,0 +1,365 @@
+<form #formRef="ngForm" novalidate>
+
+    <!-- Question 1 - When was your Depression Diagonised 
+    <div class="row" >
+        <div class="col-lg-8">
+          <msp-date
+            [label]="lang('./en/index.js').DepressionDiagnosed"
+            [showError]='showError'
+            required=false
+          ></msp-date>
+        </div>
+    </div>-->
+
+    <!-- Question 1 - Currently on any Medication -->
+    <div  class="row" style="margin-bottom: 20px" >
+        <div class="col-lg-8">
+        <p id="IsCurrentlyOnMedication" [innerHtml]="lang('./en/index.js').IsCurrentlyOnMedication" class="control-label"></p>
+        <div class="btn-group" role="group">
+            <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                    [class.msp-btn-radio]="question.IsCurrentlyOnMedication == answer.value"
+                    (click)="setUserValue(answer.value)"
+                    type="button" class="btn btn-default">{{answer.label}}
+            </button>
+        </div>
+        </div>
+
+    </div>
+    <!--Drugs and Dosage -->
+    <div *ngIf="question.IsCurrentlyOnMedication" class="row" style="margin-bottom: 20px">
+        <div class="col-lg-8">
+            <label  for="DrugsandDosages" [innerHTML]="lang('./en/index.js').DrugsandDosages"></label>
+            <textarea name="DrugsandDosages"  (keyup) = onKeydownEvent($event) class="textarea" rows="3" id="DrugsandDosages" [(ngModel)]= question.DrugsandDosages>  </textarea>     
+        </div>
+        <!--<msp-textarea
+            [label]="lang('./en/index.js').DrugsandDosages"
+            [question] = "question"
+            [id] = "DrugsandDosages"
+            [name] = "DrugsandDosages"
+            [row] ="3"
+            [userResponseField] = "question.DrugsandDosages">
+        </msp-textarea> -->
+        
+
+            <!--<input type="text" class="form-control"
+            id="Name" name="Name" [(ngModel)]="question.DrugsandDosages"
+            maxlength="10">
+            </div> -->
+
+            <div class="col-md-2" style="margin: 30px;" >
+                    <button
+                    class="btn btn-primary" (click)="showNextQuestion()" [disabled] = "!question.DrugsandDosages"
+                    [innerHTML]="lang('./en/index.js').continueButton"></button>
+            </div> 
+    </div>
+
+    <!------------Question 2 - DO you see your GP about Depression---------------------------------------->
+    <div *ngIf="question.showGPDepression"  style="margin-bottom: 20px" class="row" >
+        <div class="col-lg-8">
+        <p id="GpAboutDepression" [innerHtml]="lang('./en/index.js').GpAboutDepression" class="control-label"></p>
+            <div class="btn-group" role="group">
+                <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                        [class.msp-btn-radio]="question.GpAboutDepression == answer.value"
+                        (click)="checkDepressionVal(answer.value)"
+                        type="button" class="btn btn-default">{{answer.label}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="question.GpAboutDepression" style="margin-bottom: 20px" class="row" >
+        <div class="col-lg-8">
+                <label  for="HowOften" [innerHTML]="lang('./en/index.js').HowOften"></label>
+                <textarea name="HowOften"  (keyup) = onKeydownEvent($event) class="textarea" rows="3" id="HowOften" [(ngModel)]= question.HowOften>  </textarea>
+        </div>
+        <div class="col-md-2" style="margin: 30px;" >
+                <button
+                class="btn btn-primary" (click)="showNextQuestion()" [disabled] = "!question.HowOften"
+                [innerHTML]="lang('./en/index.js').continueButton"></button>
+        </div>
+    </div>
+
+    <div *ngIf="question.showAdmittedtoHospital" style="margin-bottom: 20px" class="row" >
+        <div class="col-lg-8">
+        <p id="IsGPAware" [innerHtml]="lang('./en/index.js').IsGPAware" class="control-label"></p>
+        <div class="btn-group" role="group">
+        <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                [class.msp-btn-radio]="question.IsGPAware == answer.value"
+                (click)="checkIfGpAware(answer.value)"
+                type="button" class="btn btn-default">{{answer.label}}
+        </button>
+        </div>
+        </div>
+    </div>
+
+    <!--Question 5 - Ever admitted to the Hospital -->
+    <div *ngIf="question.showAdmittedtoHospital" class="row" style="margin-bottom: 20px" >
+        <div class="col-lg-8">
+        <p id="AdmittedToHospital" [innerHtml]="lang('./en/index.js').AdmittedToHospital" class="control-label"></p>
+            <div class="btn-group" role="group">
+                <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                        [class.msp-btn-radio]="question.AdmittedToHospital == answer.value"
+                        (click)="checkAdmittedToHospital(answer.value)"
+                        type="button" class="btn btn-default">{{answer.label}}
+                </button>
+            </div>
+        </div>
+    </div>
+        
+
+    <!--Question 4 - DO you have anyone else fo your  Depression
+    <div style="margin-bottom: 20px" class="row" >
+        <div class="col-lg-8">
+        <label id="AnyoneAboutDepression" [innerHtml]="lang('./en/index.js').AnyoneAboutDepression" class="control-label"></label>
+        <div class="btn-group" role="group">
+            <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                    [class.msp-btn-radio]="question.AnyoneAboutDepression == answer.value"
+                    (click)="checkAnyoneAboutDepression(answer.value)"
+                    type="button" class="btn btn-default">{{answer.label}}
+            </button>
+        </div>
+        </div>
+    </div> 
+    
+    <div *ngIf="question.AnyoneAboutDepression" style="margin-bottom: 20px" class="row" >
+        <div class="col-md-4" >
+                <label  for="Name" [innerHTML]="lang('./en/index.js').Name"></label>
+                <input type="text" class="form-control"
+                id="Name" name="Name" [(ngModel)]="question.Name"
+                maxlength="10">
+        </div>
+        <div class="col-md-4" >
+                    <label  for="Job" [innerHTML]="lang('./en/index.js').Job"></label>
+                    <input type="text" class="form-control"
+                    id="Job" name="Job" [(ngModel)]="question.Job"
+                    maxlength="10">
+        </div>
+
+        <div class="col-md-4" >
+                    <label  for="Address" [innerHTML]="lang('./en/index.js').Address"></label>
+                    <input type="text" class="form-control"
+                    id="Address" name="Address" [(ngModel)]="question.Address"
+                    maxlength="10">
+        </div>
+
+        <div class="col-md-4" >
+                <label  for="Phone" [innerHTML]="lang('./en/index.js').Phone"></label>
+                <input type="text" class="form-control" [(ngModel)]="question.Phone"
+                id="Phone" name="Phone" 
+                maxlength="10">
+        </div>
+
+    </div> 
+
+    <div *ngIf="question.AnyoneAboutDepression" style="margin-bottom: 20px" class="row" >
+        <div class="col-lg-8">
+        <msp-date
+            [label]="lang('./en/index.js').LastAppointment"
+            [showError]='showError'
+            required=false>
+        </msp-date>
+    </div>
+    </div> 
+
+    <div *ngIf="question.AnyoneAboutDepression" style="margin-bottom: 20px" class="row" >
+        <div class="col-lg-8">
+        <label id="FurtherAppointment" [innerHtml]="lang('./en/index.js').FurtherAppointment" class="control-label"></label>
+        <div class="btn-group" role="group">
+            <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                    [class.msp-btn-radio]="question.FurtherAppointment == answer.value"
+                    (click)="setUserValue(answer.value)"
+                    type="button" class="btn btn-default">{{answer.label}}
+            </button>
+        </div>
+    </div>
+    </div>-->
+    
+    
+    <div *ngIf="question.AdmittedToHospital" class="row" style="margin-bottom: 20px" >
+        <div class="col-lg-8">
+            <label  for="whenAdmitted" [innerHTML]="lang('./en/index.js').WhenAdmitted"></label>
+            <textarea name="whenAdmitted"  (keyup) = onKeydownEvent($event) class="textarea" rows="3" id="whenAdmitted" [(ngModel)]= question.whenAdmitted>  </textarea>
+
+        </div> 
+        <div class="col-md-2" style="margin: 30px;" >
+                <button
+                class="btn btn-primary" (click)="showNextQuestion()" [disabled] = "!question.whenAdmitted"
+                [innerHTML]="lang('./en/index.js').continueButton"></button>
+        </div> 
+    </div>
+    
+    <div *ngIf="question.showHospitalName" class="row" style="margin-bottom: 20px">
+            <div class="col-lg-8">
+                <label  for="hospitalname" [innerHTML]="lang('./en/index.js').NameOfHospital"></label>
+                    <textarea name="hospitalname"  (keyup) = onKeydownEvent($event) class="textarea" rows="3" id="hospitalname" [(ngModel)]= question.hospitalname>  </textarea>
+            </div>
+            <div class="col-md-2" style="margin: 30px;" >
+                    <button
+                    class="btn btn-primary" (click)="showNextQuestion()" [disabled] = "!question.hospitalname"
+                    [innerHTML]="lang('./en/index.js').continueButton"></button>
+            </div> 
+    </div>
+
+    <div class="row" *ngIf="question.showAdmissionVoulntary" style="margin-bottom: 20px" >
+        <div class="col-lg-8">
+        <p id="AdmissionVoluntary" [innerHtml]="lang('./en/index.js').AdmissionVoluntary" class="control-label"></p>
+        <div class="btn-group" role="group">
+            <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                    [class.msp-btn-radio]="question.AdmissionVoluntary == answer.value"
+                    (click)="setAdmissionVoluntary(answer.value)"
+                    type="button" class="btn btn-default">{{answer.label}}
+            </button>
+        </div>
+        </div>
+    </div>
+
+   <!-- <div class="row" *ngIf="question.AdmissionVoluntary == false" style="margin-bottom: 20px" >
+            <div class="col-lg-8">
+            <label id="Sectioned" [innerHtml]="lang('./en/index.js').Sectioned" class="control-label"></label>
+            <div class="btn-group" role="group">
+                <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                        [class.msp-btn-radio]="question.Sectioned == answer.value"
+                        (click)="checkSectioned(answer.value)"
+                        type="button" class="btn btn-default">{{answer.label}}
+                </button>
+            </div>
+            </div>
+        </div>
+
+    <div class="row" *ngIf="question.AdmissionVoluntary == false" style="margin-bottom: 20px" >
+        <div class="col-lg-8">
+        <label id="RequiredHospitalFollowup" [innerHtml]="lang('./en/index.js').RequiredHospitalFollowup" class="control-label"></label>
+        <div class="btn-group" role="group">
+            <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                    [class.msp-btn-radio]="question.RequiredHospitalFollowup == answer.value"
+                    (click)="setUserValue(answer.value)"
+                    type="button" class="btn btn-default">{{answer.label}}
+            </button>
+        </div>
+        </div>
+    </div>
+
+    Question 6 - Ever self armed or attempted suicide  
+    <div class="row" style="margin-bottom: 20px" >
+        <div class="col-lg-8">
+        <label id="SelfHarmed" [innerHtml]="lang('./en/index.js').SelfHarmed" class="control-label"></label>
+        <div class="btn-group" role="group">
+            <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                    [class.msp-btn-radio]="question.SelfHarmed == answer.value"
+                    (click)="checkSelfHarmed(answer.value)"
+                    type="button" class="btn btn-default">{{answer.label}}
+            </button>
+        </div>
+    </div>
+    </div>
+
+    <div *ngIf="question.SelfHarmed"  class="row" style="margin-bottom: 20px" >
+        <div class="col-lg-8">
+            <label id="OngoingSituation" [innerHtml]="lang('./en/index.js').OngoingSituation" class="control-label"></label>
+            <div class="btn-group" role="group">
+                <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                        [class.msp-btn-radio]="question.OngoingSituation == answer.value"
+                        (click)="setUserValue(answer.value)"
+                        type="button" class="btn btn-default">{{answer.label}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="question.OngoingSituation" class="row" style="margin-bottom: 20px" >
+            <div class="col-lg-8">
+                <label id="IsGPAware" [innerHtml]="lang('./en/index.js').IsGPAware" class="control-label"></label>
+                <div class="btn-group" role="group">
+                    <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                            [class.msp-btn-radio]="question.IsGPAware == answer.value"
+                              (click)="setUserValue(answer.value)"
+                            type="button" class="btn btn-default">{{answer.label}}
+                    </button>
+                </div>
+        </div>
+    </div> -->
+
+    
+
+  <!--  <div *ngIf="question.IsGPAware == false" class="row" style="margin-bottom: 20px" >
+            <div class="col-lg-8">
+                <label id="AnyHealthcareInvolved" [innerHtml]="lang('./en/index.js').AnyHealthcareInvolved" class="control-label"></label>
+                <div class="btn-group" role="group">
+                    <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                            [class.msp-btn-radio]="question.AnyHealthcareInvolved == answer.value"
+                            (click)="setUserValue(answer.value)"
+                            type="button" class="btn btn-default">{{answer.label}}
+                    </button>
+                </div>
+        </div>
+    </div>
+
+    <div *ngIf="question.AnyHealthcareInvolved" class="row" style="margin-bottom: 20px">
+            <div class="col-lg-8">
+            <label  for="Name" [innerHTML]="lang('./en/index.js').Name "></label>
+            <input type="text" class="form-control"
+            id="Name" name="Name" [(ngModel)]="question.Name"
+            maxlength="10">
+        </div>
+    </div>
+
+
+
+    <div class="row"  *ngIf="question.AnyHealthcareInvolved == false" style="margin-bottom: 20px" >
+            <div class="col-lg-8">
+                <label id="ConsentToInformingGP" [innerHtml]="lang('./en/index.js').ConsentToInformingGP" class="control-label"></label>
+                <div class="btn-group" role="group">
+                    <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                            [class.msp-btn-radio]="question.ConsentToInformingGP == answer.value"
+                            type="button" class="btn btn-default">{{answer.label}}
+                    </button>
+                </div>
+        </div>
+    </div>
+
+    <div  *ngIf="question.IsGPAware" class="row" style="margin-bottom: 20px" >
+            <div class="col-lg-8">
+                <label id="SupportProvided" [innerHtml]="lang('./en/index.js').SupportProvided" class="control-label"></label>
+                <div class="btn-group" role="group">
+                    <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                            [class.msp-btn-radio]="question.SupportProvided == answer.value"
+                            type="button" class="btn btn-default">{{answer.label}}
+                    </button>
+                </div>
+        </div>
+    </div>
+
+  <div  *ngIf="question.SelfHarmed == false " class="row" style="margin-bottom: 20px" >
+            <div class="col-lg-8">
+                <label id="LastTimeSelfHarmed" [innerHtml]="lang('./en/index.js').LastTimeSelfHarmed" class="control-label"></label>
+                <div class="btn-group" role="group">
+                    <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
+                            [class.msp-btn-radio]="question.LastTimeSelfHarmed == answer.value"
+                            type="button" class="btn btn-default">{{answer.label}}
+                    </button>
+                </div>
+        </div>
+    </div> -->
+
+
+
+
+
+
+    <!------------------------------Continue and Cancel Button------------------------------------------------------------->
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-2">
+            <!-- class="btn btn-primary" type="submit" [disabled] = "!documentsReady()|| !isStayinginBCAfterstudies() ||checkAnyDependentsIneligible()   "
+                -->
+            <button
+            class="btn btn-primary" type="submit" (click)="continue()" [disabled] = "!canContinue"
+                [innerHTML]="lang('./en/index.js').continueButton"></button>
+            
+        </div>
+        <div class="col-md-6 pull-left" *ngIf="formRef.submitted">
+            <p class="text-danger" [innerHTML]="lang('./en/index.js').completesAllHighlightedFields">
+            </p>
+        </div>
+        <msp-cancel class='col'></msp-cancel>
+    </div>
+</form>

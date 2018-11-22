@@ -1,0 +1,32 @@
+module.exports = {
+  pageTitle: 'Questions',
+  DepressionDiagnosed: 'When was your depression diagnosed?',
+  IsCurrentlyOnMedication: 'Are you currently on any medication for depression?',
+  DrugsandDosages: 'List drugs and dosages',
+  GpAboutDepression: 'Do you see your GP about your depression?',
+  HowOften: 'How often do you see them, when was the last time?',
+  IsGPAware: 'Is your GP aware of your condition?',
+  AnyoneAboutDepression: 'Do you see anyone else for your depression? (This may include, Psychiatrist, CPN, Crisis Team, Social Worker, Support Worker or Carer)',
+  Name: 'Name',
+  Job: 'Job Title',
+  Address: 'Address',
+  Phone: 'Phone number',
+  LastAppointment: 'When was your last appointment?',
+  FurtherAppointment: 'Do you have further appointments booked?',
+  AdmittedToHospital: 'Have you ever been admitted to hospital due to your depression?',
+  WhenAdmitted: 'When was this?',
+  NameOfHospital: 'What was the name of the hospital?',
+  AdmissionVoluntary: 'Was your admission voluntary?',
+  Sectioned: 'Were you sectioned?',
+  HowLongSectioned: 'How long were you sectioned for?',
+  RequiredHospitalFollowup: 'Have you required hospital follow up / CPN and / or Crisis Team input since?',
+  SelfHarmed: 'Have you ever self harmed or attempted suicide?',
+  LastTimeSelfHarmed: 'When was the last time you attempted self harmed or suicide?',
+  OngoingSituation: 'Is this an ongoing situation for you? ',
+  AnyHealthcareInvolved: 'Is any other healthcare professional involved in your care aware? ',
+  ConsentToInformingGP: 'Would you consent to us informing your GP?',
+  SupportProvided:'what support is being provided for you?',
+  continueButton: 'Continue'
+  //todo: testme. Haven't tested step4 yet. Step3 also has some copy changes
+  
+}

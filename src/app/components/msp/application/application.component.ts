@@ -36,7 +36,8 @@ export class ApplicationComponent  {
       new MspProgressBarItem(this.lang("./en/index.js").progressStep1, this.processService.process.processSteps[0].route),
       new MspProgressBarItem(this.lang("./en/index.js").progressStep2, this.processService.process.processSteps[1].route),
       new MspProgressBarItem(this.lang("./en/index.js").progressStep3, this.processService.process.processSteps[2].route),
-      new MspProgressBarItem(this.lang("./en/index.js").progressStep4, this.processService.process.processSteps[3].route)
+      new MspProgressBarItem(this.lang("./en/index.js").progressStep4, this.processService.process.processSteps[3].route),
+      new MspProgressBarItem(this.lang("./en/index.js").progressStep5, this.processService.process.processSteps[4].route)
     ]
   };
 
@@ -75,9 +76,10 @@ export class ApplicationComponent  {
     this.processService.init([
       new ProcessStep("/msp/application/prepare"),
       new ProcessStep("/msp/application/personal-info"),
-      new ProcessStep("/msp/application/address"),
-      new ProcessStep("/msp/application/review"),
-      new ProcessStep("/msp/application/sending")]);
+      //new ProcessStep("/msp/application/address"),
+      new ProcessStep("/msp/application/history"),
+      new ProcessStep("/msp/application/question"),
+      new ProcessStep("/msp/application/review")]);
   }
 
 }
