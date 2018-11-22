@@ -6,7 +6,7 @@ import {Question} from "../../model/question.model";
 
 @Component({
   selector: 'msp-textarea',
-  templateUrl: './MultiLineTextArea.component.html',
+  templateUrl: './MultilineTextArea.component.html',
   styleUrls: ['./MultilineTextArea.component.scss']
 })
 export class MultiLineTextArea extends BaseComponent {
