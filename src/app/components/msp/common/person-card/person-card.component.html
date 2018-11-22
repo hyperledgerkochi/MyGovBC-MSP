@@ -12,7 +12,17 @@
             </div>
         </div>
 
-        <div class="row" *ngIf="person.gender">
+        <div class="row" *ngIf="person.hasFullName">
+            <div class="col-sm-4">
+                <label for="">{{lang('./en/index.js').uid}}</label>
+            </div>
+            <div class="col-sm-8">
+                <span id="UID"><strong>{{person.schoolName}}</strong></span>
+            </div>
+        </div>
+
+
+<!--       <div class="row" *ngIf="person.gender">
             <div class="col-sm-4">
                 {{lang('./en/index.js').genderLabel}}
             </div>
@@ -81,7 +91,7 @@
                 <strong>{{person.sin}}</strong>
             </div>
         </div>
-
+--> 
         <!-- Only for spouse-->
         <div class="row" *ngIf="person.prevLastName && person.relationship==1">
             <div class="col-sm-4">
@@ -167,7 +177,7 @@
             </div>
         </div>
 
-        <div class="row" *ngIf="person.hasArrivalToCanada">
+       <!-- <div class="row" *ngIf="person.hasArrivalToCanada">
             <div class="col-sm-4">
                 {{lang('./en/index.js').arrivedToCanadaLabel}}
             </div>
@@ -217,7 +227,7 @@
                 </div>
             </div>
         </div>
-
+        -->
         <!-- DEAM has extra question for future absense for next 6 months -->
 
 
@@ -229,7 +239,7 @@
                 <strong>{{person.plannedAbsence ? "Yes": "No"}}</strong>
             </div>
         </div>
-        <div *ngIf="person.planOnBeingOutOfBCRecord">
+       <!-- <div *ngIf="person.planOnBeingOutOfBCRecord">
             <div class="row">
                 <div class="col-sm-4">
                     {{lang('./en/index.js').outsideBCReasonLabel}}
@@ -263,7 +273,7 @@
                 </div>
             </div>
         </div>
-
+-->
 
 
         <div class="row" *ngIf="person.movedFromProvinceOrCountry">

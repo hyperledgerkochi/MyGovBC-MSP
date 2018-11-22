@@ -4,6 +4,7 @@ module.exports = {
   cardSuffix: 'info',
 
   nameLabel: 'Name:',
+  uid: 'Unique Identifier:',
   genderLabel: 'Gender:',
   genderValues: {F: 'Female', M: 'Male'},
 

@@ -98,7 +98,7 @@ export class QuestionComponent extends BaseComponent {
     
     this.question.showGPDepression = (event == false) ? true : false ;
     this.emitIsFormValid();
-    this.canContinue = (event == false) ? true: false;
+    //this.canContinue = (event == false) ? true: false;
 
   }
 
