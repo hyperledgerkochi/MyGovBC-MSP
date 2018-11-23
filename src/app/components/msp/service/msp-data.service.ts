@@ -95,7 +95,7 @@ export  class MspDataService {
     saveMspApplication(): void {
         let dto: MspApplicationDto = this.toMspApplicationTransferObject(this._mspApplication);
         // console.log('saving msp app: ', dto);
-        this.localStorageService.set(this.mspAppStorageKey, dto);
+      //  this.localStorageService.set(this.mspAppStorageKey, dto);
     }
 
     private fetchMspApplication(): MspApplication {

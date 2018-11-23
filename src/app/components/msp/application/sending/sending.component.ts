@@ -72,7 +72,7 @@ export class SendingComponent implements AfterContentInit {
               this.router.navigate(["/msp/application/confirmation"],
                   {queryParams: {confirmationNum:tempRef}});
 
-          }, 1000);
+          }, 900);
 
 
         }

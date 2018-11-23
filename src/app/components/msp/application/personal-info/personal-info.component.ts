@@ -108,7 +108,9 @@ export class PersonalInfoComponent extends BaseComponent {
     return stayingInBc;
   }
   canContinue():boolean {
-    return this.isAllValid();
+     // console.log(JSON.stringify(this.dataService.getMspApplication().applicant.mailingAddress));
+     return !this.dataService.getMspApplication().applicant.mailingAddress.isValidUkADDRESS
+
   }
 
   isValid(): boolean {

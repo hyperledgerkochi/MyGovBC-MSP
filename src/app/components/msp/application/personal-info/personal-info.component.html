@@ -52,7 +52,7 @@
           <!-- class="btn btn-primary" type="submit" [disabled] = "!documentsReady()|| !isStayinginBCAfterstudies() ||checkAnyDependentsIneligible()   "
             -->
         <button
-          class="btn btn-primary" type="submit" [disabled] = "false"
+          class="btn btn-primary" type="submit" [disabled] = "canContinue()"
             [innerHTML]="lang('./en/index.js').continueButton"></button>
         
       </div>

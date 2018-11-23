@@ -51,14 +51,15 @@ export class ProcessService implements CanActivate {
         this.dataService.setMspProcess(process);
     }
 
-    getNextStep(stepNumber:number):String {
+    getNextStep(stepNumber: number): String {
         let process = this.process;
-        return process.processSteps[stepNumber+1].route;
+        return process.processSteps[stepNumber + 1].route;
     }
 
-   /* getNextStep(): String {
-        return this.getFirstFalseStep().route;
-    }*/
+    /* getNextStep(): String {
+         return this.getFirstFalseStep().route;
+     }*/
+
     //used to find the next step to navigate to when steps are defined at runtime
     getFirstFalseStep(): ProcessStep {
         let process = this.process;
@@ -66,7 +67,7 @@ export class ProcessService implements CanActivate {
     }
 
 
-    getStepNumber(url:string):number{
+    getStepNumber(url: string): number {
         let process = this.process;
         return process.processSteps.findIndex(x => x.route === url);
     }
@@ -81,6 +82,9 @@ export class ProcessService implements CanActivate {
     getStep(stepNumber: number) {
         return this.process.processSteps[stepNumber]
     }
+
+
+
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>
         | Promise<boolean>
