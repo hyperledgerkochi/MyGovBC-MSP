@@ -490,7 +490,7 @@ export class PersonalDetailsComponent extends BaseComponent {
     console.log(this.person.canMoveUpandDown);
     console.log(this.person.outOfBCRecord);
     
-    if(this.person.ukGender != undefined && (this.person.ukDob_day != undefined && this.person.ukDob_month != undefined && this.person.ukDob_year != undefined)) {
+    if(this.person.ukGender != undefined && (this.person.ukDob_day != undefined && this.person.ukDob_month != undefined && this.person.ukDob_year != undefined && this.person.ukDob_year > 1800)) {
       this.showMoveAroundQues = true;
     }
 
