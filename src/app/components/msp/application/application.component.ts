@@ -79,7 +79,9 @@ export class ApplicationComponent  {
       //new ProcessStep("/msp/application/address"),
       new ProcessStep("/msp/application/history"),
       new ProcessStep("/msp/application/question"),
-      new ProcessStep("/msp/application/review")]);
+        new ProcessStep("/msp/application/review"),
+      new ProcessStep("/msp/application/sending")]);
+
   }
 
 }
