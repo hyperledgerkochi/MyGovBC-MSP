@@ -43,7 +43,7 @@ export class QuestionComponent extends BaseComponent {
   ngOnInit(){
     this.initProcessMembers(QuestionComponent.ProcessStepNum, this._processService);
     this.initQuestionResponse();
-    if(this.mspApplication.applicant.firstName == "James" && this.mspApplication.applicant.lastName == "Hamm"){
+    if(this.mspApplication.applicant.fName == "James" && this.mspApplication.applicant.lName == "Hamm"){
       this.fakeQuestionResponse();
     }
   }

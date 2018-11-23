@@ -4,7 +4,7 @@ import  {
 } from '@angular/core';
 import { state, trigger, style } from '@angular/animations';
 import { NgForm } from '@angular/forms';
-import { Person } from '../../../model/person.model';
+import { Gender, Person } from '../../../model/person.model';
 import { OutofBCRecord } from '../../../model/outof-bc-record.model';
 import {
   StatusRules, ActivitiesRules, StatusInCanada, Activities,
@@ -118,7 +118,15 @@ export class PersonalDetailsComponent extends BaseComponent {
   genderListSignal: string;
   institutionWorkSignal: string;
   showServicesCardModal: boolean = false;
+
+  //Fields use to show and Hide questions in Sequential order
   hideAddress: boolean ;
+
+  showGenderDob: boolean;
+  showMoveAroundQues: boolean; // needs to be implemented
+  showUpandDownQues: boolean;
+  showAddress: boolean;
+
   mspApplication: MspApplication;
       
   constructor(private el:ElementRef,
@@ -172,6 +180,19 @@ export class PersonalDetailsComponent extends BaseComponent {
        this.person.mailingAddress.addressLine1 = '576, East Boulevard St.';
        this.person.mailingAddress.city = 'London';
        this.person.mailingAddress.postal = 'WC2N 5DU';
+       this.person.nationalInsuranceNumber = 'AA999999A';
+       this.person.uid = 'AAA999999999';
+       this.person.ukGender =  Gender.Male;
+       this.person.ukDob_day = 2;
+       this.person.ukDob_month = 2;
+       this.person.ukDob_year = 2000;
+
+       this.person.canMoveAround = false;
+       this.person.canMoveUpandDown = false;
+       this.showGenderDob = true;
+       this.showAddress = true;
+       this.showMoveAroundQues = true;
+       this.showUpandDownQues = true;
        
      } else {
       //if(this.person.mailingAddress.addressLine1 != undefined) {
@@ -306,10 +327,11 @@ export class PersonalDetailsComponent extends BaseComponent {
 
 
   setHasPreviousPhn(value:boolean){
-    this.person.hasPreviousBCPhn = value;
-    this.onChange.emit(value);
-    this.cd.detectChanges();
-    this.emitIsFormValid();
+    this.person.canMoveUpandDown = value;
+    //this.onChange.emit(value);
+    //this.cd.detectChanges();
+    //this.emitIsFormValid();
+    this.showAddress = true;
   }
   updateSchoolExpectedCompletionDate(evt:any){
     // console.log('school expected completion date updated: %o', evt);
@@ -366,21 +388,16 @@ export class PersonalDetailsComponent extends BaseComponent {
   }
 
   handleHealthNumberChange(evt:string){
-    this.person.healthNumberFromOtherProvince = evt;
+    this.person.nationalInsuranceNumber = evt;
+    
     this.onChange.emit(evt);
     
   }
 
   setBeenOutsideForOver30Days(out:boolean){
-    this.person.declarationForOutsideOver30Days = out;
-    if(out){
-      this.person.outOfBCRecord = new OutofBCRecord();
-    }else {
-      this.person.outOfBCRecord = null;
-    }
-    this.cd.detectChanges();
-    this.onChange.emit(out);
+    this.person.canMoveAround = out;
     this.emitIsFormValid();
+    this.showUpandDownQues = true;
   }
 
   handleDeleteOutofBCRecord(evt:OutofBCRecord){
@@ -466,15 +483,35 @@ export class PersonalDetailsComponent extends BaseComponent {
   }
 
   onKeydownEvent(): void { 
-    if(this.person.uid != undefined) {
-      if(this.person.uid.length == 12) {
+    console.log(this.person.ukGender);
+    console.log(this.person.canMoveUpandDown);
+    console.log(this.person.outOfBCRecord);
+    
+    if(this.person.ukGender != undefined && (this.person.ukDob_day != undefined && this.person.ukDob_month != undefined && this.person.ukDob_year != undefined)) {
+      this.showMoveAroundQues = true;
+    }
+
+    if(this.person.canMoveUpandDown != undefined) {
+      this.showAddress = true;
+    } 
+
+    if(this.person.canMoveAround != undefined) {
+       this.showUpandDownQues = true;
+    } 
+
+
+    if(this.person.uid != undefined && this.person.nationalInsuranceNumber != undefined) {
+      if(this.person.uid.length == 12 && this.person.nationalInsuranceNumber.length == 9) {
         var regex = /^[A-Za-z]{3}\d{9}$/g;
+        
         console.log(this.person.uid.length);
        // console.log(regex.test(this.person.uid));
         //var showAddress = regex.test(this.person.schoolName);
-        this.hideAddress = regex.test(this.person.uid);
+        //this.hideAddress = regex.test(this.person.uid);
+        this.showGenderDob = regex.test(this.person.uid);
       }
     }
-    
   }
+
+
 }

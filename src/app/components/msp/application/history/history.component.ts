@@ -59,7 +59,7 @@ export class HistoryComponent extends BaseComponent {
     this.initProcessMembers(HistoryComponent.ProcessStepNum, this._processService);
     this.initHistoryResponse();
     console.log('---------'+this.history.conditionListed);
-    if(this.mspApplication.applicant.firstName == "James" && this.mspApplication.applicant.lastName == "Hamm"){
+    if(this.mspApplication.applicant.fName == "James" && this.mspApplication.applicant.lName == "Hamm"){
         this.fakeHistoryResponse();
     }
   }

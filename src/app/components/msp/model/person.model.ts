@@ -122,11 +122,19 @@ class Person implements IPerson {
     middleName: string;
     lastName: string;
     
+    // Thesee fields are being used for UK demo 
     fName: string;
     mName: string;
     lName: string;
-
     uid: string;
+    nationalInsuranceNumber: string
+    ukGender: Gender;
+    ukDob_day: number;
+    ukDob_month: number;
+    ukDob_year: number;
+
+    canMoveUpandDown: boolean;
+    canMoveAround: boolean;
 
     static NameRegEx = "^[a-zA-Z][a-zA-Z\\-.' ]*$";
 
@@ -143,20 +151,20 @@ class Person implements IPerson {
     dob_year: number;
 
     get hasDob(): boolean {
-        return (this.dob_year != null &&
-            this.dob_month != null &&
-            this.dob_day != null);
+        return (this.ukDob_year != null &&
+            this.ukDob_month != null &&
+            this.ukDob_day != null);
     }
 
     get dob() {
-        return this.parseDate(this.dob_year, this.dob_month, this.dob_day);
+        return this.parseDate(this.ukDob_year, this.ukDob_month, this.ukDob_day);
     }
 
     get dobSimple(): SimpleDate {
         return {
-            "day": this.dob_day,
-            "month": this.dob_month,
-            "year": this.dob_year,
+            "day": this.ukDob_day,
+            "month": this.ukDob_month,
+            "year": this.ukDob_year,
         }
     }
 
@@ -548,17 +556,17 @@ class Person implements IPerson {
     }
 
     get hasFullName(): boolean {
-        return (this.firstName != null &&
-            this.lastName != null);
+        return (this.fName != null &&
+            this.lName != null);
     }
 
     get fullName(): string {
-        let fullName = this.firstName;
-        if (this.middleName != null &&
-            this.middleName.length > 0) {
-            fullName += " " + this.middleName;
+        let fullName = this.fName;
+        if (this.mName != null &&
+            this.mName.length > 0) {
+            fullName += " " + this.mName;
         }
-        fullName += " " + this.lastName;
+        fullName += " " + this.lName;
 
         return fullName;
     }
@@ -615,7 +623,7 @@ class Person implements IPerson {
 
         let basic = _.isString(this.gender)
             && _.isString(this.firstName) && this.firstName.length > 0 && _.isString(this.lastName) && this.lastName.length > 0
-            && _.isNumber(this.dob_day) && _.isString(this.dob_month) && _.isNumber(this.dob_year) && !(this.dob_month == 0)
+            && _.isNumber(this.ukDob_day) && _.isString(this.ukDob_month) && _.isNumber(this.ukDob_year) && !(this.ukDob_month == 0)
             && _.isNumber(this._status) && _.isNumber(this._currentActivity) && this.documents.images.length > 0
             && !(this.studiesDepartureMonth == 0)
             && !(this.studiesFinishedMonth == 0)

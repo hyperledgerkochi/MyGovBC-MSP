@@ -4,7 +4,7 @@
     <div class="form-group"
          [ngClass]="{'has-error': formRef.invalid && (monthRef.touched || showError)}">
         <select class="form-control monthSelect"
-                [(ngModel)]="person.dob_month"
+                [(ngModel)]="person.ukDob_month"
                 validateCalendarMonth
                 id="month{{objectId}}" name="month" #monthRef="ngModel"
                 required>
@@ -24,7 +24,7 @@
         </select>
         <label class="visuallyhidden" for="day{{objectId}}">{{lang('./en/index.js').birthdateLabel}} {{lang('./en/index.js').dayLabel}}</label>
         <input type="number" class="form-control dayInput"
-               [ngModel]="person.dob_day"
+               [ngModel]="person.ukDob_day"
                (ngModelChange) = 'setDayValueOnModel($event)'
                [calendarFieldFormatter]="'day'"
                id="day{{objectId}}" name="day" #dayRef="ngModel"
@@ -35,7 +35,7 @@
 
         <label class="visuallyhidden" for="year{{objectId}}">{{lang('./en/index.js').birthdateLabel}} {{lang('./en/index.js').yearLabel}}</label>
         <input type="number" class="form-control yearInput"
-               [ngModel]="person.dob_year"
+               [ngModel]="person.ukDob_year"
                (ngModelChange) = 'setYearValueOnModel($event)'
                [calendarFieldFormatter]="'year'"
                id="year{{objectId}}" name="year" #yearRef="ngModel"

@@ -47,11 +47,11 @@ export class MspBirthDateComponent extends BaseComponent {
     }
 
     setYearValueOnModel(value: number) {
-        this.person.dob_year = value;
+        this.person.ukDob_year = value;
     }
 
     setDayValueOnModel(value: number) {
-        this.person.dob_day = value;
+        this.person.ukDob_day = value;
     }
 
     /**
