@@ -1,5 +1,5 @@
 module.exports = {
-  pageTitle: 'Questions',
+  pageTitle: 'Please complete as many questions as you are able to. The Health Assessment Advisory Service will use the Information you provide to decide if you need to come for a face-to-face assessment or not. We will use this information to give you the best support we can and pay you the right amount of benefit.',
   DepressionDiagnosed: 'When was your depression diagnosed?',
   IsCurrentlyOnMedication: 'Are you currently on any medication for depression?',
   DrugsandDosages: 'List drugs and dosages',
