@@ -121,6 +121,12 @@ class Person implements IPerson {
     firstName: string;
     middleName: string;
     lastName: string;
+    
+    fName: string;
+    mName: string;
+    lName: string;
+
+    uid: string;
 
     static NameRegEx = "^[a-zA-Z][a-zA-Z\\-.' ]*$";
 

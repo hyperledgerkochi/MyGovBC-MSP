@@ -118,12 +118,13 @@ export class PersonalDetailsComponent extends BaseComponent {
   genderListSignal: string;
   institutionWorkSignal: string;
   showServicesCardModal: boolean = false;
-  hideAddress: boolean = false;
+  hideAddress: boolean ;
   mspApplication: MspApplication;
       
   constructor(private el:ElementRef,
     private cd: ChangeDetectorRef, private dataService: MspDataService,){
     super(cd);
+    
   }
 
   statusLabel(): string {
@@ -172,9 +173,17 @@ export class PersonalDetailsComponent extends BaseComponent {
        this.person.mailingAddress.city = 'London';
        this.person.mailingAddress.postal = 'WC2N 5DU';
        
+     } else {
+      //if(this.person.mailingAddress.addressLine1 != undefined) {
+        //this.person.mailingAddress.addressLine1 = '';
+    
+     // } 
+      //this.person.mailingAddress.city = '';
+      //this.person.mailingAddress.postal = '';
+      
      } 
      
-     this.dataService.saveMspApplication();
+     //this.dataService.saveMspApplication();
      this.person.mailingAddress.country = 'UK';
   }
   // Added by Abhi to handle address and phone change 
@@ -253,6 +262,10 @@ export class PersonalDetailsComponent extends BaseComponent {
     if(this.person.relationship === Relationship.Spouse){
       window.scrollTo(0,this.el.nativeElement.offsetTop);
     }
+    if(this.person.uid != undefined) {
+       this.onKeydownEvent();
+    }
+    
   }
 
   get arrivalDateLabel():string {
@@ -452,11 +465,16 @@ export class PersonalDetailsComponent extends BaseComponent {
     return true;
   }
 
-  onKeydownEvent( event: KeyboardEvent): void { 
-    console.log(event);
-    if (event.keyCode === 13 && event.key === 'Enter') {
-      console.log('------1--'+event);
-      this.hideAddress = true;
+  onKeydownEvent(): void { 
+    if(this.person.uid != undefined) {
+      if(this.person.uid.length == 12) {
+        var regex = /^[A-Za-z]{3}\d{9}$/g;
+        console.log(this.person.uid.length);
+       // console.log(regex.test(this.person.uid));
+        //var showAddress = regex.test(this.person.schoolName);
+        this.hideAddress = regex.test(this.person.uid);
+      }
     }
+    
   }
 }

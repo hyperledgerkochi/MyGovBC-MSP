@@ -57,6 +57,7 @@ export class QuestionComponent extends BaseComponent {
 
   checkIfGpAware(event: boolean) {
     this.question.IsGPAware = event ;
+    this.question.showEverAdmittedtoHospital = true;
     this.emitIsFormValid();
   }
 

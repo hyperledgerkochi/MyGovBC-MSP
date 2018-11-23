@@ -29,6 +29,7 @@ export class Question {
     // variable to show the block after the user clicks on Continue 
     showGPDepression: boolean;
     showAdmissionVoulntary: boolean;
+    showEverAdmittedtoHospital: boolean;
     showAdmittedtoHospital: boolean;
     showHospitalName: boolean;
 

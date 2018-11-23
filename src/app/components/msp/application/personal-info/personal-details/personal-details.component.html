@@ -101,8 +101,8 @@
             </div>
             <div class="col-md-4 form-group"  [ngClass]="{'has-error': !formRef.controls.schoolName?.valid && (schoolNameRef.touched || showError)}" >
                     <label  for="schoolName" class="control-label">Unique Identifier</label>
-                    <input [(ngModel)]='person.schoolName' type="text" class="form-control"  pattern="^[A-Za-z]{3}\d{9}$" required="true"
-                    id="schoolName" name="schoolName" #schoolNameRef="ngModel"
+                    <input [(ngModel)]='person.uid' type="text" class="form-control"  pattern="^[A-Za-z]{3}\d{9}$" required="true"
+                    id="schoolName" name="schoolName" #schoolNameRef="ngModel" (keyup)=onKeydownEvent()
                     maxlength="12">
                 <div *ngIf='schoolNameRef.touched || showError' role="alert" aria-live="assertive">
                     <div class="text-danger"
@@ -111,7 +111,8 @@
             </div>
 
         </div>
-        <div >
+        <!--<b>{{this.hideAddress}}</b>-->
+        <div *ngIf="this.hideAddress">
         <div class="row">
             <div class="col-md-4">
                 <msp-gender

@@ -6,7 +6,7 @@
                 <label class="control-label" for="firstName{{objectId}}"
                        [innerHtml]="lang('./en/index.js').firstNameLabel"></label>
                 <input type="text"
-                       [(ngModel)]="person.firstName"
+                       [(ngModel)]="person.fName"
                        required
                        maxlength="30"
                        [pattern]="Person.NameRegEx"
@@ -25,7 +25,7 @@
                  [ngClass]="{'has-error': !formRef.controls.middleName?.valid && middleNameRef.touched}">
                 <label class="control-label if-applicable" for="middleName{{objectId}}" [innerHtml]="lang('./en/index.js').middleNameLabel"></label>
                 <input type="text"
-                       [(ngModel)]="person.middleName"
+                       [(ngModel)]="person.mName"
                        id='middleName{{objectId}}' name='middleName' #middleNameRef="ngModel"
                        maxlength="30"
                        [pattern]="Person.NameRegEx"
@@ -43,7 +43,7 @@
                  [ngClass]="{'has-error': !formRef.controls.lastName?.valid && (lastNameRef.touched || showError)}">
                 <label class="control-label" for="lastName{{objectId}}" [innerHtml]="lang('./en/index.js').lastNameLabel"></label>
                 <input type="text"
-                       [(ngModel)]="person.lastName"
+                       [(ngModel)]="person.lName"
                        id="lastName{{objectId}}" name='lastName' #lastNameRef="ngModel"
                        required
                        maxlength="30"
