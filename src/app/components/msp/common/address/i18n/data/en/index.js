@@ -23,8 +23,8 @@ module.exports = {
   countryLabel: 'Country',
 
   postalCodeLabel: 'Postcode',
-  postalCodeErrorIsRequired: 'Postcode is required',
-  postalCodeErrorPattern: 'Postcode must be a valid postcode',
+  postalCodeErrorIsRequired: 'Postcode is required.',
+  postalCodeErrorPattern: 'Postcode must be a valid UK postcode.Samples formats AA9A 9AA, A9A 9AA , A9 9AA ,A99 9AA',
 
   mailingAddressSameQuestion: 'Is your <strong>mailing address</strong> the same as above?',
   mailingAddressHeading: 'Mailing Address',
