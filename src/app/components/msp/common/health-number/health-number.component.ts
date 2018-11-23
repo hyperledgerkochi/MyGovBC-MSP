@@ -11,6 +11,7 @@ export class HealthNumberComponent extends BaseComponent {
   lang = require('./i18n');
 
   @Input()showError: boolean;
+  showMessage: boolean;
   @Input()healthNumber:string;
   @Input()required:boolean;
   @Output()healthNumberChange:EventEmitter<string> = new EventEmitter<string>();
@@ -21,6 +22,7 @@ export class HealthNumberComponent extends BaseComponent {
   }
 
   updateHealthNumber(evt:string){
+    this.showMessage = true;
     this.healthNumberChange.emit(evt);
   }
 }

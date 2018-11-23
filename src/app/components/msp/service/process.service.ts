@@ -84,9 +84,14 @@ export class ProcessService implements CanActivate {
     }
 
 
-
-
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>
+        | Promise<boolean>
+        | boolean {
+        console.log("can activate? state: " + state.url);
+    return true;
+    }
+
+    canActivateOld(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>
         | Promise<boolean>
         | boolean {
         console.log("can activate? state: " + state.url);

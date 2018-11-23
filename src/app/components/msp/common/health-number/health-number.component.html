@@ -10,6 +10,12 @@
                maxlength="50" required="true"
                id='healthNumber{{objectId}}' name='healthNumber' #healthNumberRef="ngModel"
                class="form-control assist-no-show">
+
+        <div *ngIf='!formRef.controls.healthNumber?.valid &&  showMessage &&  (!healthNumberRef.touched)' role="alert" aria-live="assertive">
+            <div
+                 [innerHTML]="lang('./en/index.js').healthNumberErrorHealthNumberCheck"></div>
+        </div>
+
         <div *ngIf='!formRef.controls.healthNumber?.valid && (healthNumberRef.touched || showError)' role="alert" aria-live="assertive">
             <div class="text-danger"
                  [innerHTML]="lang('./en/index.js').healthNumberErrorHealthNumberCheck"></div>

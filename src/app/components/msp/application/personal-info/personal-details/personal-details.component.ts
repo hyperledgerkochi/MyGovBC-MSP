@@ -118,6 +118,7 @@ export class PersonalDetailsComponent extends BaseComponent {
   genderListSignal: string;
   institutionWorkSignal: string;
   showServicesCardModal: boolean = false;
+    showInfomessage: boolean = false;
 
   //Fields use to show and Hide questions in Sequential order
   hideAddress: boolean ;
@@ -481,8 +482,10 @@ export class PersonalDetailsComponent extends BaseComponent {
 
     return true;
   }
-
-  onKeydownEvent(): void { 
+    showinfomsg(): void {
+        this.showInfomessage = true;
+    }
+        onKeydownEvent(): void {
     console.log(this.person.ukGender);
     console.log(this.person.canMoveUpandDown);
     console.log(this.person.outOfBCRecord);
