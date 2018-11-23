@@ -4,7 +4,8 @@ import {BaseComponent} from "../base.component";
 
 @Component({
   selector: 'msp-health-number',
-  templateUrl: './health-number.component.html'
+  templateUrl: './health-number.component.html',
+    styleUrls: ['./health-number.component.scss'],
 })
 export class HealthNumberComponent extends BaseComponent {
   lang = require('./i18n');

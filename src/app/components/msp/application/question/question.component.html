@@ -1,20 +1,15 @@
 <form #formRef="ngForm" novalidate>
 
-    <!-- Question 1 - When was your Depression Diagonised 
-    <div class="row" >
-        <div class="col-lg-8">
-          <msp-date
-            [label]="lang('./en/index.js').DepressionDiagnosed"
-            [showError]='showError'
-            required=false
-          ></msp-date>
-        </div>
-    </div>-->
+    <p class="intro"
+       [innerHtml]="lang('./en/index.js').pageTitle" role="heading" >
+    </p>
+
 
     <!-- Question 1 - Currently on any Medication -->
-    <div  class="row" style="margin-bottom: 20px" >
+    <div  class="row form-group" style="margin-top: 20px ;margin-bottom: 20px" >
         <div class="col-lg-8">
-        <p id="IsCurrentlyOnMedication" [innerHtml]="lang('./en/index.js').IsCurrentlyOnMedication" class="control-label"></p>
+        <label id="IsCurrentlyOnMedication" [innerHtml]="lang('./en/index.js').IsCurrentlyOnMedication" class="control-label"></label>
+       <br/>
         <div class="btn-group" role="group">
             <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
                     [class.msp-btn-radio]="question.IsCurrentlyOnMedication == answer.value"
@@ -56,7 +51,8 @@
     <!------------Question 2 - DO you see your GP about Depression---------------------------------------->
     <div *ngIf="question.showGPDepression"  style="margin-bottom: 20px" class="row" >
         <div class="col-lg-8">
-        <p id="GpAboutDepression" [innerHtml]="lang('./en/index.js').GpAboutDepression" class="control-label"></p>
+        <label id="GpAboutDepression" [innerHtml]="lang('./en/index.js').GpAboutDepression" class="control-label"></label>
+        <br/>
             <div class="btn-group" role="group">
                 <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
                         [class.msp-btn-radio]="question.GpAboutDepression == answer.value"
@@ -81,7 +77,8 @@
 
     <div *ngIf="question.showAdmittedtoHospital" style="margin-bottom: 20px" class="row" >
         <div class="col-lg-8">
-        <p id="IsGPAware" [innerHtml]="lang('./en/index.js').IsGPAware" class="control-label"></p>
+        <label id="IsGPAware" [innerHtml]="lang('./en/index.js').IsGPAware" class="control-label"></label>
+            <br/>
         <div class="btn-group" role="group">
         <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
                 [class.msp-btn-radio]="question.IsGPAware == answer.value"
@@ -95,7 +92,8 @@
     <!--Question 5 - Ever admitted to the Hospital -->
     <div *ngIf="question.showEverAdmittedtoHospital" class="row" style="margin-bottom: 20px" >
         <div class="col-lg-8">
-        <p id="AdmittedToHospital" [innerHtml]="lang('./en/index.js').AdmittedToHospital" class="control-label"></p>
+        <label id="AdmittedToHospital" [innerHtml]="lang('./en/index.js').AdmittedToHospital" class="control-label"></label>
+            <br/>
             <div class="btn-group" role="group">
                 <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
                         [class.msp-btn-radio]="question.AdmittedToHospital == answer.value"
@@ -202,7 +200,8 @@
 
     <div class="row" *ngIf="question.showAdmissionVoulntary" style="margin-bottom: 20px" >
         <div class="col-lg-8">
-        <p id="AdmissionVoluntary" [innerHtml]="lang('./en/index.js').AdmissionVoluntary" class="control-label"></p>
+        <label id="AdmissionVoluntary" [innerHtml]="lang('./en/index.js').AdmissionVoluntary" class="control-label"></label>
+        <br/>
         <div class="btn-group" role="group">
             <button *ngFor='let answer of [{"value": true, "label": "Yes"}, {"value": false, "label": "No"}]'
                     [class.msp-btn-radio]="question.AdmissionVoluntary == answer.value"
