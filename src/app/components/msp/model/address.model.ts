@@ -50,7 +50,23 @@ class Address {
     return isValid;
   }
 
-  get isBCOnly(): boolean {
+    get isValidUkADDRESS(): boolean {
+        // check required
+        let isValid = !_.isEmpty(this.addressLine1)
+            &&!_.isEmpty(this.city)
+            &&!_.isEmpty(this.postal)
+            &&!_.isEmpty(this.country)
+        let isValidFormat = false;
+        if (isValid) {
+            let regEx = new RegExp(Address.ukpostcodeRegEx);
+            isValidFormat =  regEx.test(this.postal);
+        }
+
+        return isValid && isValidFormat ;
+    }
+
+
+    get isBCOnly(): boolean {
     let isValid = false;
     if (this.postal &&
       this.postal.length > 0) {
