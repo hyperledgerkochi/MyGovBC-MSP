@@ -60,7 +60,7 @@ export class ReviewComponent implements OnInit{
     return this.lang('./en/index.js').doYouAgreeLabel.replace('{name}', this.spouseName);
   }
   get applicantName(){
-    return this.application.applicant.firstName + ' ' + this.application.applicant.lastName;
+    return this.application.applicant.fName + ' ' + this.application.applicant.lName;
   }
   get spouseName(){
     return this.application.spouse.firstName + ' ' + this.application.spouse.lastName;
@@ -70,7 +70,7 @@ export class ReviewComponent implements OnInit{
     // console.log('review form submitted, %o', evt);
     if(this.application.hasValidAuthToken){
       console.log('Found valid auth token, transfer to sending screen.');
-      this.processService.setStep(3, true);
+      this.processService.setStep(4, true);
       // this.logService.log({name: "Application - Review Page Before Submit (after CAPTCHA)"},"Application-Captcha Success")
       this._router.navigate(['/msp/application/sending']);
     }else{
