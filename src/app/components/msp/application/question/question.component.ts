@@ -286,6 +286,8 @@ export class QuestionComponent extends BaseComponent {
     this.question.showAdmittedtoHospital = true;
     this.question.showAdmissionVoulntary = true;
     this.question.showHospitalName = true;
+    this.question.showEverAdmittedtoHospital = true;
+    
     this.canContinue = true;
   }
 
