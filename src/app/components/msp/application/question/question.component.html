@@ -179,26 +179,26 @@
             <textarea name="whenAdmitted"  (keyup) = onKeydownEvent($event) class="textarea" rows="3" id="whenAdmitted" [(ngModel)]= question.whenAdmitted>  </textarea>
 
         </div> 
-        <div class="col-md-2" style="margin: 30px;" >
+       <!-- <div class="col-md-2" style="margin: 30px;" >
                 <button
                 class="btn btn-primary" (click)="showNextQuestion()" [disabled] = "!question.whenAdmitted"
                 [innerHTML]="lang('./en/index.js').continueButton"></button>
-        </div> 
+        </div> --> 
     </div>
     
-    <div *ngIf="question.showHospitalName" class="row" style="margin-bottom: 20px">
+    <div *ngIf="question.AdmittedToHospital" class="row" style="margin-bottom: 20px">
             <div class="col-lg-8">
                 <label  for="hospitalname" [innerHTML]="lang('./en/index.js').NameOfHospital"></label>
                     <textarea name="hospitalname"  (keyup) = onKeydownEvent($event) class="textarea" rows="3" id="hospitalname" [(ngModel)]= question.hospitalname>  </textarea>
             </div>
-            <div class="col-md-2" style="margin: 30px;" >
+           <!-- <div class="col-md-2" style="margin: 30px;" >
                     <button
                     class="btn btn-primary" (click)="showNextQuestion()" [disabled] = "!question.hospitalname"
                     [innerHTML]="lang('./en/index.js').continueButton"></button>
-            </div> 
+            </div> --> 
     </div>
 
-    <div class="row" *ngIf="question.showAdmissionVoulntary" style="margin-bottom: 20px" >
+    <div class="row" *ngIf="question.AdmittedToHospital" style="margin-bottom: 20px" >
         <div class="col-lg-8">
         <label id="AdmissionVoluntary" [innerHtml]="lang('./en/index.js').AdmissionVoluntary" class="control-label"></label>
         <br/>
