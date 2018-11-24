@@ -211,7 +211,9 @@ export class PersonalDetailsComponent extends BaseComponent {
   // Added by Abhi to handle address and phone change 
 
   handleAddressUpdate(evt:any){
-    // console.log('address update event: %o', evt);
+    if (this.person.mailingAddress.isValidUkADDRESS) {
+      this.showMoveAroundQues = true;
+    }
     this.dataService.saveMspApplication();
   }
 
@@ -491,7 +493,7 @@ export class PersonalDetailsComponent extends BaseComponent {
     console.log(this.person.outOfBCRecord);
     
     if(this.person.ukGender != undefined && (this.person.ukDob_day != undefined && this.person.ukDob_month != undefined && this.person.ukDob_year != undefined && this.person.ukDob_year > 1800)) {
-      this.showMoveAroundQues = true;
+      this.showAddress = true;
     }
 
     if(this.person.canMoveUpandDown != undefined) {

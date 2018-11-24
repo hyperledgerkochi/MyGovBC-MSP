@@ -102,6 +102,23 @@
                 </div>
             </div>
         </div>-->
+
+        <!-- Address Question Block-->
+        <div *ngIf="this.showAddress" class="row">
+            <div class="col-md-12" >
+                <msp-address #address
+                             [residentialAddress]="person.mailingAddress"
+                             [mailingAddress]="person.mailingAddress"
+                             [mailingSameAsResidentialAddress]="person.mailingSameAsResidentialAddress"
+                             (mailingSameAsResidentialAddressChange)="toggleMailingSameAsResidentialAddress($event)"
+                             (onChange)="handleAddressUpdate($event)"
+                             [showError] = "showError">
+
+                </msp-address>
+            </div>
+        </div>
+
+
         <!--Can you move around and use steps without difficulty YES/NO-->
         <div *ngIf="this.showMoveAroundQues" class="row" style="margin-bottom: 20px" >
             <div class="col-lg-8">
@@ -140,20 +157,7 @@
             </div>
         </div>
 
-        <!-- Address Question Block-->
-        <div *ngIf="this.showAddress" class="row">
-            <div class="col-md-12" >
-            <msp-address #address
-                [residentialAddress]="person.mailingAddress"
-                [mailingAddress]="person.mailingAddress"
-                [mailingSameAsResidentialAddress]="person.mailingSameAsResidentialAddress"
-                (mailingSameAsResidentialAddressChange)="toggleMailingSameAsResidentialAddress($event)"
-                (onChange)="handleAddressUpdate($event)"
-                [showError] = "showError">
 
-            </msp-address>
-            </div>
-        </div>
             
 
     

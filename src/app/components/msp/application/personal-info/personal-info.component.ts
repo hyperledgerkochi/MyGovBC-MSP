@@ -108,8 +108,8 @@ export class PersonalInfoComponent extends BaseComponent {
     return stayingInBc;
   }
   canContinue():boolean {
-     // console.log(JSON.stringify(this.dataService.getMspApplication().applicant.mailingAddress));
-     return !this.dataService.getMspApplication().applicant.mailingAddress.isValidUkADDRESS
+      console.log(JSON.stringify(this.dataService.getMspApplication().applicant.canMoveUpandDown ));
+     return this.dataService.getMspApplication().applicant.canMoveUpandDown == undefined
 
   }
 
