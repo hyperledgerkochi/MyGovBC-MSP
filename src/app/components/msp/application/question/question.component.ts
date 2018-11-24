@@ -90,7 +90,9 @@ export class QuestionComponent extends BaseComponent {
     if(event == false ) {
       this.question.showHospitalName = false;
     }
+    this.canContinue = (event == false) ? true: false;
     this.question.showAdmissionVoulntary = (event == false) ? true: false;
+
   }
 
   setUserValue(event: boolean) {
