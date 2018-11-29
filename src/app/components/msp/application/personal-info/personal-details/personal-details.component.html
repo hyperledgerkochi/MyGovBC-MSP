@@ -36,6 +36,7 @@
                                     (healthNumberChange)="handleHealthNumberChange($event)"
                                     [required]="false"
                                     [showError]="showError"
+                                    (keyup)="onKeydownEvent()"
                                     >
                 </msp-health-number>
             </div> 
