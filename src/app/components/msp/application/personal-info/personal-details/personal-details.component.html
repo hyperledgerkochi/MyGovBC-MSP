@@ -33,17 +33,16 @@
             <div class="col-md-4" >
                 <msp-health-number #healthNumber
                                     [healthNumber]="person.nationalInsuranceNumber"
-                                    (healthNumberChange)="handleHealthNumberChange($event)"
+                                    (healthNumberChange)="handleHealthNumberChange($event); onKeydownEvent();"
                                     [required]="false"
                                     [showError]="showError"
-                                    (keyup)="onKeydownEvent()"
                                     >
                 </msp-health-number>
             </div> 
             <div class="col-md-4 form-group"  [ngClass]="{'has-error': !formRef.controls.schoolName?.valid && (schoolNameRef.touched || showError)}" >
                     <label  for="schoolName" class="control-label">Unique Identifier</label>
                     <input [(ngModel)]='person.uid' type="text" class="form-control"  pattern="^[A-Za-z]{3}\d{9}$" required="true" placeholder="AAA999999999"
-                    id="schoolName" name="schoolName" #schoolNameRef="ngModel" (keyup)="showinfomsg(); onKeydownEvent()"
+                    id="schoolName" name="schoolName" #schoolNameRef="ngModel" (blur)="onKeydownEvent();" (keyup)="showinfomsg(); "
                     maxlength="12">
 
 
