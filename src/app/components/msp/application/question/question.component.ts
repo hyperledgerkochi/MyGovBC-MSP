@@ -89,8 +89,12 @@ export class QuestionComponent extends BaseComponent {
     this.emitIsFormValid();
     if(event == false ) {
       this.question.showHospitalName = false;
+      this.canContinue = true;  
+    } else if(event == true && this.question.AdmissionVoluntary != undefined )  {
+        this.canContinue = true; 
     }
-    this.canContinue = (event == false) ? true: false;
+    
+   // this.canContinue = (event == false) ? true: ""false"";
     this.question.showAdmissionVoulntary = (event == false) ? true: false;
 
   }
