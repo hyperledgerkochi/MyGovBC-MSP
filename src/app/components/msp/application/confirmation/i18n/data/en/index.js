@@ -1,6 +1,6 @@
 module.exports = {
-  pageTitle: '<i class="fa fa-check success" aria-hidden="true"></i> Your application has been submitted.',
-  secondTitle: 'What happens next',
+  pageTitle: '<i class="fa fa-check-circle success" aria-hidden="true"></i> Your application has been submitted.',
+  secondTitle: 'Next Steps',
   nextStep1: "<strong>Important:</strong> Keep your reference number – write it down, or <a>print this page</a> for your records.",
   nextStep2: "Allow 21 business days for your application to be processed.",
   nextStep3: "Once your application is processed, you will be sent a letter that confirms your MSP enrolment status. You may have a <a href='http://www2.gov.bc.ca/gov/content/health/health-drug-coverage/msp/bc-residents/eligibility-and-enrolment/how-to-enrol/coverage-wait-period' target='_blank'>wait period</a>.",
