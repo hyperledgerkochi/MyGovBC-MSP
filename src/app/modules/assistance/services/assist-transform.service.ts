@@ -79,7 +79,7 @@ export class AssistTransformService {
     const sin = app.sin.replace(/ /g, '');
     const telephone = this.app.phoneNumber
       ? this.app.phoneNumber.replace(/[() +-]/g, '').slice(1)
-      : '';
+      : undefined;
     return {
       attachmentUuids,
       birthDate,
