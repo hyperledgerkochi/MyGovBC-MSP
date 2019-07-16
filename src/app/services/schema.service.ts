@@ -7,14 +7,13 @@ import { MSPApplicationSchema } from 'app/modules/msp-core/interfaces/i-api';
   providedIn: 'root'
 })
 export class SchemaService {
-  ajv = new Ajv({ schemaId: 'id', allErrors: true });
+  ajv = new Ajv({ schemaId: 'id', allErrors: true, removeAdditional: 'all' });
   constructor() {}
 
   async validate(app: MSPApplicationSchema) {
     const validate = this.ajv.compile(defaultSchema);
     try {
       const valid = await validate(app);
-      // console.log('valid', valid);
       if (!valid) console.log('errors', validate.errors);
       return validate;
     } catch (err) {
