@@ -7,6 +7,7 @@ import { MSPApplicationSchema } from 'app/modules/msp-core/interfaces/i-api';
   providedIn: 'root'
 })
 export class SchemaService {
+  // !Important The remove additional 'all' flag should mutate the object to submit
   ajv = new Ajv({ schemaId: 'id', allErrors: true, removeAdditional: 'all' });
   constructor() {}
 
