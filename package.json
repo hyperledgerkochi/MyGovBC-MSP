@@ -70,7 +70,7 @@
     "blueimp-canvas-to-blob": "^3.14.0",
     "blueimp-load-image": "^2.19.0",
     "bootstrap": "4.3.1",
-    "css-loader": "^1.0.0",
+    "css-loader": "^5.0.0",
     "jquery": "^3.3.1",
     "jxon": "git+https://github.com/bcgov/jxon.git",
     "lodash": "^4.17.11",
