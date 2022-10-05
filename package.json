@@ -15,7 +15,9 @@
     "dev": "ng serve -o",
     "dev-build": "ng build",
     "build": "ng build --prod",
-    "test": "ng test"
+    "test": "ng test",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.8.4",
@@ -55,8 +57,8 @@
     "@angular/animations": "^6.1.9",
     "@angular/common": "^6.1.9",
     "@angular/compiler": "^6.1.9",
-    "@angular/compiler-cli": "^6.1.9",
-    "@angular/core": "^6.1.9",
+    "@angular/compiler-cli": "^9.0.0",
+    "@angular/core": "^11.0.5",
     "@angular/forms": "^6.1.9",
     "@angular/http": "^6.1.9",
     "@angular/platform-browser": "^6.1.9",
@@ -70,11 +72,11 @@
     "blueimp-canvas-to-blob": "^3.14.0",
     "blueimp-load-image": "^2.19.0",
     "bootstrap": "4.3.1",
-    "css-loader": "^1.0.0",
-    "jquery": "^3.3.1",
+    "css-loader": "^2.0.0",
+    "jquery": "^3.5.0",
     "jxon": "git+https://github.com/bcgov/jxon.git",
-    "lodash": "^4.17.11",
-    "moment": "^2.22.2",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "mygovbc-captcha-widget": "3.0.1",
     "ngx-bootstrap": "3.0.1",
     "popper.js": "^1.14.4",
@@ -83,6 +85,8 @@
     "sha1": "^1.1.1",
     "typescript": "2.8",
     "url": "^0.11.0",
-    "zone.js": "~0.8.26"
-  }
+    "zone.js": "~0.8.26",
+    "@snyk/protect": "latest"
+  },
+  "snyk": true
 }
